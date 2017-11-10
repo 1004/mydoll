@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="string_error_no_net">当前网络不稳定</string>
+    <string name="string_error_request">当前网络不稳定</string>
+    <string name="string_error_http_timeout">请求超时</string>
+    <string name="string_room_notice_other">暂时不能开启直播</string>
+    <string name="string_error_parse_exception">请求出错</string>
+</resources>
