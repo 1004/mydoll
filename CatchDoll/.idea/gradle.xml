@@ -9,8 +9,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/7k7kDanmaku" />
             <option value="$PROJECT_DIR$/CoreLibrary" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/ijkplayer-java_3.1" />
+            <option value="$PROJECT_DIR$/umengshare_6.4.3" />
           </set>
         </option>
       </GradleProjectSettings>

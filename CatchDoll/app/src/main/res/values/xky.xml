@@ -5,4 +5,174 @@
     <string name="string_error_http_timeout">请求超时</string>
     <string name="string_room_notice_other">暂时不能开启直播</string>
     <string name="string_error_parse_exception">请求出错</string>
+
+    <!--第三方登陆-->
+    <string name="auoth_cancle">授权取消！</string>
+    <string name="auoth_failed">授权失败！</string>
+
+    <string name="mzw_pull_refresh">松开手即可刷新</string>
+    <string name="mzw_pull_upload">加载中..</string>
+    <string name="mzw_pull_finally">已经是最后一个</string>
+    <string name="mzw_click_reopen_date">点击重新获取</string>
+    <string name="mzw_let_go_refresh">松开手即可刷新</string>
+    <string name="wf_listview_header_hint_loading">正在加载中</string>
+    <string name="wf_listview_footer_hint_normal">查看更多</string>
+    <string name="wf_listview_header_hint_anew">点击重试</string>
+    <string name="item_loading_not_data">已经没有了哦~</string>
+    <string name="load_error_info">点击加载更多哦</string>
+    <string name="quanzi_turnover_time">上次更新时间：%1$s</string>
+    <string name="loding_more_errer">加载错误请点击重试</string>
+    <string name="mzw_already_finish">已经加载完毕- DONE</string>
+
+    <string name="VideoView_render_none">Render: None</string>
+    <string name="VideoView_render_surface_view">Render: SurfaceView</string>
+    <string name="VideoView_render_texture_view">Render: TextureView</string>
+    <string name="VideoView_player_none">Player: None</string>
+    <string name="VideoView_player_AndroidMediaPlayer">Player: AndroidMediaPlayer</string>
+    <string name="VideoView_player_IjkMediaPlayer">Player: IjkMediaPlayer</string>
+    <string name="VideoView_player_IjkExoMediaPlayer">Player: IjkExoMediaPlayer</string>
+    <string name="N_A">N/A</string>
+    <string name="mi_player">Player</string>
+    <string name="mi_media">Media</string>
+    <string name="mi_profile_level">Profile level</string>
+    <string name="mi_pixel_format">Pixel format</string>
+    <string name="mi_resolution">Resolution</string>
+    <string name="mi_length">Length</string>
+    <string name="mi_stream_fmt1">Stream #%d</string>
+    <string name="mi_type">Type</string>
+    <string name="mi_language">Language</string>
+    <string name="mi_codec">Codec</string>
+    <string name="mi_frame_rate">Frame rate</string>
+    <string name="mi_bit_rate">Bit rate</string>
+    <string name="mi_sample_rate">Sample rate</string>
+    <string name="mi_channels">Channels</string>
+    <string name="mi__selected_video_track">*</string>
+    <string name="mi__selected_audio_track">*</string>
+    <string name="TrackType_video">Video</string>
+    <string name="TrackType_audio">Audio</string>
+    <string name="TrackType_subtitle">Subtitle</string>
+    <string name="TrackType_timedtext">Timed text</string>
+    <string name="TrackType_metadata">Meta data</string>
+    <string name="TrackType_unknown">Unknown</string>
+    <string name="pref_title_ijkplayer_audio">Audio: ijkplayer</string>
+    <string name="pref_key_enable_background_play">pref.enable_background_play</string>
+    <string name="pref_title_enable_background_play">Enable background play</string>
+    <string name="pref_summary_enable_background_play">need Android 4.0+</string>
+
+    <string name="pref_key_using_android_player">pref.using_android_player</string>
+    <string name="pref_title_using_android_player">Using system player</string>
+    <string name="pref_key_using_opensl_es">pref.using_opensl_es</string>
+    <string name="pref_title_using_opensl_es">Using OpenSL ES</string>
+    <string name="pref_key_pixel_format">pref.pixel_format</string>
+    <string name="pref_title_pixel_format">Pixel Format</string>
+    <string name="pref_key_player">pref.player</string>
+
+    <string name="pref_title_render_view">RenderView</string>
+
+    <string name="pref_key_enable_no_view">pref.enable_no_view</string>
+    <string name="pref_title_enable_no_view">Enable NoView</string>
+    <string name="pref_summary_enable_no_view"></string>
+
+    <string name="pref_key_enable_surface_view">pref.enable_surface_view</string>
+    <string name="pref_title_enable_surface_view">Enable SurfaceView</string>
+    <string name="pref_summary_enable_surface_view"></string>
+
+    <string name="pref_key_enable_texture_view">pref.enable_texture_view</string>
+    <string name="pref_title_enable_texture_view">Enable TextureView</string>
+    <string name="pref_summary_enable_texture_view"></string>
+
+    <string name="pref_key_enable_detached_surface_texture">pref.enable_detached_surface_texture</string>
+    <string name="pref_title_enable_detached_surface_texture">Enable detached SurfaceTexture</string>
+    <string name="pref_summary_enable_detached_surface_texture"></string>
+
+    <string name="pref_title_ijkplayer_video">Video: ijkplayer</string>
+
+    <string name="pref_key_using_media_codec">pref.using_media_codec</string>
+    <string name="pref_title_using_media_codec">Using MediaCodec</string>
+    <string name="pref_summary_using_media_codec"></string>
+
+    <string name="pref_key_using_media_codec_auto_rotate">pref.using_media_codec_auto_rotate</string>
+    <string name="pref_title_using_media_codec_auto_rotate">Using MediaCodec auto rotate</string>
+    <string name="pref_summary_using_media_codec_auto_rotate"></string>
+
+    <string-array name="pref_entries_pixel_format">
+        <item>Auto Select</item>
+        <item>RGB 565</item>
+        <item>RGB 888</item>
+        <item>RGBX 8888</item>
+        <item>YV12</item>
+        <item>OpenGL ES2</item>
+    </string-array>
+
+    <style name="MediaButtonCompat">
+        <item name="android:background">@null</item>
+        <item name="android:layout_width">71dip</item>
+        <item name="android:layout_height">52dip</item>
+    </style>
+
+    <!-- 圆形头像 -->
+    <declare-styleable name="CustomRoundView">
+        <attr name="border_width" format="dimension"></attr>
+        <attr name="border_color" format="color"></attr>
+    </declare-styleable>
+
+    <style name="MainDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:background">@null</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <declare-styleable name="MagicTextView">
+        <attr name="innerShadowColor" format="color" />
+        <attr name="innerShadowRadius" format="float" />
+        <attr name="innerShadowDx" format="float" />
+        <attr name="innerShadowDy" format="float" />
+        <attr name="outerShadowColor" format="color" />
+        <attr name="outerShadowRadius" format="float" />
+        <attr name="outerShadowDx" format="float" />
+        <attr name="outerShadowDy" format="float" />
+        <attr name="typeface" format="string" />
+        <attr name="foreground" format="reference|color" />
+        <attr name="strokeWidth" format="float" />
+        <attr name="strokeMiter" format="float" />
+        <attr name="strokeColor" format="color" />
+        <attr name="strokeJoinStyle">
+            <enum name="miter" value="0" />
+            <enum name="bevel" value="1" />
+            <enum name="round" value="2" />
+        </attr>
+    </declare-styleable>
+
+
+    <style name="MediaButtonCompat.Previous">
+        <item name="android:src">@mipmap/ic_launcher</item>
+    </style>
+
+    <style name="MediaButtonCompat.Next">
+        <item name="android:src">@mipmap/ic_launcher</item>
+    </style>
+
+    <style name="MediaButtonCompat.Play">
+        <item name="android:src">@mipmap/ic_launcher</item>
+    </style>
+
+    <style name="MediaButtonCompat.Ffwd">
+        <item name="android:src">@mipmap/ic_launcher</item>
+    </style>
+
+    <style name="MediaButtonCompat.Rew">
+        <item name="android:src">@mipmap/ic_launcher</item>
+    </style>
+
+    <style name="MediaButtonCompat.Pause">
+        <item name="android:src">@mipmap/ic_launcher</item>
+    </style>
+
+
+
 </resources>

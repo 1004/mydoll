@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemloadingView"
+    android:layout_width="fill_parent"
+    android:layout_height="120dp"
+    android:background="@color/transparent"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp">
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/itemloadinglayout"
+            android:layout_width="fill_parent"
+            android:layout_height="44dp"
+            android:background="@color/transparent">
+
+            <LinearLayout
+                android:id="@+id/itemloading"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
+                android:background="@mipmap/upload_background"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <ProgressBar
+                    android:layout_width="20dip"
+                    android:layout_height="20dip"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dip"
+                    android:indeterminateDrawable="@drawable/loading_progressbar_style"
+                    android:visibility="visible" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/wf_listview_header_hint_loading"
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/footer"
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:background="@color/transparent"
+                android:gravity="center"
+                android:text="@string/item_loading_not_data"
+                android:textColor="#999999"
+                android:textSize="14sp"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@mipmap/ic_launcher"
+            android:gravity="center"
+            android:text="@string/mzw_click_reopen_date"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/item_click"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_load_error_selector"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+                <ImageView
+                    android:id="@+id/load_error_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@id/load_error_img"
+                    android:text="@string/load_error_info"
+                    android:textColor="#999999"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </FrameLayout>
+
+</RelativeLayout>

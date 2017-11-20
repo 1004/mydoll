@@ -8,4 +8,9 @@
         <item name="android:windowActionBar">false</item>
         <!-- <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>-->
     </style>
+
+    <declare-styleable name="TextGradientViewStyle">
+        <attr name="text_value" format="string" />
+        <attr name="text_size" format="dimension" />
+    </declare-styleable>
 </resources>

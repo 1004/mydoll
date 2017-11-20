@@ -17,6 +17,24 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+
+    packagingOptions {
+        exclude 'META-INF/maven/commons-net/commons-net/pom.xml'
+        exclude 'META-INF/maven/commons-net/commons-net/pom.properties'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'assets/kprogresshud_spinner.png'
+    }
+
 }
 
 dependencies {
@@ -24,4 +42,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile project(':CoreLibrary')
+    compile project(':umengshare_6.4.3')
+    compile project(':ijkplayer-java_3.1')
+    compile project(':7k7kDanmaku')
 }

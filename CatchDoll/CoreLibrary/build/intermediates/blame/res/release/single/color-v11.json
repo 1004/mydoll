@@ -6,13 +6,5 @@
     {
         "merged": "E:\\studio_feiyun\\doll\\CatchDoll\\CoreLibrary\\build\\intermediates\\res\\merged\\release\\color-v11\\abc_background_cache_hint_selector_material_light.xml",
         "source": "E:\\studio_feiyun\\doll\\CatchDoll\\CoreLibrary\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.1\\res\\color-v11\\abc_background_cache_hint_selector_material_light.xml"
-    },
-    {
-        "merged": "E:\\studio_feiyun\\FeiYunTVsvn\\CoreLibrary\\build\\intermediates\\res\\merged\\release\\color-v11\\abc_background_cache_hint_selector_material_light.xml",
-        "source": "E:\\studio_feiyun\\FeiYunTVsvn\\CoreLibrary\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.1\\res\\color-v11\\abc_background_cache_hint_selector_material_light.xml"
-    },
-    {
-        "merged": "E:\\studio_feiyun\\FeiYunTVsvn\\CoreLibrary\\build\\intermediates\\res\\merged\\release\\color-v11\\abc_background_cache_hint_selector_material_dark.xml",
-        "source": "E:\\studio_feiyun\\FeiYunTVsvn\\CoreLibrary\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.1\\res\\color-v11\\abc_background_cache_hint_selector_material_dark.xml"
     }
 ]

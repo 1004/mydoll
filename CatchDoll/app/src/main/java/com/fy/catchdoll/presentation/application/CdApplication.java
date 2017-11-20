@@ -10,6 +10,8 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.qike.umengshare_643.UmengInit;
+import com.umeng.socialize.UMShareAPI;
 
 import tv.feiyunlu.qike.com.qikecorelibrary.libs.libs.core.config.Config;
 import tv.feiyunlu.qike.com.qikecorelibrary.libs.libs.core.config.Configuration;
@@ -29,7 +31,40 @@ public class CdApplication extends Application{
         initData();
         coreInit();
         initImageLoader();
+        librariesInit();
     }
+
+    /**
+     * 初始化友盟分享6.4.3
+     */
+    private void initUMengShare_6_4_3() {
+        UMShareAPI.get(this);
+        //开启debug模式，方便定位错误，具体错误检查方式可以查看http://dev.umeng.com/social/android/quick-integration的报错必看，正式发布，请关闭该模式
+        com.umeng.socialize.Config.DEBUG = false;
+        com.umeng.socialize.Config.isJumptoAppStore = false;//对应平台没有安装的时候跳转转到应用商店下载
+    }
+
+
+    /**
+     * <p>第三方初始化</p><br/>
+     *
+     * @author suenxianhao
+     * @since 5.0.0
+     */
+    private void librariesInit() {
+        long time = System.currentTimeMillis();
+        //初始化友盟相关
+        initUMengShare_6_4_3();
+    }
+
+
+    {
+        /**
+         * 6.4.3
+         */
+        UmengInit.initUmengService();
+    }
+
 
     private void coreInit() {
         long time = System.currentTimeMillis();
