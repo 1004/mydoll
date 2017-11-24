@@ -3,6 +3,8 @@ package com.fy.catchdoll.module.network;
 
 import com.fy.catchdoll.library.utils.DeviceUtils;
 import com.fy.catchdoll.presentation.application.CdApplication;
+import com.fy.catchdoll.presentation.model.dto.account.User;
+import com.fy.catchdoll.presentation.presenter.account.AccountManager;
 
 import java.net.URI;
 import java.util.Map;
@@ -32,15 +34,14 @@ public class CommonalityParams {
 			mUrl = url;
 			try {
 //				mParams.put(LOCALE_KEY, country);
-//				User user = AccountManager.getInstance(QikeApplication.getApplication()).getUser();
-//				if (user != null){
-//					mParams.put("room_id",user.getUser_id());
-//					mParams.put("user_id",user.getUser_id());
-//					mParams.put("user_verify",user.getUser_verify());
-//				}
+				User user = AccountManager.getInstance().getUser();
+				if (user != null){
+					mParams.put("user_id",user.getUser_id());
+					mParams.put("success_token",user.getUser_verify());
+				}
 //				mParams.put("signtime", (System.currentTimeMillis()/1000)+"");
-//				mParams.put("pf", "android");
-				mParams.put("cv", DeviceUtils.getVersionCode(CdApplication.getApplication()));
+				mParams.put("signtype", "1");
+				mParams.put("version", DeviceUtils.getVersionCode(CdApplication.getApplication()));
 //				mParams.put("sv", Device.getSysVersion());
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -35,17 +35,14 @@ public class BazaarGetDao<T> extends AbstractGetDao {
     private Map<String, Object> mParams = new HashMap<String, Object>();
     private CommonalityParams mCommonality = new CommonalityParams();
     private String mUrl;
-    private DLResultData<T> mData;
-
-    private DLResultData<String> mErrorData;
+    private ResultData<T> mData;
 
     private int mDataType;
     public static final int ARRAY_DATA = 0;
     public static final int ARRAY_DATA_CHUNK = 1;
     public static final int ARRAY_DATA_LOOP = 2;
     public static final int ARRAY_DATA_STATUS = 3;
-    public static final int YESCODE = 200;
-    public static final int YESCODE2 = 1;
+    public static final int YESCODE = 0;
     private boolean isNext = false;
     private boolean isPre = true;
     private T mLoopData;
@@ -59,7 +56,7 @@ public class BazaarGetDao<T> extends AbstractGetDao {
     public BazaarGetDao(String url, Class<T> clazz, int type) {
         super(url);
         mDataType = type;
-        mData = new DLResultData<T>();
+        mData = new ResultData<T>();
         mUrl = url;
         this.clazz = clazz;
         //		mContext = context;
@@ -112,7 +109,7 @@ public class BazaarGetDao<T> extends AbstractGetDao {
 
         if (!TextUtils.isEmpty(content)) {
             JSONObject object = JSONObject.parseObject(content);
-            mData = JSONObject.parseObject(content, DLResultData.class);
+            mData = JSONObject.parseObject(content, ResultData.class);
             if (checkCorrentCode()) {
 
                 try {
@@ -126,31 +123,20 @@ public class BazaarGetDao<T> extends AbstractGetDao {
 
                     switch (mDataType) {
                         case ARRAY_DATA:
-                            if (object.get("_meta") != null) {
-                                mData.setPage(JSONObject.parseObject(object.get("_meta").toString(), Page.class));
+                            if (object.get("page") != null) {
+                                mData.setPage(JSONObject.parseObject(object.get("page").toString(), Page.class));
                             }
-                            mData.setErrcode(JSONObject.parseObject(object.get("errcode").toString(), Integer.class));
-                            if (isErrorCode(mData.getErrcode())) {
-                                mResult.setCode(JSONObject.parseObject(object.get("errcode").toString(), Integer.class));
-                            }
-                            if (object.get("items") instanceof JSONArray) {
-                                mData.setDataList(JSONArray.parseArray(object.get("items").toString(), clazz));
+                            if (object.get("data") != null && object.get("data") instanceof JSONArray) {
+                                mData.setDataList(JSONArray.parseArray(object.get("data").toString(), clazz));
                             }
                             break;
 
                         case ARRAY_DATA_CHUNK:
-
-                            if (object.get("items") != null) {
-                                mData.setData(JSONObject.parseObject(object.get("items").toString(), clazz));
-
+                            if (object.get("data") != null && object.get("data") instanceof JSONObject) {
+                                mData.setData(JSONObject.parseObject(object.get("data").toString(), clazz));
                             }
-
                             break;
                         case ARRAY_DATA_STATUS:
-                            mData.setErrcode(JSONObject.parseObject(object.get("errcode").toString(), Integer.class));
-                            if (isErrorCode(mData.getErrcode())) {
-                                mResult.setCode(JSONObject.parseObject(object.get("errcode").toString(), Integer.class));
-                            }
                             break;
                         case ARRAY_DATA_LOOP:
                             Gson gson = new Gson();
@@ -167,11 +153,10 @@ public class BazaarGetDao<T> extends AbstractGetDao {
                 }
             } else {
                 nextPageError();
-                mErrorData = JSONObject.parseObject(content, DLResultData.class);
-                if(mErrorData != null){
+                if(mData != null){
                     if (mResult != null) {
-                        mResult.setCode(mErrorData.getErrcode());
-                        mResult.setErrmsg(mErrorData.getErrmsg());
+                        mResult.setCode(mData.getStatus().getCode());
+                        mResult.setErrmsg(mData.getStatus().getMessage());
                     }
                 }
             }
@@ -271,7 +256,7 @@ public class BazaarGetDao<T> extends AbstractGetDao {
 
 
     public boolean checkCorrentCode() {
-        return mData.getErrcode() == YESCODE;
+        return mData.getStatus().getCode() == YESCODE;
     }
 
     /**
@@ -336,20 +321,12 @@ public class BazaarGetDao<T> extends AbstractGetDao {
         return mData.getData();
     }
 
-    public DLResultData<T> getmData() {
+    public ResultData<T> getmData() {
         return mData;
     }
 
     public int getCode() {
-        return mData.getErrcode();
-    }
-
-    public DLResultData<String> getErrorData() {
-        return mErrorData;
-    }
-
-    public int getStatus() {
-        return mData.getErrcode();
+        return mData.getStatus().getCode();
     }
 
 
@@ -364,7 +341,4 @@ public class BazaarGetDao<T> extends AbstractGetDao {
         return cacheLoad;
     }
 
-    private boolean isErrorCode(int code) {
-        return (code != YESCODE);
-    }
 }

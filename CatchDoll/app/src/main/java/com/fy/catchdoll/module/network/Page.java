@@ -2,41 +2,32 @@ package com.fy.catchdoll.module.network;
 
 public class Page {
 	/**总条数*/
-	private int totalCount;
+	private int total;
 	/**总页数*/
-	private int pageCount;//总页数
-	private int currentPage;//当前页
-	private String pageType;
+	private int pagecount;//总页数
+	private int pagenum;//当前页
 
-	public String getPageType() {
-		return pageType;
+	public int getTotal() {
+		return total;
 	}
 
-	public void setPageType(String pageType) {
-		this.pageType = pageType;
+	public void setTotal(int total) {
+		this.total = total;
 	}
 
-	public int getTotalCount() {
-		return totalCount;
+	public int getPagecount() {
+		return pagecount;
 	}
 
-	public void setTotalCount(int totalCount) {
-		this.totalCount = totalCount;
+	public void setPagecount(int pagecount) {
+		this.pagecount = pagecount;
 	}
 
-	public int getPageCount() {
-		return pageCount;
+	public int getPagenum() {
+		return pagenum;
 	}
 
-	public void setPageCount(int pageCount) {
-		this.pageCount = pageCount;
-	}
-
-	public int getCurrentPage() {
-		return currentPage;
-	}
-
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
+	public void setPagenum(int pagenum) {
+		this.pagenum = pagenum;
 	}
 }

@@ -35,6 +35,9 @@
 
         </activity>
 
+        <service android:name=".module.service.NetService"></service>
+        <service android:name=".presentation.presenter.update2.UploadService"></service>
+
         <!--友盟 start-->
         <activity
             android:name=".WBShareActivity"

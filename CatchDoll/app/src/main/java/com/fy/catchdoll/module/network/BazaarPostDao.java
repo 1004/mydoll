@@ -40,8 +40,7 @@ public class BazaarPostDao<T> extends BasicPostDao {
 	private Class<T> clazz = null;
 	private String mStrResult;
 	private int mDataType;
-	private DLResultData<T> mData;
-	private DLResultData<String> mErrorData;
+	private ResultData<T> mData;
 	private String mUrl;
 	private T mLoopData;
 	private Map<String, Object> mParams = new HashMap<String, Object>();
@@ -51,7 +50,7 @@ public class BazaarPostDao<T> extends BasicPostDao {
 	public BazaarPostDao(String url, Class<T> clazz, int type) {
 		super(url);
 		mDataType = type;
-		mData = new DLResultData<T>();
+		mData = new ResultData<T>();
 		mUrl = url;
 		this.clazz = clazz;
 		if (mCacheLoader == null) {
@@ -95,9 +94,9 @@ public class BazaarPostDao<T> extends BasicPostDao {
 
 		if (!TextUtils.isEmpty(content)) {
 			JSONObject object = JSONObject.parseObject(content);
-			mData = JSONObject.parseObject(content, DLResultData.class);
+			mData = JSONObject.parseObject(content, ResultData.class);
 			
-			if (mData.getErrcode() == BazaarGetDao.YESCODE) {
+			if (mData.getStatus().getCode() == BazaarGetDao.YESCODE) {
 				try {
 
 					if (clazz != null && clazz.equals(String.class)) {
@@ -108,12 +107,16 @@ public class BazaarPostDao<T> extends BasicPostDao {
 
 					switch (mDataType) {
 					case ARRAY_DATA:
-						mData.setDataList(JSONArray.parseArray(object.get("data").toString(), clazz));
-
+						if (object.get("page") != null) {
+							mData.setPage(JSONObject.parseObject(object.get("page").toString(), Page.class));
+						}
+						if (object.get("data") != null && object.get("data") instanceof JSONArray) {
+							mData.setDataList(JSONArray.parseArray(object.get("data").toString(), clazz));
+						}
 						break;
 
 					case ARRAY_DATA_CHUNK:
-						if(object.get("data") != null) {
+						if (object.get("data") != null && object.get("data") instanceof JSONObject) {
 							mData.setData(JSONObject.parseObject(object.get("data").toString(), clazz));
 						}
 
@@ -130,10 +133,13 @@ public class BazaarPostDao<T> extends BasicPostDao {
 					e.printStackTrace();
 					mResult.setCode(ParamsContants.ERROR_PARSE);
 				}
-			}
-			
-			else{
-				mErrorData = JSONObject.parseObject(content, DLResultData.class);
+			}else{
+				if(mData != null){
+					if (mResult != null) {
+						mResult.setCode(mData.getStatus().getCode());
+						mResult.setErrmsg(mData.getStatus().getMessage());
+					}
+				}
 			}
 		} else {
 			mResult.setCode(ParamsContants.ERROR_PARSE);
@@ -194,10 +200,7 @@ public class BazaarPostDao<T> extends BasicPostDao {
 		return mLoopData;
 	}
 
-	public DLResultData<String> getErrorData(){
-		return mErrorData;
-	}
-	
+
 	public String getStringResult() {
 		return mStrResult;
 	}
@@ -207,7 +210,7 @@ public class BazaarPostDao<T> extends BasicPostDao {
 	}
 
 	public int getStatus() {
-		return mData.getErrcode();
+		return mData.getStatus().getCode();
 	}
 
 //	public Page getPage() {

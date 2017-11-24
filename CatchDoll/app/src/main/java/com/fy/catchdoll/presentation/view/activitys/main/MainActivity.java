@@ -1,9 +1,11 @@
 package com.fy.catchdoll.presentation.view.activitys.main;
 
+import android.content.Intent;
 import android.view.View;
 
 import com.fy.catchdoll.R;
 import com.fy.catchdoll.library.utils.ActivityUtils;
+import com.fy.catchdoll.module.service.NetService;
 import com.fy.catchdoll.presentation.view.activitys.base.AppCompatBaseActivity;
 
 /**
@@ -23,7 +25,11 @@ public class MainActivity extends AppCompatBaseActivity{
 
     @Override
     public void initData() {
+        try{
+            startService(new Intent(this, NetService.class));
+        }catch (Throwable e){
 
+        }
     }
 
     @Override

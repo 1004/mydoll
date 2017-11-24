@@ -27,7 +27,6 @@ public abstract class AbstractGetDao<T> implements IDao<T>, IResultProcessor {
 	protected String URL;
 	private Map<String, Object> mParamsMap;
 	protected CacheLoad mCacheLoader;
-	private boolean mAddVerifyKey = true;
 	private boolean mNeedDecodeResponse;
 	protected HttpActionProxy proxy;
 	protected BaseLoadListener loadListener;
@@ -136,7 +135,6 @@ public abstract class AbstractGetDao<T> implements IDao<T>, IResultProcessor {
 
 	@Override
 	public void needVerifyKey(boolean bool) {
-		this.mAddVerifyKey = bool;
 	}
 
 	@Override
@@ -155,9 +153,6 @@ public abstract class AbstractGetDao<T> implements IDao<T>, IResultProcessor {
 	}
 
 	private void verifyKey() {
-		if (!mAddVerifyKey) {
-			return;
-		}
 		if (mParamsMap != null && mParamsMap.size() != 0) {
 			mParamsMap.put("key", URLParamsUtils.initGeneralKey(URL, mParamsMap));
 		}

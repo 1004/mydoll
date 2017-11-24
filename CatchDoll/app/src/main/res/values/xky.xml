@@ -148,6 +148,38 @@
         </attr>
     </declare-styleable>
 
+    <style name="MyDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <!-- 升级的dialog -->
+    <style name="update_ProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
+
+        <!-- 继承了android横向的ProgressBar的样式 -->
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/update_progress</item>
+    </style>
+
+    <style name="MyTopciDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="dialogWindowAnim" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/push_down_in</item>
+        <item name="android:windowExitAnimation">@anim/push_down_out</item>
+    </style>
 
     <style name="MediaButtonCompat.Previous">
         <item name="android:src">@mipmap/ic_launcher</item>
@@ -172,6 +204,44 @@
     <style name="MediaButtonCompat.Pause">
         <item name="android:src">@mipmap/ic_launcher</item>
     </style>
+
+
+    <string name="dialog_title">提示</string>
+    <string name="string_ban_cancel">取消</string>
+    <string name="string_ban_yes">确定</string>
+    <string name="prompt">提示</string>
+    <string name="confirm_exit">确定退出登录</string>
+    <string name="exit">退出</string>
+
+    <!-- 版本更新所用到的内容 -->
+    <string name="app_update_ticker">新版本开始更新…</string>
+    <string name="app_update_downloading">下载中…</string>
+    <string name="app_update_downloaded">下载完成，点击安装</string>
+    <string name="app_update_download_error">下载失败，点击重新下载</string>
+
+    <dimen name="dimen_ban_view_w">240dp</dimen>
+    <dimen name="dimen_ban_view_item_h">44dp</dimen>
+
+    <color name="color_ban_line">#edecec</color>
+    <color name="color_divide_">#f5f5f5</color>
+    <color name="item_border_color">#ffdadada</color>
+    <color name="green_downloading_progress">#41c737</color>
+
+
+    <style name="style_ban_title">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#666666</item>
+    </style>
+    <style name="style_h_cancel_">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#999999</item>
+    </style>
+
+    <style name="style_ban_content">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#21aaff</item>
+    </style>
+
 
 
 

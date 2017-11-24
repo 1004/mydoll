@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
+    useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         applicationId "com.fy.catchdoll"
@@ -45,4 +46,6 @@ dependencies {
     compile project(':umengshare_6.4.3')
     compile project(':ijkplayer-java_3.1')
     compile project(':7k7kDanmaku')
+    compile "org.apache.httpcomponents:httpcore:4.3.2"
+
 }
