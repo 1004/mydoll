@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/room_container"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/left_room_container"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/dimen_r_margin"
+            android:layout_marginRight="@dimen/dimen_r_between"
+            android:background="@drawable/shape_room_bg"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/left_room_pic"
+                android:layout_width="match_parent"
+                android:scaleType="centerCrop"
+                android:layout_height="@dimen/dimen_room_pic_h"
+                android:src="@color/color_f5f5f5" />
+            <TextView
+                android:id="@+id/left_room_title"
+                android:layout_width="wrap_content"
+                android:singleLine="true"
+                style="@style/style_13_969ea3"
+                android:text="Molly系列"
+                android:layout_marginTop="@dimen/dimen_r_text_margin_t"
+                android:layout_marginLeft="@dimen/dimen_r_text_margin_b"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/left_room_money"
+                android:layout_width="wrap_content"
+                android:singleLine="true"
+                style="@style/style_13_ffd929"
+                android:text="100K"
+                android:layout_marginTop="@dimen/dimen_r_text_margin_t"
+                android:layout_marginLeft="@dimen/dimen_r_text_margin_b"
+                android:layout_marginBottom="@dimen/dimen_r_text_margin_b"
+                android:layout_height="wrap_content" />
+
+            <RelativeLayout
+                android:background="@drawable/shape_room_bottom_bg"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_r_bootom_h">
+                <RelativeLayout
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/left_room_b_icon"
+                        android:src="@mipmap/ic_launcher"
+                        android:layout_centerVertical="true"
+                        android:layout_width="@dimen/dimen_r_bootom_icon_wh"
+                        android:layout_height="@dimen/dimen_r_bootom_icon_wh" />
+                    <TextView
+                        android:id="@+id/left_room_b_con"
+                        android:layout_toRightOf="@id/left_room_b_icon"
+                        style="@style/style_12_4bd3a1"
+                        android:text="空闲中"
+                        android:layout_marginLeft="@dimen/dimen_r_bootom_icon_margin"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/right_room_container"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginRight="@dimen/dimen_r_margin"
+            android:background="@drawable/shape_room_bg"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/right_room_pic"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_room_pic_h"
+                android:src="@color/color_f5f5f5" />
+            <TextView
+                android:id="@+id/right_room_title"
+                android:layout_width="wrap_content"
+                android:singleLine="true"
+                style="@style/style_13_969ea3"
+                android:text="Molly系列"
+                android:layout_marginTop="@dimen/dimen_r_text_margin_t"
+                android:layout_marginLeft="@dimen/dimen_r_text_margin_b"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/right_room_money"
+                android:layout_width="wrap_content"
+                android:singleLine="true"
+                style="@style/style_13_ffd929"
+                android:text="100K"
+                android:layout_marginTop="@dimen/dimen_r_text_margin_t"
+                android:layout_marginLeft="@dimen/dimen_r_text_margin_b"
+                android:layout_marginBottom="@dimen/dimen_r_text_margin_b"
+                android:layout_height="wrap_content" />
+
+            <RelativeLayout
+                android:background="@drawable/shape_room_bottom_bg"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_r_bootom_h">
+                <RelativeLayout
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/right_room_b_icon"
+                        android:src="@mipmap/ic_launcher"
+                        android:layout_centerVertical="true"
+                        android:layout_width="@dimen/dimen_r_bootom_icon_wh"
+                        android:layout_height="@dimen/dimen_r_bootom_icon_wh" />
+                    <TextView
+                        android:id="@+id/right_room_b_con"
+                        android:layout_toRightOf="@id/right_room_b_icon"
+                        style="@style/style_12_4bd3a1"
+                        android:text="空闲中"
+                        android:layout_marginLeft="@dimen/dimen_r_bootom_icon_margin"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_r_margin">
+
+    </View>
+</LinearLayout>

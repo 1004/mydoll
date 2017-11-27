@@ -243,6 +243,62 @@
     </style>
 
 
+    <!-- banner start -->
+    <color name="banner_bottom_bg">#33000000</color>
+
+    <dimen name="banner_height">180dp</dimen>
+    <dimen name="banner_bottom_height">25dp</dimen>
+    <dimen name="banner_bottom_margin">8dp</dimen>
+
+    <style name="banner_bottom_title_style">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+    <!-- banner end -->
 
 
+    <drawable name="drawable_default_color">#f5f5f5</drawable>
+    <drawable name="drawable_write_color">#ffffff</drawable>
+
+    <dimen name="dimen_room_pic_h">130dp</dimen>
+    <dimen name="dimen_r_pic_score">15dp</dimen>
+    <dimen name="dimen_r_between">15dp</dimen>
+    <dimen name="dimen_r_margin">15dp</dimen>
+    <dimen name="dimen_r_text_margin_t">10dp</dimen>
+    <dimen name="dimen_r_text_margin_b">15dp</dimen>
+    <dimen name="dimen_r_bootom_h">33dp</dimen>
+    <dimen name="dimen_r_bootom_icon_wh">15dp</dimen>
+    <dimen name="dimen_r_bootom_icon_margin">6dp</dimen>
+    <dimen name="dimen_r_banner_h">160dp</dimen>
+    <dimen name="dimen_nav_h">45dp</dimen>
+    <string name="string_room_busy">游戏中</string>
+    <string name="string_room_free">空闲中</string>
+    <string name="state_loading_str">加载中...</string>
+    <string name="net_error_str">加载失败,点击刷新</string>
+    <string name="net_error_t1">空空如也</string>
+    <string name="net_error_t2">加载失败,网络可能有问题!</string>
+
+    <declare-styleable name="circleimageview">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
+
+    <style name="style_13_969ea3">
+        <item name="android:textSize">13.0sp</item>
+        <item name="android:textColor">#969ea3</item>
+    </style>
+    <style name="style_13_ffd929">
+        <item name="android:textSize">13.0sp</item>
+        <item name="android:textColor">#ffd929</item>
+    </style>
+    <style name="style_12_4bd3a1">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textColor">#4bd3a1</item>
+    </style>
+    <style name="text_loading_style">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/color_999</item>
+    </style>
 </resources>

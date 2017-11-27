@@ -17,7 +17,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:name=".presentation.application.CdApplication"
-        android:theme="@style/AppTheme">
+        android:theme="@android:style/Theme.Light.NoTitleBar">
+        <meta-data android:name="android.max_aspect" android:value="2.1" />
         <activity android:name=".presentation.view.activitys.main.MainActivity">
 
         </activity>

@@ -52,6 +52,9 @@ public class URLParamsUtils {
 
 		String sign = "";
 		try {
+			if (params != null){
+				params.remove("key");
+			}
 			String paramString = HttpUtil.convertParams(params);
 			URI uri = new URI(url);
 			String path = uri.getHost() + uri.getPath();

@@ -42,7 +42,7 @@ public class BazaarGetDao<T> extends AbstractGetDao {
     public static final int ARRAY_DATA_CHUNK = 1;
     public static final int ARRAY_DATA_LOOP = 2;
     public static final int ARRAY_DATA_STATUS = 3;
-    public static final int YESCODE = 0;
+    public static final int YESCODE = 1;
     private boolean isNext = false;
     private boolean isPre = true;
     private T mLoopData;

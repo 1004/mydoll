@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/banner_height"
+    android:paddingLeft="@dimen/dimen_r_margin"
+    android:paddingRight="@dimen/dimen_r_margin"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/banner_bottom_container"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/banner_bottom_height"
+            android:layout_alignParentBottom="true" >
+
+            <TextView
+                android:id="@+id/banner_bottom_title"
+                style="@style/banner_bottom_title_style"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/banner_bottom_margin"
+                android:visibility="gone"
+                android:ellipsize="end"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="FAD" />
+
+            <LinearLayout
+                android:id="@+id/banner_bottom_point_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingRight="@dimen/banner_bottom_margin" >
+            </LinearLayout>
+        </RelativeLayout>
+        <com.fy.catchdoll.library.widgets.BannerViewPager
+            android:id="@+id/banner_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/banner_bottom_container"
+            android:scaleType="centerInside"/>
+    </RelativeLayout>
+</RelativeLayout>

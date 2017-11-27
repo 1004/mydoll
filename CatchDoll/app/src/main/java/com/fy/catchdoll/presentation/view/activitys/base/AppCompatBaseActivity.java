@@ -14,7 +14,10 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 
 
+import com.fy.catchdoll.R;
+import com.fy.catchdoll.library.utils.GlideUtils;
 import com.fy.catchdoll.library.utils.UiUtils;
+import com.fy.catchdoll.module.support.immersionbarlib.ImmersionBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +37,7 @@ public abstract class AppCompatBaseActivity extends FragmentActivity implements 
      * 程序是否处于前台，默认值false
      */
     private boolean isActive = true;
+    protected ImmersionBar mImmersionBar;
 
     /**
      * 监听程序从后台切换回来的接口
@@ -82,6 +86,7 @@ public abstract class AppCompatBaseActivity extends FragmentActivity implements 
         setRequestedOrientation(isVoriention() ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT : ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         UiUtils.createActivity(this);
         super.onCreate(savedInstanceState);
+        immersionBarInit();
         setContentView(getLayoutId());
         initView();
         initData();
@@ -119,8 +124,8 @@ public abstract class AppCompatBaseActivity extends FragmentActivity implements 
      */
     @Override
     protected void onDestroy() {
-
         UiUtils.destroyActivity(this);
+        immersionBarDestroy();
         super.onDestroy();
     }
 
@@ -198,11 +203,46 @@ public abstract class AppCompatBaseActivity extends FragmentActivity implements 
 
     public void onResume() {
         super.onResume();
+        GlideUtils.resumeAllRequest(this);
     }
 
     public void onPause() {
         super.onPause();
-
+        GlideUtils.pauseAllRequest(this);
     }
+
+    /**--------------沉浸式状态栏开始---------------**/
+    protected boolean isImmersionBar(){
+        return true;
+    }
+
+    protected void immersionBarInit() {
+        if (!isImmersionBar()||!ImmersionBar.isSupportStatusBarDarkFont()) {
+            return;
+        }
+        mImmersionBar = ImmersionBar.with(this);
+        mImmersionBar
+                .statusBarColor(getBarColor())
+                .fitsSystemWindows(true)
+                .statusBarDarkFont(isDarkFont());
+        mImmersionBar.init();
+    }
+
+    protected int getBarColor(){
+        return R.color.color_white;
+    }
+
+    protected boolean isDarkFont(){
+        return true;
+    }
+
+
+
+    private void immersionBarDestroy() {
+        if (mImmersionBar != null)
+            mImmersionBar.destroy();
+        //必须调用该方法，防止内存泄漏，不调用该方法，如果界面bar发生改变，在不关闭app的情况下，退出此界面再进入将记忆最后一次bar改变的状态
+    }
+
 
 }
