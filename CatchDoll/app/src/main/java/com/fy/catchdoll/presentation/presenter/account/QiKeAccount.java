@@ -133,7 +133,7 @@ public class QiKeAccount implements IAccount {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (mLoginPresenter != null) {
-//            mLoginPresenter.onActivityResult(requestCode, resultCode, data);
+            mLoginPresenter.onActivityResult(requestCode, resultCode, data);
         }
 
     }

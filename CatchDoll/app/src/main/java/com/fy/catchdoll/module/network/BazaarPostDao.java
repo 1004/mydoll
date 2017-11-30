@@ -136,7 +136,7 @@ public class BazaarPostDao<T> extends BasicPostDao {
 			}else{
 				if(mData != null){
 					if (mResult != null) {
-						mResult.setCode(mData.getStatus().getCode());
+						mResult.setCode(ParamsContants.ERROR_SERVER);
 						mResult.setErrmsg(mData.getStatus().getMessage());
 					}
 				}

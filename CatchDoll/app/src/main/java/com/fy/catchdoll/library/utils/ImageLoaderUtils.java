@@ -40,7 +40,7 @@ public class ImageLoaderUtils {
             .cacheInMemory()//内存缓存
             .cacheOnDisc()//磁盘缓存
             .imageScaleType(ImageScaleType.IN_SAMPLE_INT)
-            .displayer(new FlexibleRoundedBitmapDisplayer(Device.dip2px(CdApplication.getApplication(), 8), FlexibleRoundedBitmapDisplayer.CORNER_TOP_LEFT | FlexibleRoundedBitmapDisplayer.CORNER_TOP_RIGHT)) // 自定义增强型BitmapDisplayer
+            .displayer(new FlexibleRoundedBitmapDisplayer(Device.dip2px(CdApplication.getApplication(), 15), FlexibleRoundedBitmapDisplayer.CORNER_TOP_LEFT | FlexibleRoundedBitmapDisplayer.CORNER_TOP_RIGHT)) // 自定义增强型BitmapDisplayer
             .build();
 
     public static DisplayImageOptions mSpecialOptions = new DisplayImageOptions.Builder()

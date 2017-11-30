@@ -19,6 +19,7 @@ import tv.feiyunlu.qike.com.qikecorelibrary.libs.libs.core.cache.CacheLoader;
 import tv.feiyunlu.qike.com.qikecorelibrary.libs.libs.core.config.Configuration;
 import tv.feiyunlu.qike.com.qikecorelibrary.libs.libs.core.thread.Task;
 import tv.feiyunlu.qike.com.qikecorelibrary.libs.libs.core.thread.impl.HttpActionProxy;
+import tv.feiyunlu.qike.com.qikecorelibrary.libs.libs.function.configuration.Params;
 
 /**
  * <p>dao封装类</p><br/>
@@ -155,7 +156,7 @@ public class BazaarGetDao<T> extends AbstractGetDao {
                 nextPageError();
                 if(mData != null){
                     if (mResult != null) {
-                        mResult.setCode(mData.getStatus().getCode());
+                        mResult.setCode(ParamsContants.ERROR_SERVER);
                         mResult.setErrmsg(mData.getStatus().getMessage());
                     }
                 }

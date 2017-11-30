@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fy.catchdoll.R;
+import com.fy.catchdoll.library.utils.CommonUtil;
 import com.fy.catchdoll.library.utils.ImageLoaderUtils;
 import com.fy.catchdoll.presentation.model.dto.base.BaseItemDto;
 import com.fy.catchdoll.presentation.model.dto.doll.DollMachine;
@@ -58,26 +59,35 @@ public class DollRoomWrap extends BaseViewObtion<BaseItemDto>{
             holder.mRightContainer.setVisibility(View.VISIBLE);
         }
         DollMachine leftDollRoom = data.get(leftPosition);
-        initItem(holder.mLeftCover, holder.mLeftTitle, holder.mleftMoney, holder.mleftBContent,leftDollRoom);
+        initItem(holder.mLeftContainer,holder.mLeftCover, holder.mLeftTitle, holder.mleftMoney, holder.mleftBContent,holder.mLeftBIcon,leftDollRoom);
 
         if (leftPosition != rightPosition){
             DollMachine rightDollRoom = data.get(rightPosition);
-            initItem(holder.mRightCover, holder.mRightTitle, holder.mRightMoney, holder.mRightBContent,rightDollRoom);
+            initItem(holder.mRightContainer,holder.mRightCover, holder.mRightTitle, holder.mRightMoney, holder.mRightBContent,holder.mRightBIcon,rightDollRoom);
         }
 
     }
 
-    private void  initItem(ImageView cover,TextView title,TextView money,TextView bcon,  DollMachine dollRoom){
-        ImageLoaderUtils.setRoundedImage(dollRoom.getDoll_image(),cover);
+    private void  initItem(View container,ImageView cover,TextView title,TextView money,TextView bcon,  ImageView bImg, final DollMachine dollRoom){
+//        ImageLoaderUtils.setRoundedImage(dollRoom.getDoll_image(),cover);
+        ImageLoaderUtils.displayImage(cover, R.drawable.drawable_write_color, dollRoom.getDoll_image());
         title.setText(dollRoom.getDoll_title());
-        money.setText(dollRoom.getGold()+" K");
+        money.setText(dollRoom.getGold()+" "+ CommonUtil.getMoneyUnit());
         if (dollRoom.getIs_game() == DollMachine.BUSY){
             //游戏中
             bcon.setText(mActivity.getResources().getString(R.string.string_room_busy));
+            bImg.setImageResource(R.mipmap.busy);
         }else {
             //空闲
             bcon.setText(mActivity.getResources().getString(R.string.string_room_free));
+            bImg.setImageResource(R.mipmap.free);
         }
+        container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemElementClick(v,dollRoom);
+            }
+        });
     }
 
     class DolllViewHolder{

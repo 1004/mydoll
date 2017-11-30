@@ -93,7 +93,7 @@ public class UmengThirdLogin {
                 case WEIXIN:
                     mUserInfo.setToken(data.get("access_token"));
                     mUserInfo.setSource("wechat");
-                    mUserInfo.setOpenId(data.get("unionid") + "," + data.get("openid"));
+                    mUserInfo.setOpenId(data.get("openid"));
                     break;
                 case QQ:
                     mUserInfo.setToken(data.get("access_token"));

@@ -12,6 +12,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.TextView;
 
 
 import com.fy.catchdoll.R;
@@ -38,6 +39,7 @@ public abstract class AppCompatBaseActivity extends FragmentActivity implements 
      */
     private boolean isActive = true;
     protected ImmersionBar mImmersionBar;
+    private TextView mTitleTv;
 
     /**
      * 监听程序从后台切换回来的接口
@@ -89,6 +91,7 @@ public abstract class AppCompatBaseActivity extends FragmentActivity implements 
         immersionBarInit();
         setContentView(getLayoutId());
         initView();
+        initCommonNavView();
         initData();
         setListener();
         loadData();
@@ -98,6 +101,20 @@ public abstract class AppCompatBaseActivity extends FragmentActivity implements 
     protected void initUmengPush() {
        // PushHelper.getInstance().openAppStart(this);
 
+    }
+
+    private void initCommonNavView(){
+        View viewById = findViewById(R.id.bacK_common_nav);
+        if (viewById != null){
+            viewById.findViewById(R.id.nav_back).setOnClickListener(this);
+            mTitleTv = (TextView) viewById.findViewById(R.id.nav_title);
+        }
+    }
+
+    public void setCommonTitle(String titleStr){
+        if (mTitleTv != null){
+            mTitleTv.setText(titleStr);
+        }
     }
 
     public boolean isVoriention() {
@@ -115,7 +132,9 @@ public abstract class AppCompatBaseActivity extends FragmentActivity implements 
         return this;
     }
 
-
+    protected String getMString(int strId){
+        return getResources().getString(strId);
+    }
     /**
      * 在銷毀的同時，刪除其所在activity集合中的實例
      *
@@ -181,6 +200,11 @@ public abstract class AppCompatBaseActivity extends FragmentActivity implements 
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.nav_back:
+                finish();
+                break;
+        }
     }
 
     private long mExitTime;

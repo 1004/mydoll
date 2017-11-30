@@ -1,5 +1,6 @@
 package com.fy.catchdoll.presentation.view.activitys.main;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatBaseActivity implements OnWrapItemCli
     private PagePresenter mPagePresenter;
     private IndexPresenter mPresenter;
     private CommonAdapterType mAdapter;
+    private View myCenter;
 
 
     @Override
@@ -51,6 +53,8 @@ public class MainActivity extends AppCompatBaseActivity implements OnWrapItemCli
     public void initView() {
         topicLv = (ResultsListView) findViewById(R.id.lv);
         netstate = (NetStateView) findViewById(R.id.netstate);
+        myCenter = findViewById(R.id.main_my_center);
+        findViewById(R.id.main_my_box).setOnClickListener(this);
 
         netstate.setContentView(topicLv);
         netstate.show(NetStateView.NetState.LOADING);
@@ -89,6 +93,7 @@ public class MainActivity extends AppCompatBaseActivity implements OnWrapItemCli
         netstate.setOnRefreshListener(this);
         topicLv.setonRefreshListener(this);
         mPresenter.registPresenterCallBack(this);
+        myCenter.setOnClickListener(this);
     }
 
     @Override
@@ -138,14 +143,19 @@ public class MainActivity extends AppCompatBaseActivity implements OnWrapItemCli
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        switch (v.getId()){
+        switch (v.getId()) {
+            case R.id.main_my_center:
+                ActivityUtils.startMyActivity(this);
+                break;
+            case R.id.main_my_box:
+                ActivityUtils.startBoxInfoActivity(this);
+                break;
         }
-
     }
 
     @Override
     public void onItemClick(View v, Object... obj) {
-
+        ActivityUtils.startRoomActivity(this,"");
     }
 
     @Override

@@ -160,6 +160,7 @@ public class LoginPresenter implements IAccountBizCallBack {
             Log.e("TAG", "mUmengUserInfo==" + mUmengUserInfo.getSource());
             Log.e("TAG", "token==" + mUmengUserInfo.getToken());
             Log.e("TAG", "openid==" + mUmengUserInfo.getOpenId());
+//            Toast.makeText(mContext, R.string.auoth_success, Toast.LENGTH_SHORT).show();
             loginThird();
         }
 

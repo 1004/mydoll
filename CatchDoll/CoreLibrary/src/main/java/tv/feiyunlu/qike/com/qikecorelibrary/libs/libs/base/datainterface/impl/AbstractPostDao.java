@@ -169,9 +169,6 @@ public abstract class AbstractPostDao<T> implements IDao<T>, IResultProcessor {
 	}
 
 	private void verifyKey() {
-		if (!mAddVerifyKey) {
-			return;
-		}
 		if (mParamsMap != null && mParamsMap.size() != 0) {
 			mParamsMap.put("key", URLParamsUtils.initGeneralKey(URL, mParamsMap));
 		}

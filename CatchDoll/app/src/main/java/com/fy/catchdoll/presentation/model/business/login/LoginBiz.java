@@ -84,7 +84,9 @@ public class LoginBiz {
     }
 
     public void loginThird(String token, String openId, String source) {
-
+        if (mLoginBizCallBack != null) {
+            mLoginBizCallBack.dataResult("token="+token+"appid=",null,0);
+        }
 //        if (source.equals("qq")) {
 //            mThirdDao = new BazaarGetDao<User>(Paths.BASEPATH + Paths.THIRD_LOGIN, User.class, BazaarGetDao.ARRAY_DATA_CHUNK);
 //        } else {

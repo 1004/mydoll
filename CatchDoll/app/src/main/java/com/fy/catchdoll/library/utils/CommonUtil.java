@@ -92,7 +92,9 @@ public class CommonUtil {
 	}
 	
 	
-
+	public static final String getMoneyUnit(){
+		return "K";
+	}
 	
 	
 	

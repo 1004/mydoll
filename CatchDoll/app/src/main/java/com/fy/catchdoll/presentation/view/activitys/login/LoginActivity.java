@@ -1,15 +1,19 @@
 package com.fy.catchdoll.presentation.view.activitys.login;
 
+import android.content.Intent;
 import android.view.View;
 
 import com.fy.catchdoll.R;
 import com.fy.catchdoll.library.utils.ActivityUtils;
+import com.fy.catchdoll.module.network.Page;
+import com.fy.catchdoll.presentation.presenter.account.AccountManager;
+import com.fy.catchdoll.presentation.presenter.account.IAccountPresenterCallBack;
 import com.fy.catchdoll.presentation.view.activitys.base.AppCompatBaseActivity;
 
 /**
  * Created by xky on 2017/11/20 0020.
  */
-public class LoginActivity extends AppCompatBaseActivity {
+public class LoginActivity extends AppCompatBaseActivity implements IAccountPresenterCallBack {
     private View mLoginBtn;
     @Override
     public int getLayoutId() {
@@ -39,10 +43,39 @@ public class LoginActivity extends AppCompatBaseActivity {
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.login_wx:
                 ActivityUtils.startMainActivity(this);
+//                AccountManager.getInstance().login(AccountManager.LoginType.WEIXIN,this,this);
                 break;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {// 防止取消三方授权回来后Crash //Yocn
+            AccountManager.getInstance().onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
+    public void callBackStats(int status) {
+
+    }
+
+    @Override
+    public void dataResult(Object obj, Page page, int status) {
+        ActivityUtils.startMainActivity(this);
+    }
+
+    @Override
+    public void errerResult(int code, String msg) {
+
     }
 }

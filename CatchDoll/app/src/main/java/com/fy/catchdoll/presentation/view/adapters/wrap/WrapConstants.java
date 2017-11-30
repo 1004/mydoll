@@ -7,4 +7,10 @@ public class WrapConstants {
 //    首页
     public static final int WRAP_INDEX_BANNER = 1;
     public static final int WRAP_INDEX_LIST = WRAP_INDEX_BANNER+1;
+
+    //背包
+    public static final int WRAP_BOX_DOLL = 1;
+    public static final int WRAP_ADDRESS = WRAP_BOX_DOLL+1;
+
+    public static final int WRAP_MY_SPEND = 1;
 }

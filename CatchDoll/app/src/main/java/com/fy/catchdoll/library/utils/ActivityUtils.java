@@ -3,7 +3,13 @@ package com.fy.catchdoll.library.utils;
 import android.content.Context;
 import android.content.Intent;
 
+import com.fy.catchdoll.presentation.model.dto.account.UserInfo;
+import com.fy.catchdoll.presentation.view.activitys.box.BoxInfoActivity;
 import com.fy.catchdoll.presentation.view.activitys.main.MainActivity;
+import com.fy.catchdoll.presentation.view.activitys.my.MyActivity;
+import com.fy.catchdoll.presentation.view.activitys.my.MyExchangeActivity;
+import com.fy.catchdoll.presentation.view.activitys.my.MyInviteShareActivity;
+import com.fy.catchdoll.presentation.view.activitys.my.MySpendActivity;
 import com.fy.catchdoll.presentation.view.activitys.room.RoomActivity;
 
 /**
@@ -26,6 +32,51 @@ public class ActivityUtils {
      */
     public static void startRoomActivity(Context context,String roomId){
         Intent intent = new Intent(context, RoomActivity.class);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 启动我的界面
+     * @param context
+     */
+    public static void startMyActivity(Context context){
+        Intent intent = new Intent(context, MyActivity.class);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 启动邀请码界面
+     * @param context
+     */
+    public static void startInvideCodeActivity(Context context){
+        Intent intent = new Intent(context, MyExchangeActivity.class);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 启动背包界面
+     * @param context
+     */
+    public static void startBoxInfoActivity(Context context){
+        Intent intent = new Intent(context, BoxInfoActivity.class);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 启动消费记录
+     * @param context
+     */
+    public static void startMySpendHistory(Context context){
+        Intent intent = new Intent(context, MySpendActivity.class);
+        context.startActivity(intent);
+    }
+    /**
+     * 启动分享界面
+     * @param context
+     */
+    public static void startMyInviteShareHistory(Context context,UserInfo info){
+        Intent intent = new Intent(context, MyInviteShareActivity.class);
+        intent.putExtra(MyInviteShareActivity.INVITE_SHARE_DATA_KEY,info);
         context.startActivity(intent);
     }
 }

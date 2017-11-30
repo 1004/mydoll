@@ -39,6 +39,9 @@ public class CommonalityParams {
 					mParams.put("user_id",user.getUser_id());
 					mParams.put("success_token",user.getUser_verify());
 				}
+				mParams.put("user_id","1");
+				mParams.put("success_token","f86d66cf3674bc3872c97250f6a5b5a1");
+
 //				mParams.put("signtime", (System.currentTimeMillis()/1000)+"");
 				mParams.put("signtype", "1");
 				mParams.put("version", DeviceUtils.getVersionCode(CdApplication.getApplication()));

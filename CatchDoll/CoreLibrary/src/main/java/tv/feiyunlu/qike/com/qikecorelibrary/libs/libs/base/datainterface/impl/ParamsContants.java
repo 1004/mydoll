@@ -9,6 +9,7 @@ public class ParamsContants {
     
     public static final int ERROR_DECODE = 100091;
     public static final int ERROR_PARSE = 100092;
-    
+    public static final int ERROR_SERVER= 100093;//服务器返回错误信息
+
     
 }

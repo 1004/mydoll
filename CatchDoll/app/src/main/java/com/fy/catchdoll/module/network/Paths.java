@@ -19,6 +19,10 @@ public class Paths {
     public static final String HOME_ARTICLE = "v1/article";
 
     public static final String IDNEX_DATA = "index/list.json";//首页数据
+    public static final String MY_INFO_DATA = "user/info.json";//个人信息
+    public static final String BOX_INFO_DATA = "backpack/mybackpack.json";//背包信息
+    public static final String MY_SPEND_DATA = "gold/changelist.json";//消费记录
+    public static final String MY_SEND_CODE = "user/setinvicode.json";//消费记录
 
 
 }

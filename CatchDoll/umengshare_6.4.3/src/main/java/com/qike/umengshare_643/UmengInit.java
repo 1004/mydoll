@@ -4,8 +4,8 @@ import com.umeng.socialize.PlatformConfig;
 
 public class UmengInit {
 
-	public static final String WEIXIN_APPID = "wx38f124abbdd694d7";
-	public static final String WEIXIN_APPKEY = "70b448ebc12cf26ecfdc8e4b283328a4";
+	public static final String WEIXIN_APPID = "wx8ff481aad7c25e65";
+	public static final String WEIXIN_APPKEY = "c874039fe9cd2feff732abb5b6b3883a";
 	public static final String QQ_APPID = "1105220372";
 	public static final String QQ_APPKEY = "1NpGTtQtvbmVjvs1";
 //	public static final String SINA_APPID = "4121226451";

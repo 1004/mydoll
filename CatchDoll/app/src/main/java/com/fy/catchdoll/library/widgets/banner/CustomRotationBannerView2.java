@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -46,8 +47,8 @@ public class CustomRotationBannerView2 extends RelativeLayout implements OnPageC
     private List<BannerInfo> mDatas;
     private Context mContext;
     private RotationBannerViewPagerAdapter2 mAdapter;
-    private int mFocusId = R.mipmap.tele_point_select;
-    private int mDefaultId = R.mipmap.tele_point;
+    private int mFocusId = R.mipmap.current;
+    private int mDefaultId = R.mipmap.point;
     private int mCurrentPosition;
     private boolean mIsContinue = true;
     public static final int TIMERLOOPER = 1;
@@ -176,6 +177,7 @@ public class CustomRotationBannerView2 extends RelativeLayout implements OnPageC
             point.setTag(i);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(15, 15);
             params.rightMargin = 15;
+            params.gravity = Gravity.CENTER;
             mPointContainer.addView(point, params);
         }
     }

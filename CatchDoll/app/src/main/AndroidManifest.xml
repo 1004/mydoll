@@ -35,9 +35,15 @@
             >
 
         </activity>
+        <activity android:name=".presentation.view.activitys.my.MyActivity"></activity>
+        <activity android:name=".presentation.view.activitys.my.MyExchangeActivity"></activity>
+        <activity android:name=".presentation.view.activitys.box.BoxInfoActivity"></activity>
+        <activity android:name=".presentation.view.activitys.my.MyInviteShareActivity"></activity>
+        <activity android:name=".presentation.view.activitys.my.MySpendActivity"></activity>
 
         <service android:name=".module.service.NetService"></service>
         <service android:name=".presentation.presenter.update2.UploadService"></service>
+
 
         <!--友盟 start-->
         <activity

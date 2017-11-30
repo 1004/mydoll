@@ -9,6 +9,8 @@
     <!--第三方登陆-->
     <string name="auoth_cancle">授权取消！</string>
     <string name="auoth_failed">授权失败！</string>
+    <string name="auoth_success">授权成功！</string>
+
 
     <string name="mzw_pull_refresh">松开手即可刷新</string>
     <string name="mzw_pull_upload">加载中..</string>
@@ -271,12 +273,24 @@
     <dimen name="dimen_r_bootom_icon_margin">6dp</dimen>
     <dimen name="dimen_r_banner_h">160dp</dimen>
     <dimen name="dimen_nav_h">45dp</dimen>
+    <dimen name="dimen_nav_left">15dp</dimen>
     <string name="string_room_busy">游戏中</string>
     <string name="string_room_free">空闲中</string>
     <string name="state_loading_str">加载中...</string>
     <string name="net_error_str">加载失败,点击刷新</string>
     <string name="net_error_t1">空空如也</string>
     <string name="net_error_t2">加载失败,网络可能有问题!</string>
+
+    <declare-styleable name="SelectableRoundedImageView">
+        <attr name="sriv_left_top_corner_radius" format="dimension" />
+        <attr name="sriv_right_top_corner_radius" format="dimension" />
+        <attr name="sriv_left_bottom_corner_radius" format="dimension" />
+        <attr name="sriv_right_bottom_corner_radius" format="dimension" />
+        <attr name="sriv_border_width" format="dimension" />
+        <attr name="sriv_border_color" format="color" />
+        <attr name="sriv_oval" format="boolean" />
+        <attr name="android:scaleType" />
+    </declare-styleable>
 
     <declare-styleable name="circleimageview">
         <attr name="civ_border_width" format="dimension" />
@@ -289,6 +303,14 @@
         <item name="android:textSize">13.0sp</item>
         <item name="android:textColor">#969ea3</item>
     </style>
+    <style name="style_13_adb5bb">
+        <item name="android:textSize">13.0sp</item>
+        <item name="android:textColor">#adb5bb</item>
+    </style>
+    <style name="style_13_fff">
+        <item name="android:textSize">13.0sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
     <style name="style_13_ffd929">
         <item name="android:textSize">13.0sp</item>
         <item name="android:textColor">#ffd929</item>
@@ -297,8 +319,97 @@
         <item name="android:textSize">12.0sp</item>
         <item name="android:textColor">#4bd3a1</item>
     </style>
+    <style name="style_14_fff">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+    <style name="style_40_fff">
+        <item name="android:textSize">40.0sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+    <style name="style_11_fff">
+        <item name="android:textSize">11.0sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+    <style name="style_14_848d92">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textColor">#848d92</item>
+    </style>
+    <style name="style_14_00ded6">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textColor">#00ded6</item>
+    </style>
+    <style name="style_14_ff0000">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textColor">#ff0000</item>
+    </style>
+    <style name="style_16_464e52">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:textColor">#464e52</item>
+    </style>
+    <style name="style_15_848d92">
+        <item name="android:textSize">15.0sp</item>
+        <item name="android:textColor">#848d92</item>
+    </style>
+    <style name="style_15_ffffff">
+        <item name="android:textSize">15.0sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+    <style name="style_12_b6bfc6">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textColor">#b6bfc6</item>
+    </style>
+
     <style name="text_loading_style">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/color_999</item>
     </style>
+    <!--我的-->
+    <dimen name="dimen_my_header_h">210dp</dimen>
+    <dimen name="dimen_my_item_h">60dp</dimen>
+    <dimen name="dimen_my_item_top">15dp</dimen>
+    <dimen name="dimen_my_item_exit_top">20dp</dimen>
+    <dimen name="dimen_my_item_left">20dp</dimen>
+    <dimen name="dimen_my_item_right">15dp</dimen>
+
+    <string name="string_my_has_money">您拥有的咔币</string>
+    <string name="string_my_rechage">充值</string>
+    <string name="string_my_title">我的</string>
+    <string name="string_my_rechange_history">消费记录</string>
+    <string name="string_my_invite_give">邀请奖励</string>
+    <string name="string_my_input_code">输入邀请码</string>
+    <string name="string_my_bg_music">背景音乐</string>
+    <string name="string_my_voice">音效</string>
+    <string name="string_my_exit">退出当前账号</string>
+
+    <!--邀请码-->
+    <string name="string_invite_code_title">邀请码</string>
+    <string name="string_invite_code_info">输入邀请码免费兑换娃娃币</string>
+    <string name="string_invite_code_input">输入兑换码</string>
+    <string name="string_invite_code_btn">兑换</string>
+
+    <string name="string_share_name">你的邀请码</string>
+    <string name="string_share_wx">微信</string>
+    <string name="string_share_qq">QQ</string>
+    <string name="string_share_circle">朋友圈</string>
+    <string name="string_share_qq_zone">QQ空间</string>
+    <string name="string_spend_title">消费明细</string>
+
+    <!--地址-->
+    <string name="string_address_info">收件信息</string>
+    <string name="string_address_info_update">修改</string>
+    <string name="string_address_name">收件人:%1$s</string>
+    <string name="string_address_phone">手机号:%1$s</string>
+    <string name="string_address_address">地址:%1$s</string>
+
+    <string name="string_order_commit">提交订单</string>
+    <string name="string_box_title">背包</string>
+
+    <dimen name="dimen_share_icon_wh">49dp</dimen>
+    <dimen name="dimen_share_title_top">15dp</dimen>
+    <dimen name="dimen_share_container_bet">10dp</dimen>
+
+    <string name="string_share_no_content">娃娃ka</string>
+
+
 </resources>
