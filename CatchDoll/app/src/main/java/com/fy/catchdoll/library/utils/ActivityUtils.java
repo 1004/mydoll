@@ -5,11 +5,13 @@ import android.content.Intent;
 
 import com.fy.catchdoll.presentation.model.dto.account.UserInfo;
 import com.fy.catchdoll.presentation.view.activitys.box.BoxInfoActivity;
+import com.fy.catchdoll.presentation.view.activitys.login.LoginActivity;
 import com.fy.catchdoll.presentation.view.activitys.main.MainActivity;
 import com.fy.catchdoll.presentation.view.activitys.my.MyActivity;
 import com.fy.catchdoll.presentation.view.activitys.my.MyExchangeActivity;
 import com.fy.catchdoll.presentation.view.activitys.my.MyInviteShareActivity;
 import com.fy.catchdoll.presentation.view.activitys.my.MySpendActivity;
+import com.fy.catchdoll.presentation.view.activitys.room.DollRoomActivity;
 import com.fy.catchdoll.presentation.view.activitys.room.RoomActivity;
 
 /**
@@ -32,6 +34,23 @@ public class ActivityUtils {
      */
     public static void startRoomActivity(Context context,String roomId){
         Intent intent = new Intent(context, RoomActivity.class);
+        context.startActivity(intent);
+    }
+    /**
+     * 启动直播间 开始抓娃娃
+     * @param context
+     * @param roomId
+     */
+    public static void startDollRoomActivity(Context context,String roomId){
+        Intent intent = new Intent(context, DollRoomActivity.class);
+        context.startActivity(intent);
+    }
+    /**
+     * 启动登录页面
+     * @param context
+     */
+    public static void startLoginActivity(Context context){
+        Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
     }
 

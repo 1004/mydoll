@@ -11,7 +11,7 @@
             android:layout_width="30dp"
             android:id="@+id/main_my_center"
             android:layout_marginLeft="20dp"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/drawable_default_color"
             android:scaleType="centerCrop"
             app:civ_border_width="1dp"
             app:civ_border_color="@color/color_white"

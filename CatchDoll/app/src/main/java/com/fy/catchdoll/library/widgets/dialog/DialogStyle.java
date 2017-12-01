@@ -8,4 +8,5 @@ public enum DialogStyle {
 	LOADING,
 	COMMON_INTOR,
 	BOTTOM_SELECT,
+	SENT_CHAT
 }

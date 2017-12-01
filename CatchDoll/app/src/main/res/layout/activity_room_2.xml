@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/back_common_nav"></include>
+
+    <ScrollView
+        android:layout_above="@+id/llinputparent"
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/room_video_chat_container"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="300dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/color_4BD3A1"
+                    android:layout_height="0dp">
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:background="@color/color_21aaff"
+                    android:layout_height="121dp">
+                    <Button
+                        android:id="@+id/room_chat_btn"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:text="发言"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp" />
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/catch_history_container"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="@color/color_f5f5f5"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="sdkfjsdlkfjklsdf"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@mipmap/ic_launcher"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

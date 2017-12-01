@@ -28,7 +28,7 @@
             android:gravity="center_vertical"
             android:layout_toLeftOf="@+id/invide_code_exchange"
             android:hint="@string/string_invite_code_input"
-            android:inputType="number|numberDecimal"
+            android:inputType="textUri|textMultiLine"
             android:textColor="@color/color_ADB5BB"
             android:textSize="13sp"/>
         <TextView

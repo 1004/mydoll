@@ -28,33 +28,13 @@ public class User {
      * 用户id
      */
     @DatabaseField(id = true)
-    private String user_id;
+    private String id;
 
     @DatabaseField
-    private String user_type;
+    private String nickname;
 
     @DatabaseField
-    private String mobile;
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    @DatabaseField
-    private String nick;
-
-    @DatabaseField
-    private String avatar;
-
-    @DatabaseField
-    private String set_login_pwd;
-
-    @DatabaseField
-    private String user_verify;
+    private String headimgurl;
 
     /**
      * 是否为最新的账号 1：是最新的 ，0:不是最新的
@@ -63,165 +43,114 @@ public class User {
     private int islast;
 
     @DatabaseField
-    private String gender;
+    private String sex;
     @DatabaseField
-    private int fans;
+    private String access_token;
     @DatabaseField
-    private String level;
+    private String invitation_code;
     @DatabaseField
-    private int identity_auth;//是否以实名认证1为是0为否
-    private Integer force_gps_address;//判断是否检查GPS权限
-    private Integer try_author;//判断是否是试用
-    private String[] title;
+    private String invitation_total;
+    @DatabaseField
+    private String invitation_gold;
+    @DatabaseField
+    private String max_invitation_friends;
     public User() {
 
     }
 
-    public String[] getTitle() {
-        return title;
+    public String getId() {
+        return id;
     }
 
-    public void setTitle(String[] title) {
-        this.title = title;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public Integer getTry_author() {
-        return try_author;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setTry_author(Integer try_author) {
-        this.try_author = try_author;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
-    public Integer getForce_gps_address() {
-        return force_gps_address;
+    public String getHeadimgurl() {
+        return headimgurl;
     }
 
-    public void setForce_gps_address(Integer force_gps_address) {
-        this.force_gps_address = force_gps_address;
+    public void setHeadimgurl(String headimgurl) {
+        this.headimgurl = headimgurl;
     }
-
-    public String getUser_id() {
-        return user_id;
-    }
-
-
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
-    }
-
-
-    public String getUser_type() {
-        return user_type;
-    }
-
-
-    public void setUser_type(String user_type) {
-        this.user_type = user_type;
-    }
-
-
-    public String getNick() {
-        return nick;
-    }
-
-
-    public void setNick(String nick) {
-        this.nick = nick;
-    }
-
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-
-    public String getSet_login_pwd() {
-        return set_login_pwd;
-    }
-
-
-    public void setSet_login_pwd(String set_login_pwd) {
-        this.set_login_pwd = set_login_pwd;
-    }
-
-
-    public String getUser_verify() {
-        return user_verify;
-    }
-
-
-    public void setUser_verify(String user_verify) {
-        this.user_verify = user_verify;
-    }
-
 
     public int getIslast() {
         return islast;
     }
 
-
     public void setIslast(int islast) {
         this.islast = islast;
     }
 
-
-    public String getGender() {
-        return gender;
+    public String getSex() {
+        return sex;
     }
 
-
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
-    public int getFans() {
-        return fans;
+    public String getAccess_token() {
+        return access_token;
     }
 
-    public void setFans(int fans) {
-        this.fans = fans;
+    public void setAccess_token(String access_token) {
+        this.access_token = access_token;
     }
 
-    public String getLevel() {
-        return level;
+    public String getInvitation_code() {
+        return invitation_code;
     }
 
-    public void setLevel(String level) {
-        this.level = level;
+    public void setInvitation_code(String invitation_code) {
+        this.invitation_code = invitation_code;
     }
 
-    public int getIdentity_auth() {
-        return identity_auth;
+    public String getInvitation_total() {
+        return invitation_total;
     }
 
-    public void setIdentity_auth(int identity_auth) {
-        this.identity_auth = identity_auth;
+    public void setInvitation_total(String invitation_total) {
+        this.invitation_total = invitation_total;
+    }
+
+    public String getInvitation_gold() {
+        return invitation_gold;
+    }
+
+    public void setInvitation_gold(String invitation_gold) {
+        this.invitation_gold = invitation_gold;
+    }
+
+    public String getMax_invitation_friends() {
+        return max_invitation_friends;
+    }
+
+    public void setMax_invitation_friends(String max_invitation_friends) {
+        this.max_invitation_friends = max_invitation_friends;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "user_id='" + user_id + '\'' +
-                ", user_type='" + user_type + '\'' +
-                ", mobile='" + mobile + '\'' +
-                ", nick='" + nick + '\'' +
-                ", avatar='" + avatar + '\'' +
-                ", set_login_pwd='" + set_login_pwd + '\'' +
-                ", user_verify='" + user_verify + '\'' +
+                "id='" + id + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", headimgurl='" + headimgurl + '\'' +
                 ", islast=" + islast +
-                ", gender='" + gender + '\'' +
-                ", fans=" + fans +
-                ", level='" + level + '\'' +
-                ", identity_auth=" + identity_auth +
-                ", force_gps_address=" + force_gps_address +
-                ", try_author=" + try_author +
-                ", title=" + Arrays.toString(title) +
+                ", sex='" + sex + '\'' +
+                ", access_token='" + access_token + '\'' +
+                ", invitation_code='" + invitation_code + '\'' +
+                ", invitation_total='" + invitation_total + '\'' +
+                ", invitation_gold='" + invitation_gold + '\'' +
+                ", max_invitation_friends='" + max_invitation_friends + '\'' +
                 '}';
     }
 }

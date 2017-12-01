@@ -6,6 +6,8 @@ import android.view.View;
 import com.fy.catchdoll.R;
 import com.fy.catchdoll.library.utils.ActivityUtils;
 import com.fy.catchdoll.module.network.Page;
+import com.fy.catchdoll.presentation.model.dto.account.User;
+import com.fy.catchdoll.presentation.presenter.ErrorCodeOperate;
 import com.fy.catchdoll.presentation.presenter.account.AccountManager;
 import com.fy.catchdoll.presentation.presenter.account.IAccountPresenterCallBack;
 import com.fy.catchdoll.presentation.view.activitys.base.AppCompatBaseActivity;
@@ -27,7 +29,11 @@ public class LoginActivity extends AppCompatBaseActivity implements IAccountPres
 
     @Override
     public void initData() {
-
+        User user = AccountManager.getInstance().getUser();
+        if (user != null){
+            //已经登陆过
+            startMainActivity();
+        }
     }
 
     @Override
@@ -45,8 +51,8 @@ public class LoginActivity extends AppCompatBaseActivity implements IAccountPres
         super.onClick(v);
         switch (v.getId()) {
             case R.id.login_wx:
-                ActivityUtils.startMainActivity(this);
-//                AccountManager.getInstance().login(AccountManager.LoginType.WEIXIN,this,this);
+//                ActivityUtils.startMainActivity(this);
+                AccountManager.getInstance().login(AccountManager.LoginType.WEIXIN,this,this);
                 break;
         }
     }
@@ -71,11 +77,16 @@ public class LoginActivity extends AppCompatBaseActivity implements IAccountPres
 
     @Override
     public void dataResult(Object obj, Page page, int status) {
+        startMainActivity();
+    }
+
+    private void startMainActivity(){
         ActivityUtils.startMainActivity(this);
+        finish();
     }
 
     @Override
     public void errerResult(int code, String msg) {
-
+        ErrorCodeOperate.executeError("",this,code,msg,true);
     }
 }

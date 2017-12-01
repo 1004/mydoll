@@ -119,7 +119,7 @@ public class AccountManager {
      * @since 1.0.0
      */
     public User getUser() {
-        if (mUser == null || TextUtils.isEmpty(mUser.getUser_id())) {
+        if (mUser == null || TextUtils.isEmpty(mUser.getId())) {
             mUser = AccountStoreManager.getInstance().queryNewUser();
         }
         return mUser;

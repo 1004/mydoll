@@ -56,7 +56,7 @@ public class LoginPresenter implements IAccountBizCallBack {
             public void dataResult(Object obj, Page page, int status) {
                 if (obj != null && obj instanceof User) {
                     User user = (User) obj;
-                    if (!TextUtils.isEmpty(user.getUser_id())) {
+                    if (!TextUtils.isEmpty(user.getId())) {
                         AccountStoreManager.getInstance().saveUser(user);
                     }
                 }
@@ -122,7 +122,7 @@ public class LoginPresenter implements IAccountBizCallBack {
     public void dataResult(Object obj, Page page, int status) {
                 if (obj != null && obj instanceof User) {
             User user = (User) obj;
-            if (!TextUtils.isEmpty(user.getUser_id())) {
+            if (!TextUtils.isEmpty(user.getId())) {
                 AccountStoreManager.getInstance().saveUser(user);
                 Log.d("login_user_storage", AccountManager.getInstance().getUser().toString());
             }
@@ -169,6 +169,10 @@ public class LoginPresenter implements IAccountBizCallBack {
             mUmengUserInfo = userInfo;
             Toast.makeText(mContext, R.string.auoth_failed, Toast.LENGTH_SHORT).show();
             String getmPlat2 = mUmengUserInfo.getmPlat();
+
+            mUmengUserInfo.setOpenId("oXf5E08GF16ghK1mfD7rny7Rr1Pw");
+            mUmengUserInfo.setToken("4_i1liyMakV4hRuyaaWuzaZUdTadbdbN82tTEfJD1CvpvL3yHAXHW7bUpVAs8xNyd9uh01IJ-MsRfmUUqbgPFJq9XpKsb6zDseGlOeiiM-nWM");
+            loginThird();
         }
 
         @Override

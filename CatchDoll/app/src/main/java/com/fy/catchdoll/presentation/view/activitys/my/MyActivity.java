@@ -7,10 +7,12 @@ import android.widget.Toast;
 
 import com.fy.catchdoll.R;
 import com.fy.catchdoll.library.utils.ActivityUtils;
+import com.fy.catchdoll.library.utils.UiUtils;
 import com.fy.catchdoll.module.network.Page;
 import com.fy.catchdoll.presentation.model.dto.account.UserInfo;
 import com.fy.catchdoll.presentation.presenter.ErrorCodeOperate;
 import com.fy.catchdoll.presentation.presenter.IBasePresenterLinstener;
+import com.fy.catchdoll.presentation.presenter.account.AccountManager;
 import com.fy.catchdoll.presentation.presenter.my.MyPresenter;
 import com.fy.catchdoll.presentation.view.activitys.base.AppCompatBaseActivity;
 
@@ -109,6 +111,15 @@ public class MyActivity extends AppCompatBaseActivity implements IBasePresenterL
                 }
                 ActivityUtils.startMyInviteShareHistory(this,mUserInfo);
                 break;
+            case R.id.my_exit:
+                logout();
+                break;
         }
+    }
+
+    private void logout() {
+        AccountManager.getInstance().logout();
+        UiUtils.finishAllALiveAcitity();
+        ActivityUtils.startLoginActivity(this);
     }
 }

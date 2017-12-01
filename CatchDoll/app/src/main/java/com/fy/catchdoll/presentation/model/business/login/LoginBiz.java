@@ -3,6 +3,7 @@ package com.fy.catchdoll.presentation.model.business.login;
 
 
 import com.fy.catchdoll.module.network.BazaarGetDao;
+import com.fy.catchdoll.module.network.BazaarPostDao;
 import com.fy.catchdoll.module.network.Paths;
 import com.fy.catchdoll.presentation.model.business.IAccountBizCallBack;
 import com.fy.catchdoll.presentation.model.dto.account.User;
@@ -21,10 +22,10 @@ import tv.feiyunlu.qike.com.qikecorelibrary.libs.libs.base.datainterface.impl.su
 public class LoginBiz {
     private IAccountBizCallBack mLoginBizCallBack;
     private BazaarGetDao<User> mDao;
-    private BazaarGetDao<User> mThirdDao;
+    private BazaarPostDao<User> mThirdDao;
+
 
     public LoginBiz() {
-
     }
 
     /**
@@ -84,53 +85,28 @@ public class LoginBiz {
     }
 
     public void loginThird(String token, String openId, String source) {
-        if (mLoginBizCallBack != null) {
-            mLoginBizCallBack.dataResult("token="+token+"appid=",null,0);
-        }
-//        if (source.equals("qq")) {
-//            mThirdDao = new BazaarGetDao<User>(Paths.BASEPATH + Paths.THIRD_LOGIN, User.class, BazaarGetDao.ARRAY_DATA_CHUNK);
-//        } else {
-//            mThirdDao = new BazaarGetDao<User>(Paths.BASEPATH + Paths.WEIXIN_LOGIN, User.class, BazaarGetDao.ARRAY_DATA_CHUNK);
-//        }
-//
-//        mThirdDao.setNoCache();
-//        mThirdDao.registerListener(new BaseLoadListener() {
-//            @Override
-//            public void onComplete(IDao.ResultType resultType) {
-//                super.onComplete(resultType);
-//                if (mLoginBizCallBack != null) {
-//                    if (mThirdDao.getStatus() == 200) {
-//                        mLoginBizCallBack.dataResult(mThirdDao.getData());
-//                        mLoginBizCallBack.callBackStats(mThirdDao.getStatus());
-//
-//                    } else {
-//                        if (mThirdDao.getErrorData() != null) {
-//                            mLoginBizCallBack.errerResult(mThirdDao.getErrorData().getCode(), mThirdDao.getErrorData().getMsg());
-//                        } else {
-//                            mLoginBizCallBack.errerResult(mThirdDao.getStatus(), "");
-//                        }
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onError(Result result) {
-//                super.onError(result);
-//                if (mLoginBizCallBack != null) {
-//                        mLoginBizCallBack.errerResult(result.getCode(),result.getErrmsg());
-//                }
-//            }
-//        });
-//        if (source.equals("qq")) {
-//            mThirdDao.putParams("token", token);
-//            mThirdDao.putParams("open_id", openId);
-//        } else {
-//            mThirdDao.putParams("token", token);
-//            mThirdDao.putParams("open_id", openId);
-//        }
-//        mThirdDao.putParams("source", source);
-//        mThirdDao.putParams("appid", 3);
-//        mThirdDao.asyncDoAPI();
 
+        mThirdDao = new BazaarPostDao<User>(Paths.NEWAPI + Paths.WX_LOGIN_DATA, User.class, BazaarGetDao.ARRAY_DATA_CHUNK);
+        mThirdDao.setNoCache();
+        mThirdDao.registerListener(new BaseLoadListener() {
+            @Override
+            public void onComplete(IDao.ResultType resultType) {
+                super.onComplete(resultType);
+                if (mLoginBizCallBack != null) {
+                    mLoginBizCallBack.dataResult(mThirdDao.getData(), null, 0);
+                }
+            }
+
+            @Override
+            public void onError(Result result) {
+                super.onError(result);
+                if (mLoginBizCallBack != null) {
+                    mLoginBizCallBack.errerResult(result.getCode(), result.getErrmsg());
+                }
+            }
+        });
+        mThirdDao.putParams("access_toen", token);
+        mThirdDao.putParams("openid", openId);
+        mThirdDao.asyncDoAPI();
     }
 }

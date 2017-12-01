@@ -3,13 +3,16 @@ package com.fy.catchdoll.presentation.view.activitys.main;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.fy.catchdoll.R;
 import com.fy.catchdoll.library.utils.ActivityUtils;
+import com.fy.catchdoll.library.utils.ImageLoaderUtils;
 import com.fy.catchdoll.library.widgets.NetStateView;
 import com.fy.catchdoll.library.widgets.ResultsListView;
 import com.fy.catchdoll.module.network.Page;
 import com.fy.catchdoll.module.service.NetService;
+import com.fy.catchdoll.presentation.model.dto.account.User;
 import com.fy.catchdoll.presentation.model.dto.base.BaseItemDto;
 import com.fy.catchdoll.presentation.model.dto.doll.DollMachine;
 import com.fy.catchdoll.presentation.model.dto.doll.IndexDataDto;
@@ -18,6 +21,7 @@ import com.fy.catchdoll.presentation.model.dto.doll.banner.BannerInfo;
 import com.fy.catchdoll.presentation.model.dto.doll.banner.WrapBannerInfo;
 import com.fy.catchdoll.presentation.presenter.ErrorCodeOperate;
 import com.fy.catchdoll.presentation.presenter.IBasePresenterLinstener;
+import com.fy.catchdoll.presentation.presenter.account.AccountManager;
 import com.fy.catchdoll.presentation.presenter.index.IndexPresenter;
 import com.fy.catchdoll.presentation.presenter.page.PagePresenter;
 import com.fy.catchdoll.presentation.view.activitys.base.AppCompatBaseActivity;
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatBaseActivity implements OnWrapItemCli
     private PagePresenter mPagePresenter;
     private IndexPresenter mPresenter;
     private CommonAdapterType mAdapter;
+    private ImageView mIcon;
     private View myCenter;
 
 
@@ -54,6 +59,7 @@ public class MainActivity extends AppCompatBaseActivity implements OnWrapItemCli
         topicLv = (ResultsListView) findViewById(R.id.lv);
         netstate = (NetStateView) findViewById(R.id.netstate);
         myCenter = findViewById(R.id.main_my_center);
+        mIcon = (ImageView) findViewById(R.id.main_my_center);
         findViewById(R.id.main_my_box).setOnClickListener(this);
 
         netstate.setContentView(topicLv);
@@ -67,10 +73,18 @@ public class MainActivity extends AppCompatBaseActivity implements OnWrapItemCli
         mPresenter = new IndexPresenter();
         mPagePresenter = new PagePresenter();
 
+        setUserData();
         try{
             startService(new Intent(this, NetService.class));
         }catch (Throwable e){
 
+        }
+    }
+
+    private void setUserData(){
+        User user = AccountManager.getInstance().getUser();
+        if (user != null){
+            ImageLoaderUtils.displayImage(mIcon,R.drawable.drawable_default_color,user.getHeadimgurl());
         }
     }
 
@@ -155,7 +169,7 @@ public class MainActivity extends AppCompatBaseActivity implements OnWrapItemCli
 
     @Override
     public void onItemClick(View v, Object... obj) {
-        ActivityUtils.startRoomActivity(this,"");
+        ActivityUtils.startDollRoomActivity(this,"");
     }
 
     @Override

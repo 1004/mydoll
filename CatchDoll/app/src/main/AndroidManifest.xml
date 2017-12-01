@@ -40,6 +40,11 @@
         <activity android:name=".presentation.view.activitys.box.BoxInfoActivity"></activity>
         <activity android:name=".presentation.view.activitys.my.MyInviteShareActivity"></activity>
         <activity android:name=".presentation.view.activitys.my.MySpendActivity"></activity>
+        <activity android:name=".presentation.view.activitys.room.DollRoomActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            >
+
+        </activity>
 
         <service android:name=".module.service.NetService"></service>
         <service android:name=".presentation.presenter.update2.UploadService"></service>

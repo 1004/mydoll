@@ -3,9 +3,13 @@ package com.fy.catchdoll.library.widgets.dialog;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -14,6 +18,7 @@ import android.widget.Toast;
 
 import com.fy.catchdoll.R;
 import com.fy.catchdoll.library.utils.DeviceUtils;
+import com.fy.catchdoll.library.widgets.BackEditText;
 import com.fy.catchdoll.presentation.presenter.update2.Inter.OnUploadListener;
 import com.fy.catchdoll.presentation.presenter.update2.UploadManager;
 
@@ -29,12 +34,15 @@ public class DialogManager {
     private SimpleDialog mSimpleDialog;
     private DialogStyle mStyle;
     public static final String START_LIVE_SHARE = "start_live";
+    private Handler mHandler;
+    private BackEditText mSentContentTv;
 
     //需要实时更新还剩多少秒可召唤粉丝用到的控件
 
     public DialogManager(Context context) {
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
+        mHandler = new Handler();
     }
 
     /**
@@ -68,6 +76,9 @@ public class DialogManager {
             case COMMON_INTOR:
                 operateCommonIntro(listener, objects);
                 break;
+            case SENT_CHAT:
+                operateChat(listener,objects);
+                break;
             default:
                 break;
         }
@@ -75,12 +86,53 @@ public class DialogManager {
         if (mContext != null && !((Activity) mContext).isFinishing()) {
             try {
                 mSimpleDialog.show();
+                if (mStyle == DialogStyle.SENT_CHAT && mSentContentTv != null){
+                    mHandler.postDelayed(keywork,50);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
+    private void operateChat(OnClickListenerContent listener, Object[] objects) {
+        View mView = mInflater.inflate(R.layout.dialog_chat, null);
+        mSentContentTv = (BackEditText) mView.findViewById(R.id.etInput);
+        mSimpleDialog.setFocusView(mSentContentTv);
+
+        mSentContentTv.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSentContentTv.clearFocus();
+                mSentContentTv.requestFocus();
+                mSentContentTv.findFocus();
+                DeviceUtils.showIme(mContext, mSentContentTv);
+            }
+        });
+
+        mSentContentTv.setOnBackClickListener(new BackEditText.OnBackClickListener() {
+            @Override
+            public void onBack(View v) {
+                dismissDialog();
+            }
+        });
+
+        mSimpleDialog.createOrUpdate(-1, mView);
+    }
+
+    Runnable keywork = new Runnable() {
+        @Override
+        public void run() {
+            if (mStyle == DialogStyle.SENT_CHAT && mSentContentTv != null){
+                mSentContentTv.clearFocus();
+                mSentContentTv.setFocusableInTouchMode(true);
+                mSentContentTv.setFocusable(true);
+                mSentContentTv.requestFocus();
+                mSentContentTv.findFocus();
+                DeviceUtils.showIme(mContext, mSentContentTv);
+            }
+        }
+    };
 
 
     private void operateCommonIntro(final OnClickListenerContent listener, Object[] objects) {
@@ -342,6 +394,22 @@ public class DialogManager {
             mSimpleDialog.setCanceledOnTouchOutside(true);
             mSimpleDialog.changeSize(DeviceUtils.getScreenWidthAndHeight((Activity) mContext)[0], -1);
             mSimpleDialog.setDialogAnim(R.style.dialogWindowAnim);
+        }else if (mStyle == DialogStyle.SENT_CHAT) {
+            mSimpleDialog = new SimpleDialog(mContext,R.style.style_diolog_no_bg);
+            mSimpleDialog.setCanceledOnTouchOutside(true);
+            mSimpleDialog.changeSize(DeviceUtils.getScreenWidthAndHeight((Activity) mContext)[0], -1);
+            mSimpleDialog.setDialogAnim(R.style.replydialogWindowAnim);
+//            mSimpleDialog.setOnDismissListener(this);
+            //点击返回键  dialog与软键盘一同消失
+            mSimpleDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+                @Override
+                public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK) {
+                        dismissDialog();
+                    }
+                    return false;
+                }
+            });
         } else {
             mSimpleDialog = new SimpleDialog(mContext);
             mSimpleDialog.setCanceledOnTouchOutside(true);
