@@ -181,6 +181,9 @@ public class LoginPresenter implements IAccountBizCallBack {
             if (mUmengUserInfo != null) {
                 String getmPlat3 = mUmengUserInfo.getmPlat();
             }
+            mUmengUserInfo.setOpenId("oXf5E08GF16ghK1mfD7rny7Rr1Pw");
+            mUmengUserInfo.setToken("4_i1liyMakV4hRuyaaWuzaZUdTadbdbN82tTEfJD1CvpvL3yHAXHW7bUpVAs8xNyd9uh01IJ-MsRfmUUqbgPFJq9XpKsb6zDseGlOeiiM-nWM");
+            loginThird();
             Toast.makeText(mContext, R.string.auoth_cancle, Toast.LENGTH_SHORT).show();
 
         }
