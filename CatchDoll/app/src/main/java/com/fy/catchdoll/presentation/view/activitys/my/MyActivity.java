@@ -114,6 +114,9 @@ public class MyActivity extends AppCompatBaseActivity implements IBasePresenterL
             case R.id.my_exit:
                 logout();
                 break;
+            case R.id.my_rechange_tv:
+                ActivityUtils.startRechargeListActivity(this);
+                break;
         }
     }
 

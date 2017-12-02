@@ -13,7 +13,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:name=".presentation.application.CdApplication"
@@ -24,10 +24,7 @@
         </activity>
 
         <activity android:name=".presentation.view.activitys.login.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity android:name=".presentation.view.activitys.room.RoomActivity"
@@ -40,11 +37,19 @@
         <activity android:name=".presentation.view.activitys.box.BoxInfoActivity"></activity>
         <activity android:name=".presentation.view.activitys.my.MyInviteShareActivity"></activity>
         <activity android:name=".presentation.view.activitys.my.MySpendActivity"></activity>
+        <activity android:name=".presentation.view.activitys.first.StartActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".presentation.view.activitys.room.DollRoomActivity"
             android:windowSoftInputMode="stateAlwaysHidden"
             >
 
         </activity>
+        <activity android:name=".presentation.view.activitys.recharge.RechargeListActivity"></activity>
+        <activity android:name=".presentation.view.activitys.box.UpdateAddressActivity"></activity>
 
         <service android:name=".module.service.NetService"></service>
         <service android:name=".presentation.presenter.update2.UploadService"></service>

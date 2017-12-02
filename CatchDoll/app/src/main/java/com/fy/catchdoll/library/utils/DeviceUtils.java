@@ -392,6 +392,21 @@ public class DeviceUtils {
             return 0;
         }
     }
+
+    public static int getStatusBarHeight2(Activity activity){
+        int statusBarHeight2 = 0;
+        try {
+            Class<?> clazz = Class.forName("com.android.internal.R$dimen");
+            Object object = clazz.newInstance();
+            int height = Integer.parseInt(clazz.getField("status_bar_height")
+                    .get(object).toString());
+            statusBarHeight2 = activity.getResources().getDimensionPixelSize(height);
+        } catch (Exception e) {
+            e.printStackTrace();
+            statusBarHeight2 =0;
+        }
+        return statusBarHeight2;
+    }
 //
 //    /**
 //     *设置多媒体声音为0

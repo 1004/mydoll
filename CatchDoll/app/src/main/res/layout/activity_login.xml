@@ -3,10 +3,72 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:gravity="center"
     android:layout_height="match_parent">
-    <Button
-        android:text="微信登陆"
-        android:layout_width="100dp"
-        android:id="@+id/login_wx"
-        android:layout_height="100dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_weight="3"
+        android:layout_height="0dp">
+        <ImageView
+            android:scaleType="centerCrop"
+            android:background="@mipmap/cover_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:src="@mipmap/logo"
+            android:layout_width="125dp"
+            android:layout_height="125dp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <TextView
+            android:id="@+id/login_wx"
+            android:gravity="center"
+            android:text="@string/string_login_wx"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="45dp"
+            style="@style/style_15_ffffff"
+            android:background="@drawable/shape_round_2bd2b7_40_bg"
+            android:layout_width="150dp"
+            android:layout_height="55dp" />
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:layout_above="@+id/login_author_tv"
+            android:layout_marginBottom="70dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/xuanzhong"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                style="@style/style_12_b6bfc6"
+                android:text="@string/string_login_agree_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_gravity="center_vertical"
+                style="@style/style_12_848d92"
+                android:text="@string/string_login_agree_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
+        <TextView
+            android:id="@+id/login_author_tv"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            style="@style/style_12_b6bfc6"
+            android:text="@string/string_wawa_qutho"
+            android:layout_marginBottom="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
 </LinearLayout>

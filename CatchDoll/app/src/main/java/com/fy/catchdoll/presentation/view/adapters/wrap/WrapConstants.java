@@ -13,4 +13,8 @@ public class WrapConstants {
     public static final int WRAP_ADDRESS = WRAP_BOX_DOLL+1;
 
     public static final int WRAP_MY_SPEND = 1;
+
+    //充值
+    public static final int WRAP_RECHARGE_ITEM = 1;
+    public static final int WRAP_RECHARGE_IMG = WRAP_RECHARGE_ITEM+1;
 }

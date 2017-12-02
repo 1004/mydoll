@@ -51,7 +51,6 @@ public class LoginActivity extends AppCompatBaseActivity implements IAccountPres
         super.onClick(v);
         switch (v.getId()) {
             case R.id.login_wx:
-//                ActivityUtils.startMainActivity(this);
                 AccountManager.getInstance().login(AccountManager.LoginType.WEIXIN,this,this);
                 break;
         }

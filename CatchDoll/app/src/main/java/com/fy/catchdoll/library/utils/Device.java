@@ -51,6 +51,8 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <p>
@@ -1040,6 +1042,27 @@ public class Device {
         TelephonyManager tm = (TelephonyManager) context
                 .getSystemService(Context.TELEPHONY_SERVICE);
         return tm.getLine1Number();
+    }
+
+    /**
+     * 判断手机格式是否正确
+     *
+     * @param str
+     *            需要判断的字符串
+     * @return 返回true说明字符串匹配成功
+     */
+    // Pattern类的作用在于编译正则表达式后创建一个匹配模式. Matcher类使用Pattern实例提供的模式信息对正则表达式进行匹配
+    public static boolean isPhone(String str) {
+        // 将给定的正则表达式编译并赋予给Pattern类
+        Pattern pattern = Pattern.compile("1[0-9]{10}");
+        // 对指定输入的字符串创建一个Matcher对象
+        Matcher matcher = pattern.matcher(str);
+        // 尝试对整个目标字符展开匹配检测,也就是只有整个目标字符串完全匹配时才返回真值.
+        if (matcher.matches()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

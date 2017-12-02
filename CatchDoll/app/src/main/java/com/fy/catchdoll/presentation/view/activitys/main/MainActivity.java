@@ -170,7 +170,9 @@ public class MainActivity extends AppCompatBaseActivity implements OnWrapItemCli
     @Override
     public void onItemClick(View v, Object... obj) {
         ActivityUtils.startDollRoomActivity(this,"");
+//        ActivityUtils.startRoomActivity(this,"");
     }
+
 
     @Override
     public void dataResult(Object obj, Page page, int status) {

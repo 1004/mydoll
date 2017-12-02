@@ -1,16 +1,20 @@
 package com.fy.catchdoll.library.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
 import com.fy.catchdoll.presentation.model.dto.account.UserInfo;
+import com.fy.catchdoll.presentation.model.dto.box.AddressInfo;
 import com.fy.catchdoll.presentation.view.activitys.box.BoxInfoActivity;
+import com.fy.catchdoll.presentation.view.activitys.box.UpdateAddressActivity;
 import com.fy.catchdoll.presentation.view.activitys.login.LoginActivity;
 import com.fy.catchdoll.presentation.view.activitys.main.MainActivity;
 import com.fy.catchdoll.presentation.view.activitys.my.MyActivity;
 import com.fy.catchdoll.presentation.view.activitys.my.MyExchangeActivity;
 import com.fy.catchdoll.presentation.view.activitys.my.MyInviteShareActivity;
 import com.fy.catchdoll.presentation.view.activitys.my.MySpendActivity;
+import com.fy.catchdoll.presentation.view.activitys.recharge.RechargeListActivity;
 import com.fy.catchdoll.presentation.view.activitys.room.DollRoomActivity;
 import com.fy.catchdoll.presentation.view.activitys.room.RoomActivity;
 
@@ -97,5 +101,26 @@ public class ActivityUtils {
         Intent intent = new Intent(context, MyInviteShareActivity.class);
         intent.putExtra(MyInviteShareActivity.INVITE_SHARE_DATA_KEY,info);
         context.startActivity(intent);
+    }
+
+
+    /**
+     * 启动充值
+     * @param context
+     */
+    public static void startRechargeListActivity(Context context){
+        Intent intent = new Intent(context, RechargeListActivity.class);
+        context.startActivity(intent);
+    }
+    /**
+     * 启动充值
+     * @param context
+     */
+    public static void startUpdateAddressActivity(Activity context,AddressInfo info){
+        Intent intent = new Intent(context, UpdateAddressActivity.class);
+        if (info != null){
+            intent.putExtra(UpdateAddressActivity.UPDATA_INFO_ADDRESS_KEY,info);
+        }
+        context.startActivityForResult(intent,UpdateAddressActivity.ADDRESS_REQUESTCODE);
     }
 }

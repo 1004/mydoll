@@ -24,6 +24,8 @@ public class Paths {
     public static final String MY_SPEND_DATA = "gold/changelist.json";//消费记录
     public static final String MY_SEND_CODE = "user/setinvicode.json";//消费记录
     public static final String WX_LOGIN_DATA = "login/wechat.json";//微信登陆
+    public static final String RECHARGE_LIST_ = "gold/packagelist.json";//娃娃币充值套餐列表
+    public static final String UPDATE_ADDRESS_DATA = "user/setaddress.json";//添加/修改用户收件地址
 
 
 }

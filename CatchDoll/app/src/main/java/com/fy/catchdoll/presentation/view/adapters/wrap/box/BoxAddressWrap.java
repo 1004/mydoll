@@ -32,11 +32,16 @@ public class BoxAddressWrap extends BaseViewObtion<BaseItemDto>{
         if (!(baseItemDto instanceof AddressInfo)){
             return;
         }
-        AddressInfo addressInfo = (AddressInfo) baseItemDto;
+        final AddressInfo addressInfo = (AddressInfo) baseItemDto;
         holder.receiverName.setText(mActivity.getResources().getString(R.string.string_address_name,addressInfo.getName()));
         holder.receivePhone.setText(mActivity.getResources().getString(R.string.string_address_phone,addressInfo.getPhone()));
         holder.receiveAddress.setText(mActivity.getResources().getString(R.string.string_address_address,addressInfo.getAddress()));
-
+        holder.updataTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemElementClick(v,addressInfo);
+            }
+        });
     }
 
     class ViewHolder{

@@ -1,11 +1,13 @@
 package com.fy.catchdoll.presentation.view.activitys.box;
 
+import android.content.Intent;
 import android.text.Html;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.fy.catchdoll.R;
+import com.fy.catchdoll.library.utils.ActivityUtils;
 import com.fy.catchdoll.library.widgets.NetStateView;
 import com.fy.catchdoll.library.widgets.ResultsListView;
 import com.fy.catchdoll.module.network.Page;
@@ -52,7 +54,7 @@ public class BoxInfoActivity extends AppCompatBaseActivity implements OnWrapItem
         mOrderMoneyInfo = (TextView) findViewById(R.id.order_commit_tv);
         mCommitOrder = (TextView) findViewById(R.id.order_money_info);
 
-        netstate.setContentView(topicLv,mCommitContainer);
+        netstate.setContentView(topicLv, mCommitContainer);
         netstate.show(NetStateView.NetState.LOADING);
     }
 
@@ -93,6 +95,7 @@ public class BoxInfoActivity extends AppCompatBaseActivity implements OnWrapItem
             BoxInfoDto mDto = (BoxInfoDto) obj;
 
             List<BaseItemDto> datas = parseData(mDto);
+            mAdapter.clear();
             mAdapter.addList(datas);
             mAdapter.notifyDataSetChanged();
             netstate.show(NetStateView.NetState.CONTENT);
@@ -134,8 +137,30 @@ public class BoxInfoActivity extends AppCompatBaseActivity implements OnWrapItem
 
     @Override
     public void onItemClick(View v, Object... obj) {
+        switch (v.getId()){
+            case R.id.box_address_update:
+                operateUpdataInfo(obj);
+                break;
+        }
 
     }
+
+    private void operateUpdataInfo(Object[] obj) {
+        if(obj != null){
+            AddressInfo info = (AddressInfo) obj[0];
+            ActivityUtils.startUpdateAddressActivity(this,info);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == UpdateAddressActivity.ADDRESS_REQUESTCODE && resultCode == UpdateAddressActivity.ADDRESS_RESULTCODE){
+            loadData();
+        }
+    }
+
+
 
     @Override
     public void onRefrsh(View view) {

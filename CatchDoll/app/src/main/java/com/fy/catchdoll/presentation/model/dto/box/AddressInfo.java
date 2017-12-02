@@ -2,10 +2,12 @@ package com.fy.catchdoll.presentation.model.dto.box;
 
 import com.fy.catchdoll.presentation.model.dto.base.BaseItemDto;
 
+import java.io.Serializable;
+
 /**
  * Created by xky on 2017/11/28 0028.
  */
-public class AddressInfo extends BaseItemDto{
+public class AddressInfo extends BaseItemDto implements Serializable{
     private String id;
     private String user_id;
     private String name;

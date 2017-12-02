@@ -19,18 +19,16 @@
             android:layout_height="30dp" />
         <ImageView
             android:id="@+id/main_my_box"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/box_icon"
             android:layout_alignParentRight="true"
             android:scaleType="centerCrop"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:layout_width="20dp"
             android:layout_height="20dp" />
-        <TextView
+        <ImageView
+            android:src="@mipmap/index_logo"
             android:layout_centerInParent="true"
-            android:text="WA@KA"
-            android:textColor="#fff"
-            android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
