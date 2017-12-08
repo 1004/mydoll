@@ -26,6 +26,11 @@ public class StartActivity extends AppCompatBaseActivity{
     }
 
     @Override
+    protected boolean isImmersionBar() {
+        return false;
+    }
+
+    @Override
     public void initData() {
         mHandler = new Handler();
     }

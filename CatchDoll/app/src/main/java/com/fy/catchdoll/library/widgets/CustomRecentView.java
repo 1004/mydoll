@@ -59,6 +59,8 @@ public class CustomRecentView extends LinearLayout{
 
     private void addRecentView(Object o, boolean b) {
         View itemView = mInflater.inflate(R.layout.view_recent_doll_item,null);
+        View line = itemView.findViewById(R.id.recent_doll_line);
+        line.setVisibility(b?GONE:VISIBLE);
         addView(itemView,LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
     }
 

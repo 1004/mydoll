@@ -2,12 +2,16 @@ package com.fy.catchdoll.presentation.view.activitys.main;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.fy.catchdoll.R;
 import com.fy.catchdoll.library.utils.ActivityUtils;
 import com.fy.catchdoll.library.utils.ImageLoaderUtils;
+import com.fy.catchdoll.library.utils.PreferencesUtils;
+import com.fy.catchdoll.library.utils.UiUtils;
 import com.fy.catchdoll.library.widgets.NetStateView;
 import com.fy.catchdoll.library.widgets.ResultsListView;
 import com.fy.catchdoll.module.network.Page;
@@ -24,6 +28,8 @@ import com.fy.catchdoll.presentation.presenter.IBasePresenterLinstener;
 import com.fy.catchdoll.presentation.presenter.account.AccountManager;
 import com.fy.catchdoll.presentation.presenter.index.IndexPresenter;
 import com.fy.catchdoll.presentation.presenter.page.PagePresenter;
+import com.fy.catchdoll.presentation.presenter.update2.Inter.IOnCheckVersonCallBack;
+import com.fy.catchdoll.presentation.presenter.update2.UploadManager;
 import com.fy.catchdoll.presentation.view.activitys.base.AppCompatBaseActivity;
 import com.fy.catchdoll.presentation.view.adapters.wrap.WrapConstants;
 import com.fy.catchdoll.presentation.view.adapters.wrap.base.CommonAdapterType;
@@ -47,6 +53,7 @@ public class MainActivity extends AppCompatBaseActivity implements OnWrapItemCli
     private CommonAdapterType mAdapter;
     private ImageView mIcon;
     private View myCenter;
+    private boolean isForce;
 
 
     @Override
@@ -79,6 +86,8 @@ public class MainActivity extends AppCompatBaseActivity implements OnWrapItemCli
         }catch (Throwable e){
 
         }
+
+        checkUpgrade();
     }
 
     private void setUserData(){
@@ -100,6 +109,69 @@ public class MainActivity extends AppCompatBaseActivity implements OnWrapItemCli
         mAdapter.addViewObtains(WrapConstants.WRAP_INDEX_LIST,mRoomWrap);
 
         return mAdapter;
+    }
+
+    /**
+     * 检测系统更新
+     */
+    public void checkUpgrade() {
+        UploadManager.getInstance().checkUpLoad(this, new IOnCheckVersonCallBack() {
+            @Override
+            public void onCheckStart() {
+            }
+            @Override
+            public void onCheckFinish(boolean isNew, boolean isforce) {
+                if (isNew) {
+                    MainActivity.this.isForce = isforce;
+                }
+            }
+
+            @Override
+            public void onCheckError(String msg, boolean isStartBaiDu) {
+            }
+        });
+    }
+
+    /**
+     * 按两次back退出
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // 截获后退键
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0 && isForce) {
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+    private long preTimes = 0;
+    private static long TWO_SECOND_S = 2000;
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
+                long currentTime = System.currentTimeMillis();
+
+                // 如果时间间隔大于2秒, 不处理
+                if ((currentTime - preTimes) > TWO_SECOND_S) {
+                    // 显示消息
+                    Toast.makeText(this, getResources().getString(R.string.press_twice_back_exit), Toast.LENGTH_SHORT).show();
+
+                    // 更新时间
+                    preTimes = currentTime;
+
+                    // 截获事件,不再处理
+                    return true;
+                } else {
+					UiUtils.finishAllALiveAcitity();
+                    return true;
+                }
+
+            }
+        }
+        return super.dispatchKeyEvent( event);
     }
 
     @Override
@@ -235,5 +307,11 @@ public class MainActivity extends AppCompatBaseActivity implements OnWrapItemCli
         } else if (!isRefrsh) {
         }
         ErrorCodeOperate.executeError(TAG, getContext(), code, msg, true);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        UploadManager.getInstance().destoryData();
     }
 }

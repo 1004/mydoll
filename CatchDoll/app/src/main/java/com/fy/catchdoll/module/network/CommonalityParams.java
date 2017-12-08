@@ -1,8 +1,11 @@
 package com.fy.catchdoll.module.network;
 
 
+import android.text.TextUtils;
+
 import com.fy.catchdoll.library.utils.DeviceUtils;
 import com.fy.catchdoll.presentation.application.CdApplication;
+import com.fy.catchdoll.presentation.model.business.update.UploadBiz;
 import com.fy.catchdoll.presentation.model.dto.account.User;
 import com.fy.catchdoll.presentation.presenter.account.AccountManager;
 
@@ -42,6 +45,7 @@ public class CommonalityParams {
 				}
 				mParams.put("signtype", "1");
 				mParams.put("version", DeviceUtils.getVersionCode(CdApplication.getApplication()));
+				setAppInfo(mParams);//设置应用基本信息
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -50,6 +54,23 @@ public class CommonalityParams {
 		}
 		return mParams;
 	}
+
+	private void setAppInfo(Map<String, Object> mParams){
+		String metaData = DeviceUtils.getMetaData(CdApplication.getApplication(), UploadBiz.UMENG_CHANNEL);
+		String app_id = "2";
+		String app_sign= "NzRhYzc0OWM2MWYz";
+		if (!TextUtils.isEmpty(metaData)){
+			String[] split = metaData.split("_");
+			if (split.length >= 3){
+				app_id = split[1];
+				app_sign = split[2];
+			}
+		}
+		mParams.put("appid", app_id);
+		mParams.put("app_sign", app_sign);
+	}
+
+
 
 	public String convertParams(Map<String, Object> mParams) {
 		try {

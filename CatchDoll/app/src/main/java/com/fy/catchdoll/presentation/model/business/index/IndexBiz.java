@@ -21,10 +21,12 @@ public class IndexBiz extends BaseLoadListener {
     }
 
     public void firstTask(){
+        mIndexDao.setNoCache();
         mIndexDao.startUpTask();
     }
 
     public void nextTask(){
+        mIndexDao.setNoCache();
         mIndexDao.nextUpTask();
     }
 

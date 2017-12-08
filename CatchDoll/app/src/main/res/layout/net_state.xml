@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/logo" />
 
         <TextView
             android:id="@+id/t1"
@@ -90,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/logo" />
 
         <TextView
             style="@style/text_loading_style"

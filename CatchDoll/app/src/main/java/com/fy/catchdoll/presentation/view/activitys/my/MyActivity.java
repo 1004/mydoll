@@ -9,6 +9,7 @@ import com.fy.catchdoll.R;
 import com.fy.catchdoll.library.utils.ActivityUtils;
 import com.fy.catchdoll.library.utils.UiUtils;
 import com.fy.catchdoll.module.network.Page;
+import com.fy.catchdoll.presentation.model.dto.account.User;
 import com.fy.catchdoll.presentation.model.dto.account.UserInfo;
 import com.fy.catchdoll.presentation.presenter.ErrorCodeOperate;
 import com.fy.catchdoll.presentation.presenter.IBasePresenterLinstener;
@@ -52,6 +53,10 @@ public class MyActivity extends AppCompatBaseActivity implements IBasePresenterL
     public void initData() {
         mMyPresenter = new MyPresenter();
         setCommonTitle(getMString(R.string.string_my_title));
+        User user = AccountManager.getInstance().getUser();
+        if (user != null){
+            mGoldTv.setText(user.getInvitation_gold());
+        }
     }
 
     @Override

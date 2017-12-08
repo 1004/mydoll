@@ -44,7 +44,7 @@ public class UploadPresenter implements BaseCallbackPresenter, DialogManager.OnC
             @Override
             public void onUpdate(boolean isHasNet) {
                 if (isError && isHasNet && mDto != null) {
-                    startUpload(mDto.getUrl());
+                    startUpload(mDto.getDownlink());
                 }
             }
         });
@@ -114,7 +114,7 @@ public class UploadPresenter implements BaseCallbackPresenter, DialogManager.OnC
         try {
             int app_version_code = DeviceUtils.getVersionCode(mContext);
             if (mCallBack != null) {
-                mCallBack.onCheckFinish(version_code > app_version_code, dto.getUpgrade() == UpdateDto.FORCE_UPDATA);
+                mCallBack.onCheckFinish(version_code > app_version_code, dto.getIs_force() == UpdateDto.FORCE_UPDATA);
             }
             if (version_code > app_version_code) {
                 // 更新去了
@@ -126,15 +126,15 @@ public class UploadPresenter implements BaseCallbackPresenter, DialogManager.OnC
     }
 
     private void goUpload(UpdateDto dto) {
-        int force = dto.getUpgrade();
+        int force = dto.getIs_force();
         if (force == UpdateDto.FORCE_UPDATA) {
             // 强制更新
-            mDialogManager.showDialog(DialogStyle.UPLOAD, this, true, dto.getDesc(), dto.getUrl());
+            mDialogManager.showDialog(DialogStyle.UPLOAD, this, true, dto.getUpdate_notes(), dto.getDownlink());
             mNofityViewPresenter.setNotifyListener();
-            startUpload(dto.getUrl());
+            startUpload(dto.getDownlink());
         } else {
             // 非强制更新
-            mDialogManager.showDialog(DialogStyle.UPLOAD, this, false, dto.getDesc(), dto.getUrl());
+            mDialogManager.showDialog(DialogStyle.UPLOAD, this, false, dto.getUpdate_notes(), dto.getDownlink());
             mNofityViewPresenter.setNotifyListener();
         }
     }
@@ -208,7 +208,7 @@ public class UploadPresenter implements BaseCallbackPresenter, DialogManager.OnC
                     mNofityViewPresenter.cancelNotify();
                 } else if (action.equals(UploadNotifyPresenter.RECEIVER_ACTION_RETRY)) { // 重试下载
                     if (mDto != null) {
-                        startUpload(mDto.getUrl());
+                        startUpload(mDto.getDownlink());
                     }
                 }
             }

@@ -33,18 +33,7 @@ public class UploadBiz extends BaseLoadListener {
     }
 
     public void checkUpload(){
-        String metaData = DeviceUtils.getMetaData(mContext, UMENG_CHANNEL);
-        String app_id = "4";
-        String app_sign= "NzRhYzc0OWM2MWYz";
-        if (!TextUtils.isEmpty(metaData)){
-            String[] split = metaData.split("_");
-            if (split.length >= 3){
-                app_id = split[1];
-                app_sign = split[2];
-            }
-        }
-        mGetUpdateDao.putParams("app_id", app_id);
-        mGetUpdateDao.putParams("app_sign", app_sign);
+        mGetUpdateDao.setNoCache();
         mGetUpdateDao.asyncDoAPI();
     }
 

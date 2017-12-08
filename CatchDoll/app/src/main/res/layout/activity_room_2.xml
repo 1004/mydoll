@@ -79,7 +79,7 @@
                             android:layout_height="match_parent">
                             <TextView
                                 android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="28dp"
+                                android:layout_marginTop="18dp"
                                 style="@style/style_13_fffefe"
                                 android:text="@string/string_room_my_money"
                                 android:layout_width="wrap_content"

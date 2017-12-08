@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -175,9 +176,9 @@ public class CustomRotationBannerView2 extends RelativeLayout implements OnPageC
         for (int i = 0; i < mDatas.size(); i++) {
             ImageView point = (ImageView) mInflater.inflate(R.layout.tele_banner_point_layout, null);
             point.setTag(i);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(15, 15);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             params.rightMargin = 15;
-            params.gravity = Gravity.CENTER;
+            params.gravity = Gravity.CENTER_HORIZONTAL;
             mPointContainer.addView(point, params);
         }
     }

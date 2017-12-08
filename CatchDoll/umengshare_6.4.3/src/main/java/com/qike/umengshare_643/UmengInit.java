@@ -6,8 +6,8 @@ public class UmengInit {
 
 	public static final String WEIXIN_APPID = "wx8ff481aad7c25e65";
 	public static final String WEIXIN_APPKEY = "c874039fe9cd2feff732abb5b6b3883a";
-	public static final String QQ_APPID = "1105220372";
-	public static final String QQ_APPKEY = "1NpGTtQtvbmVjvs1";
+	public static final String QQ_APPID = "1106587128";
+	public static final String QQ_APPKEY = "5NOqpKNLd9vEgc46";
 //	public static final String SINA_APPID = "4121226451";
 //	public static final String SINA_APPKEY = "7d4978b61dae937838519e07f9910b5f";
 	public static final String SINA_APPID = "3144866046";

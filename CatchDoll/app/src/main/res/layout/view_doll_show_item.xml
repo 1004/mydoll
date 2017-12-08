@@ -3,15 +3,18 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:paddingBottom="15dp"
         android:layout_width="match_parent"
-        android:layout_height="360dp">
+        android:layout_height="260dp">
         <ImageView
+            android:id="@+id/room_doll_video"
             android:src="@mipmap/cover_bg"
-            android:scaleType="centerCrop"
             android:layout_width="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="15dp"
             android:layout_height="match_parent" />
     </RelativeLayout>
 </LinearLayout>
