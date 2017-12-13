@@ -6,7 +6,9 @@ import android.widget.TextView;
 
 import com.fy.catchdoll.R;
 import com.fy.catchdoll.library.utils.Loger;
+import com.fy.catchdoll.presentation.model.dto.account.User;
 import com.fy.catchdoll.presentation.model.dto.account.UserInfo;
+import com.fy.catchdoll.presentation.presenter.account.AccountManager;
 import com.fy.catchdoll.presentation.presenter.share.SharePresenter;
 import com.fy.catchdoll.presentation.view.activitys.base.AppCompatBaseActivity;
 import com.umeng.socialize.UMShareListener;
@@ -18,7 +20,6 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
  */
 public class MyInviteShareActivity extends AppCompatBaseActivity{
     public static final String INVITE_SHARE_DATA_KEY = "invite_share_data";
-    private UserInfo mUserInfo;
     private TextView mShareCodeTv;
     private TextView mShareHintInfo;
     private View mWxContainer;
@@ -45,14 +46,14 @@ public class MyInviteShareActivity extends AppCompatBaseActivity{
     @Override
     public void initData() {
         setCommonTitle(getMString(R.string.string_invite_code_title));
-        mUserInfo = (UserInfo) getIntent().getSerializableExtra(INVITE_SHARE_DATA_KEY);
         mSharePresenter = new SharePresenter(this);
         updataView();
     }
 
     private void updataView(){
-        if(mUserInfo != null){
-            mShareCodeTv.setText(mUserInfo.getInvitation_code());
+        User user = AccountManager.getInstance().getUser();
+        if(user != null){
+            mShareCodeTv.setText(user.getInvitation_code());
         }
     }
 

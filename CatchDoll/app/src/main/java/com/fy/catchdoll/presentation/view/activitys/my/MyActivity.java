@@ -53,11 +53,15 @@ public class MyActivity extends AppCompatBaseActivity implements IBasePresenterL
     public void initData() {
         mMyPresenter = new MyPresenter();
         setCommonTitle(getMString(R.string.string_my_title));
-        User user = AccountManager.getInstance().getUser();
-        if (user != null){
-            mGoldTv.setText(user.getInvitation_gold());
-        }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updata();
+    }
+
+
 
     @Override
     public void setListener() {
@@ -74,7 +78,7 @@ public class MyActivity extends AppCompatBaseActivity implements IBasePresenterL
 
     @Override
     public void loadData() {
-        mMyPresenter.firstTask();
+//        mMyPresenter.firstTask();
     }
 
     @Override
@@ -86,8 +90,9 @@ public class MyActivity extends AppCompatBaseActivity implements IBasePresenterL
     }
 
     private void updata(){
-        if (mUserInfo != null){
-            mGoldTv.setText(mUserInfo.getGold());
+        User user = AccountManager.getInstance().getUser();
+        if (user != null){
+            mGoldTv.setText(user.getGold()+"");
         }
     }
 
@@ -110,11 +115,11 @@ public class MyActivity extends AppCompatBaseActivity implements IBasePresenterL
                 break;
             case R.id.my_invite_give:
 //                邀请奖励
-                if (mUserInfo == null) {
-                    Toast.makeText(this,"信息获取中",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                ActivityUtils.startMyInviteShareHistory(this,mUserInfo);
+//                if (mUserInfo == null) {
+//                    Toast.makeText(this,"信息获取中",Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+                ActivityUtils.startMyInviteShareHistory(this);
                 break;
             case R.id.my_exit:
                 logout();

@@ -495,4 +495,10 @@
     <string name="string_room_catch_doll">抓</string>
     <string name="string_room_my_money">我的咔币</string>
     <string name="string_flash_info">掌上娃娃机   快乐不停歇</string>
+
+    <string name="string_pay_state_loading">正在支付...</string>
+    <string name="string_pay_state_error">支付失败</string>
+    <string name="string_pay_state_check">支付确认中</string>
+    <string name="string_pay_state_cancel">支付取消</string>
+    <string name="string_pay_state_success">支付成功</string>
 </resources>

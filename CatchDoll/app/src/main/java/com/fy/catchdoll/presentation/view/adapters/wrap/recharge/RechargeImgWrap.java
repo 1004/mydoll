@@ -5,9 +5,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.fy.catchdoll.R;
+import com.fy.catchdoll.library.utils.ImageLoaderUtils;
 import com.fy.catchdoll.presentation.model.dto.base.BaseItemDto;
 import com.fy.catchdoll.presentation.model.dto.box.BoxDoll;
+import com.fy.catchdoll.presentation.model.dto.doll.banner.BannerInfo;
 import com.fy.catchdoll.presentation.view.adapters.wrap.base.BaseViewObtion;
+
+import tv.feiyunlu.qike.com.qikecorelibrary.libs.libs.base.datainterface.impl.ImageLoader;
 
 /**
  * Created by wst on 2017/12/2.
@@ -26,9 +30,13 @@ public class RechargeImgWrap extends BaseViewObtion<BaseItemDto> {
     @Override
     public void updateView(BaseItemDto baseItemDto, int position, View convertView) {
         ViewHolder holder = (ViewHolder) convertView.getTag();
-        if (!(baseItemDto instanceof BoxDoll)){
+        if (!(baseItemDto instanceof BannerInfo)){
             return;
         }
+
+        BannerInfo info = (BannerInfo) baseItemDto;
+        ImageLoaderUtils.displayImage(holder.dollIcon,R.drawable.drawable_default_color,info.getImage());
+
     }
 
     class ViewHolder{

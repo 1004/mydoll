@@ -19,6 +19,7 @@ public class RechargeItemWrap extends BaseViewObtion<BaseItemDto>{
         ViewHolder viewHolder = new ViewHolder();
         viewHolder.rechareCount = (TextView) convertView.findViewById(R.id.recharge_count);
         viewHolder.rechargeMoney = (TextView) convertView.findViewById(R.id.recharge_money);
+        viewHolder.itemContainer = convertView.findViewById(R.id.recharge_container);
         convertView.setTag(viewHolder);
 
         return convertView;
@@ -30,12 +31,19 @@ public class RechargeItemWrap extends BaseViewObtion<BaseItemDto>{
         if (!(baseItemDto instanceof RechargeItem)){
             return;
         }
-        RechargeItem dollBox = (RechargeItem) baseItemDto;
+        final RechargeItem dollBox = (RechargeItem) baseItemDto;
         holder.rechareCount.setText(dollBox.getNumber());
         holder.rechargeMoney.setText("￥"+dollBox.getPrice());
+        holder.itemContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemElementClick(v,dollBox);
+            }
+        });
     }
 
     class ViewHolder{
+        public View itemContainer;
         public TextView rechareCount;
         public TextView rechargeMoney;
     }

@@ -79,6 +79,9 @@ public class DialogManager {
             case SENT_CHAT:
                 operateChat(listener,objects);
                 break;
+            case PAY_STATE:
+                operaatePayState(listener,objects);
+                break;
             default:
                 break;
         }
@@ -93,6 +96,16 @@ public class DialogManager {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void operaatePayState(OnClickListenerContent listener, Object[] objects) {
+        View mView = mInflater.inflate(R.layout.dialog_pay_state, null);
+        TextView minfoTv = (TextView) mView.findViewById(R.id.pay_info_title);
+        if (objects != null && objects.length > 0) {
+            String info = (String) objects[0];
+            minfoTv.setText(info);
+        }
+        mSimpleDialog.createOrUpdate(-1, mView);
     }
 
     private void operateChat(OnClickListenerContent listener, Object[] objects) {
@@ -385,7 +398,7 @@ public class DialogManager {
         if (mStyle == DialogStyle.EXIT ) { //根据需求修改dialog的样式
             mSimpleDialog = new SimpleDialog(mContext);
             mSimpleDialog.setCanceledOnTouchOutside(false);
-        } else if (mStyle == DialogStyle.UPLOAD ) {
+        } else if (mStyle == DialogStyle.UPLOAD || mStyle==DialogStyle.PAY_STATE) {
             mSimpleDialog = new SimpleDialog(mContext);
             mSimpleDialog.setCancelable(false);
             mSimpleDialog.setCanceledOnTouchOutside(false);

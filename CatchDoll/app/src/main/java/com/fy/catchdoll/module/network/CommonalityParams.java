@@ -38,11 +38,13 @@ public class CommonalityParams {
 			try {
 				User user = AccountManager.getInstance().getUser();
 				if (user != null){
-//					mParams.put("user_id",user.getId());
-//					mParams.put("access_token",user.getAccess_token());
-					mParams.put("user_id","1");
-					mParams.put("access_token","f86d66cf3674bc3872c97250f6a5b5a1");
+					mParams.put("user_id",user.getId());
+					mParams.put("access_token",user.getAccess_token());
+//					mParams.put("user_id","1");
+//					mParams.put("access_token","f86d66cf3674bc3872c97250f6a5b5a1");
 				}
+//				mParams.put("user_id","1");
+//				mParams.put("access_token","f86d66cf3674bc3872c97250f6a5b5a1");
 				mParams.put("signtype", "1");
 				mParams.put("version", DeviceUtils.getVersionCode(CdApplication.getApplication()));
 				setAppInfo(mParams);//设置应用基本信息

@@ -4,6 +4,7 @@ import com.fy.catchdoll.module.network.BazaarGetDao;
 import com.fy.catchdoll.module.network.Paths;
 import com.fy.catchdoll.presentation.model.business.BaseBizListener;
 import com.fy.catchdoll.presentation.model.dto.box.BoxInfoDto;
+import com.fy.catchdoll.presentation.model.dto.recharge.RechargeDto;
 import com.fy.catchdoll.presentation.model.dto.recharge.RechargeItem;
 
 import tv.feiyunlu.qike.com.qikecorelibrary.libs.libs.base.datainterface.BaseLoadListener;
@@ -14,10 +15,10 @@ import tv.feiyunlu.qike.com.qikecorelibrary.libs.libs.base.datainterface.impl.su
  * Created by wst on 2017/12/2.
  */
 public class RecharegeListBiz extends BaseLoadListener {
-    private BazaarGetDao<RechargeItem> mIndexDao;
+    private BazaarGetDao<RechargeDto> mIndexDao;
     private BaseBizListener mCallback;
     public RecharegeListBiz(){
-        mIndexDao = new BazaarGetDao<RechargeItem>(Paths.NEWAPI + Paths.RECHARGE_LIST_, RechargeItem.class, BazaarGetDao.ARRAY_DATA);
+        mIndexDao = new BazaarGetDao<RechargeDto>(Paths.NEWAPI + Paths.RECHARGE_LIST_, RechargeDto.class, BazaarGetDao.ARRAY_DATA_CHUNK);
         mIndexDao.registerListener(this);
     }
 
@@ -36,7 +37,7 @@ public class RecharegeListBiz extends BaseLoadListener {
     public void onComplete(IDao.ResultType resultType) {
         super.onComplete(resultType);
         if (mCallback != null){
-            mCallback.dataResult(mIndexDao.getList(),mIndexDao.getPage(),mIndexDao.getCode());
+            mCallback.dataResult(mIndexDao.getData(),mIndexDao.getPage(),mIndexDao.getCode());
         }
     }
 

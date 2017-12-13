@@ -97,9 +97,8 @@ public class ActivityUtils {
      * 启动分享界面
      * @param context
      */
-    public static void startMyInviteShareHistory(Context context,UserInfo info){
+    public static void startMyInviteShareHistory(Context context){
         Intent intent = new Intent(context, MyInviteShareActivity.class);
-        intent.putExtra(MyInviteShareActivity.INVITE_SHARE_DATA_KEY,info);
         context.startActivity(intent);
     }
 

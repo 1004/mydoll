@@ -54,8 +54,19 @@ public class User {
     private String invitation_gold;
     @DatabaseField
     private String max_invitation_friends;
+    @DatabaseField
+    private int gold;
+
     public User() {
 
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
     }
 
     public String getId() {

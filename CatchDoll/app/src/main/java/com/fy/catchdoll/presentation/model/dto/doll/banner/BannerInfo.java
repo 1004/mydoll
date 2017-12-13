@@ -9,6 +9,15 @@ public class BannerInfo extends BaseItemDto{
     private String title;
     private String image;
     private String link;
+    private int jump_type;
+
+    public int getJump_type() {
+        return jump_type;
+    }
+
+    public void setJump_type(int jump_type) {
+        this.jump_type = jump_type;
+    }
 
     public String getTitle() {
         return title;

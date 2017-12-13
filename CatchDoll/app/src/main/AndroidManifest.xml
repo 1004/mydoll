@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/flash_icon"
@@ -56,6 +57,22 @@
 
         <service android:name=".module.service.NetService"></service>
         <service android:name=".presentation.presenter.update2.UploadService"></service>
+
+
+        <!--微信支付-->
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="wx8ff481aad7c25e65"/>
+            </intent-filter>
+
+        </activity>
+
 
 
         <!--友盟 start-->
