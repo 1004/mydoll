@@ -17,4 +17,9 @@ public class WrapConstants {
     //充值
     public static final int WRAP_RECHARGE_ITEM = 1;
     public static final int WRAP_RECHARGE_IMG = WRAP_RECHARGE_ITEM+1;
+
+    //发货记录
+    public static final int WRAP_SEND_ADDRESS = 1;
+    public static final int WRAP_SEND_ITEM = WRAP_SEND_ADDRESS+1;
+    public static final int WRAP_SEND_STATE = WRAP_SEND_ITEM+1;
 }

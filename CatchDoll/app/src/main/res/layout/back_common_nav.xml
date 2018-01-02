@@ -27,5 +27,21 @@
             android:layout_width="wrap_content"
             android:layout_centerInParent="true"
             android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:id="@+id/nav_right"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="@dimen/dimen_nav_left"
+            android:paddingRight="@dimen/dimen_nav_left"
+            android:visibility="gone"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/nav_right_icon"
+                android:src="@mipmap/room_record"
+                android:scaleType="centerCrop"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>

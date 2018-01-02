@@ -14,6 +14,7 @@ import tv.feiyunlu.qike.com.qikecorelibrary.libs.libs.base.datainterface.impl.su
 
 /**
  * Created by wst on 2017/12/2.
+ * 修改地址
  */
 public class UpdataInfoBiz extends BaseLoadListener{
     private BazaarPostDao<Object> mIndexDao;

@@ -12,8 +12,8 @@ import com.fy.catchdoll.presentation.presenter.IBasePresenterLinstener;
 public class CheckOrderPresenter implements BaseBizListener {
     private RechargeConfimBiz mBiz;
     private IBasePresenterLinstener mListener ;
-    public CheckOrderPresenter(){
-        mBiz = new RechargeConfimBiz();
+    public CheckOrderPresenter(String urlprefix){
+        mBiz = new RechargeConfimBiz(urlprefix);
         mBiz.registBizCallBack(this);
     }
 

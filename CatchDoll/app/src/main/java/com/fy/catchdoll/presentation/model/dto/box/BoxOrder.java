@@ -6,6 +6,15 @@ package com.fy.catchdoll.presentation.model.dto.box;
 public class BoxOrder {
     private String backpack_doll_total;
     private String price;
+    private String packet_mail_number_text;
+
+    public String getPacket_mail_number_text() {
+        return packet_mail_number_text;
+    }
+
+    public void setPacket_mail_number_text(String packet_mail_number_text) {
+        this.packet_mail_number_text = packet_mail_number_text;
+    }
 
     public String getBackpack_doll_total() {
         return backpack_doll_total;

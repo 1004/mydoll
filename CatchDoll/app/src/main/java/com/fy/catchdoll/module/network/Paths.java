@@ -28,6 +28,9 @@ public class Paths {
     public static final String UPDATE_ADDRESS_DATA = "user/setaddress.json";//添加/修改用户收件地址
     public static final String GOLD_ORDER_DATA = "gold/setorder.json";//金币充值套餐
     public static final String CHECK_ORDER_DATA = "gold/checkorder.json";//订单状态确认
+    public static final String CHECK_ORDER_DATA_BOX = "backpack/checkorder.json";//订单状态确认
+    public static final String BOX_ORDER_COMMIT = "backpack/setbackpackorder.json";//背包订单提交
+    public static final String ORDER_HISTORY_URL = "backpack/backpackorder.json";//背包订单记录列表
 
 
 }

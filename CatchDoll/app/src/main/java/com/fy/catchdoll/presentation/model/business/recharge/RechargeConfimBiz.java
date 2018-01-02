@@ -18,8 +18,8 @@ import tv.feiyunlu.qike.com.qikecorelibrary.libs.libs.base.datainterface.impl.su
 public class RechargeConfimBiz extends BaseLoadListener {
     private BazaarGetDao<OrderConfirmDto> mIndexDao;
     private BaseBizListener mCallback;
-    public RechargeConfimBiz(){
-        mIndexDao = new BazaarGetDao<OrderConfirmDto>(Paths.NEWAPI + Paths.CHECK_ORDER_DATA, OrderConfirmDto.class, BazaarPostDao.ARRAY_DATA_CHUNK);
+    public RechargeConfimBiz(String urlPrefix){
+        mIndexDao = new BazaarGetDao<OrderConfirmDto>(Paths.NEWAPI + urlPrefix, OrderConfirmDto.class, BazaarPostDao.ARRAY_DATA_CHUNK);
         mIndexDao.registerListener(this);
     }
 

@@ -9,5 +9,6 @@ public enum DialogStyle {
 	COMMON_INTOR,
 	BOTTOM_SELECT,
 	SENT_CHAT,
-	PAY_STATE
+	PAY_STATE,
+	BOX_ORDER_SUCCESS
 }

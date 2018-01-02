@@ -12,6 +12,7 @@ import com.fy.catchdoll.library.widgets.ResultsListView;
 import com.fy.catchdoll.library.widgets.dialog.DialogManager;
 import com.fy.catchdoll.library.widgets.dialog.DialogStyle;
 import com.fy.catchdoll.module.network.Page;
+import com.fy.catchdoll.module.network.Paths;
 import com.fy.catchdoll.module.support.recharge.RechargeManager;
 import com.fy.catchdoll.module.support.recharge.RechargeNotifyManager;
 import com.fy.catchdoll.module.support.recharge.common.dto.BasePayEntry;
@@ -79,7 +80,7 @@ public class RechargeListActivity extends AppCompatBaseActivity  implements OnWr
         topicLv.setAdapter(getAdapter());
         mInfoPresenter = new RechargeListPresenter();
         mOrderPresenter = new RechargeOrderPresenter();
-        mCheckPresenter = new CheckOrderPresenter();
+        mCheckPresenter = new CheckOrderPresenter(Paths.CHECK_ORDER_DATA);
         mDialogManager = new DialogManager(this);
     }
 
@@ -105,6 +106,11 @@ public class RechargeListActivity extends AppCompatBaseActivity  implements OnWr
         RechargeNotifyManager.getInstance().registPayStateListener(KEY, this);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RechargeNotifyManager.getInstance().unRegistPayStateListener(KEY);
+    }
 
     @Override
     public void loadData() {

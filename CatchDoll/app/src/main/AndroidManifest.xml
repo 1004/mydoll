@@ -54,6 +54,7 @@
         </activity>
         <activity android:name=".presentation.view.activitys.recharge.RechargeListActivity"></activity>
         <activity android:name=".presentation.view.activitys.box.UpdateAddressActivity"></activity>
+        <activity android:name=".presentation.view.activitys.orderhistory.OrderHistoryActivity"></activity>
 
         <service android:name=".module.service.NetService"></service>
         <service android:name=".presentation.presenter.update2.UploadService"></service>

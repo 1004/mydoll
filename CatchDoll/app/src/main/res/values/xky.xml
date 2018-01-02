@@ -367,9 +367,17 @@
         <item name="android:textSize">14.0sp</item>
         <item name="android:textColor">#00ded6</item>
     </style>
+    <style name="style_17_969ea3">
+        <item name="android:textSize">17.0sp</item>
+        <item name="android:textColor">#969ea3</item>
+    </style>
     <style name="style_14_adb5bb">
         <item name="android:textSize">14.0sp</item>
         <item name="android:textColor">#adb5bb</item>
+    </style>
+    <style name="style_14_b6bfc6">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textColor">#b6bfc6</item>
     </style>
     <style name="style_14_ff0000">
         <item name="android:textSize">14.0sp</item>
@@ -451,6 +459,7 @@
     <string name="string_share_circle">朋友圈</string>
     <string name="string_share_qq_zone">QQ空间</string>
     <string name="string_spend_title">消费明细</string>
+    <string name="string_orderhistory_title">发货记录</string>
 
     <!--地址-->
     <string name="string_address_info">收件信息</string>
@@ -496,9 +505,13 @@
     <string name="string_room_my_money">我的咔币</string>
     <string name="string_flash_info">掌上娃娃机   快乐不停歇</string>
 
+    <string name="string_box_order_commit">正在下单</string>
     <string name="string_pay_state_loading">正在支付...</string>
     <string name="string_pay_state_error">支付失败</string>
     <string name="string_pay_state_check">支付确认中</string>
     <string name="string_pay_state_cancel">支付取消</string>
     <string name="string_pay_state_success">支付成功</string>
+    <string name="string_box_order_success">下单成功</string>
+    <string name="string_send_state_str">状态:%1$s</string>
+    <string name="string_send_time_str">下单时间:%1$s</string>
 </resources>

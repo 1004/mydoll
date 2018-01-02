@@ -39,7 +39,7 @@ public class BoxDollWrap extends BaseViewObtion<BaseItemDto>{
             Doll doll_info = dollBox.getDoll_info();
             ImageLoaderUtils.displayImage(holder.dollIcon,R.drawable.drawable_default_color,doll_info.getImage());
             holder.dollTitle.setText(doll_info.getTitle());
-            holder.dollTime.setText(doll_info.getCreated_at());
+            holder.dollTime.setText(dollBox .getCreated_at());
         }
 
     }

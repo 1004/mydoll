@@ -12,6 +12,7 @@ public class BoxDoll extends BaseItemDto{
     private String doll_id;
     private String created_at;
     private Doll doll_info;
+    private Doll doll;
 
     public String getId() {
         return id;
@@ -51,5 +52,13 @@ public class BoxDoll extends BaseItemDto{
 
     public void setDoll_info(Doll doll_info) {
         this.doll_info = doll_info;
+    }
+
+    public Doll getDoll() {
+        return doll;
+    }
+
+    public void setDoll(Doll doll) {
+        this.doll = doll;
     }
 }

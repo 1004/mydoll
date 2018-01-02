@@ -14,6 +14,7 @@ import com.fy.catchdoll.presentation.view.activitys.my.MyActivity;
 import com.fy.catchdoll.presentation.view.activitys.my.MyExchangeActivity;
 import com.fy.catchdoll.presentation.view.activitys.my.MyInviteShareActivity;
 import com.fy.catchdoll.presentation.view.activitys.my.MySpendActivity;
+import com.fy.catchdoll.presentation.view.activitys.orderhistory.OrderHistoryActivity;
 import com.fy.catchdoll.presentation.view.activitys.recharge.RechargeListActivity;
 import com.fy.catchdoll.presentation.view.activitys.room.DollRoomActivity;
 import com.fy.catchdoll.presentation.view.activitys.room.RoomActivity;
@@ -120,6 +121,16 @@ public class ActivityUtils {
         if (info != null){
             intent.putExtra(UpdateAddressActivity.UPDATA_INFO_ADDRESS_KEY,info);
         }
-        context.startActivityForResult(intent,UpdateAddressActivity.ADDRESS_REQUESTCODE);
+        context.startActivityForResult(intent, UpdateAddressActivity.ADDRESS_REQUESTCODE);
+    }
+
+
+    /**
+     * 发货记录
+     * @param context
+     */
+    public static void startSendHistoryActivity(Context context){
+        Intent intent = new Intent(context, OrderHistoryActivity.class);
+        context.startActivity(intent);
     }
 }

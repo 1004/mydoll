@@ -2,24 +2,41 @@ package com.fy.catchdoll.presentation.view.activitys.box;
 
 import android.content.Intent;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fy.catchdoll.R;
 import com.fy.catchdoll.library.utils.ActivityUtils;
 import com.fy.catchdoll.library.widgets.NetStateView;
 import com.fy.catchdoll.library.widgets.ResultsListView;
+import com.fy.catchdoll.library.widgets.dialog.DialogManager;
+import com.fy.catchdoll.library.widgets.dialog.DialogStyle;
 import com.fy.catchdoll.module.network.Page;
+import com.fy.catchdoll.module.network.Paths;
+import com.fy.catchdoll.module.support.recharge.RechargeManager;
+import com.fy.catchdoll.module.support.recharge.RechargeNotifyManager;
+import com.fy.catchdoll.module.support.recharge.common.dto.WxPayEntry;
+import com.fy.catchdoll.presentation.model.dto.account.User;
 import com.fy.catchdoll.presentation.model.dto.base.BaseItemDto;
 import com.fy.catchdoll.presentation.model.dto.box.AddressInfo;
 import com.fy.catchdoll.presentation.model.dto.box.BoxDoll;
 import com.fy.catchdoll.presentation.model.dto.box.BoxInfoDto;
 import com.fy.catchdoll.presentation.model.dto.box.BoxOrder;
+import com.fy.catchdoll.presentation.model.dto.recharge.BoxOrderDto;
+import com.fy.catchdoll.presentation.model.dto.recharge.OrderConfirmDto;
+import com.fy.catchdoll.presentation.model.dto.recharge.OrderExpress;
 import com.fy.catchdoll.presentation.presenter.ErrorCodeOperate;
 import com.fy.catchdoll.presentation.presenter.IBasePresenterLinstener;
+import com.fy.catchdoll.presentation.presenter.account.AccountManager;
 import com.fy.catchdoll.presentation.presenter.box.BoxInfoPresenter;
+import com.fy.catchdoll.presentation.presenter.recharge.BoxOrderPresenter;
+import com.fy.catchdoll.presentation.presenter.recharge.CheckOrderPresenter;
 import com.fy.catchdoll.presentation.view.activitys.base.AppCompatBaseActivity;
+import com.fy.catchdoll.presentation.view.activitys.recharge.RechargeListActivity;
 import com.fy.catchdoll.presentation.view.adapters.wrap.WrapConstants;
 import com.fy.catchdoll.presentation.view.adapters.wrap.base.CommonAdapterType;
 import com.fy.catchdoll.presentation.view.adapters.wrap.base.OnWrapItemClickListener;
@@ -32,7 +49,8 @@ import java.util.List;
 /**
  * Created by xky on 2017/11/28 0028.
  */
-public class BoxInfoActivity extends AppCompatBaseActivity implements OnWrapItemClickListener, NetStateView.IRefreshListener, IBasePresenterLinstener {
+public class BoxInfoActivity extends AppCompatBaseActivity implements OnWrapItemClickListener, NetStateView.IRefreshListener, IBasePresenterLinstener, DialogManager.OnClickListenerContent, RechargeNotifyManager.OnPayStateListener {
+    private static final String KEY = "BoxInfoActivity";
     private ListView topicLv;
     private NetStateView netstate;
     private CommonAdapterType mAdapter;
@@ -40,6 +58,14 @@ public class BoxInfoActivity extends AppCompatBaseActivity implements OnWrapItem
     private BoxInfoPresenter mInfoPresenter;
     private TextView mOrderMoneyInfo;
     private TextView mCommitOrder;
+    private BoxOrderPresenter mOrderPresenter;
+    private boolean isCommit = false;
+    private DialogManager dialogManager;
+    private WxPayEntry mCurrentEntry;
+    private CheckOrderPresenter mCheckPresenter;
+    private OrderExpress mExpress;
+    private View mRightView;
+    private ImageView mRightIcon;
 
     @Override
     public int getLayoutId() {
@@ -53,6 +79,10 @@ public class BoxInfoActivity extends AppCompatBaseActivity implements OnWrapItem
         mCommitContainer = findViewById(R.id.box_commit_container);
         mOrderMoneyInfo = (TextView) findViewById(R.id.order_commit_tv);
         mCommitOrder = (TextView) findViewById(R.id.order_money_info);
+        mRightView = findViewById(R.id.nav_right);
+        mRightIcon = (ImageView) findViewById(R.id.nav_right_icon);
+        mRightView.setVisibility(View.VISIBLE);
+
 
         netstate.setContentView(topicLv, mCommitContainer);
         netstate.show(NetStateView.NetState.LOADING);
@@ -63,6 +93,9 @@ public class BoxInfoActivity extends AppCompatBaseActivity implements OnWrapItem
         setCommonTitle(getMString(R.string.string_box_title));
         topicLv.setAdapter(getAdapter());
         mInfoPresenter = new BoxInfoPresenter();
+        mOrderPresenter = new BoxOrderPresenter();
+        dialogManager = new DialogManager(this);
+        mCheckPresenter = new CheckOrderPresenter(Paths.CHECK_ORDER_DATA_BOX);
     }
 
     private CommonAdapterType getAdapter() {
@@ -81,6 +114,71 @@ public class BoxInfoActivity extends AppCompatBaseActivity implements OnWrapItem
     public void setListener() {
         netstate.setOnRefreshListener(this);
         mInfoPresenter.registPresenterCallBack(this);
+        mOrderMoneyInfo.setOnClickListener(this);
+        mRightView.setOnClickListener(this);
+        mOrderPresenter.registPresenterCallBack(mOrderCallBack);
+        mCheckPresenter.registPresenterCallBack(mCheckOrderCallBack);
+        RechargeNotifyManager.getInstance().registPayStateListener(KEY, this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RechargeNotifyManager.getInstance().unRegistPayStateListener(KEY);
+    }
+
+    private IBasePresenterLinstener mOrderCallBack = new IBasePresenterLinstener() {
+        @Override
+        public void dataResult(Object obj, Page page, int status) {
+            isCommit = false;
+            dialogManager.dismissDialog();
+            if (obj != null){
+                BoxOrderDto dto = (BoxOrderDto) obj;
+                operatePay(dto);
+            }
+        }
+
+        @Override
+        public void errerResult(int code, String msg) {
+            isCommit = false;
+            dialogManager.dismissDialog();
+            ErrorCodeOperate.executeError("", getContext(), code, msg, true);
+        }
+    };
+
+    private IBasePresenterLinstener mCheckOrderCallBack = new IBasePresenterLinstener() {
+        @Override
+        public void dataResult(Object obj, Page page, int status) {
+            dialogManager.dismissDialog();
+            if (obj != null){
+                Toast.makeText(BoxInfoActivity.this,getMString(R.string.string_pay_state_success),Toast.LENGTH_SHORT).show();
+                if (mExpress != null){
+                    netstate.show(NetStateView.NetState.EMPTY);
+                    dialogManager.showDialog(DialogStyle.BOX_ORDER_SUCCESS, BoxInfoActivity.this, mExpress.getSuccess_msg());
+                }
+            }
+        }
+
+        @Override
+        public void errerResult(int code, String msg) {
+            dialogManager.dismissDialog();
+            ErrorCodeOperate.executeError("", getContext(), code, msg, true);
+        }
+    };
+
+    private void operatePay(BoxOrderDto dto) {
+        mExpress = dto.getExpress();
+        mCurrentEntry = dto.getWx_pay();
+        if (mExpress != null && mExpress.getIs_free_shipping() == 1){
+            //包邮，无需支付
+            netstate.show(NetStateView.NetState.EMPTY);
+            dialogManager.showDialog(DialogStyle.BOX_ORDER_SUCCESS,this,mExpress.getSuccess_msg());
+            return;
+        }
+        if (mExpress != null && mCurrentEntry != null && mExpress.getIs_free_shipping() == 0){
+            // 0:需要支付邮费
+            RechargeManager.getInstance().Pay(this,mCurrentEntry);
+        }
     }
 
     @Override
@@ -95,10 +193,14 @@ public class BoxInfoActivity extends AppCompatBaseActivity implements OnWrapItem
             BoxInfoDto mDto = (BoxInfoDto) obj;
 
             List<BaseItemDto> datas = parseData(mDto);
-            mAdapter.clear();
-            mAdapter.addList(datas);
-            mAdapter.notifyDataSetChanged();
-            netstate.show(NetStateView.NetState.CONTENT);
+            if (datas.size() == 0){
+                netstate.show(NetStateView.NetState.EMPTY);
+            }else {
+                mAdapter.clear();
+                mAdapter.addList(datas);
+                mAdapter.notifyDataSetChanged();
+                netstate.show(NetStateView.NetState.CONTENT);
+            }
         }
     }
 
@@ -125,7 +227,8 @@ public class BoxInfoActivity extends AppCompatBaseActivity implements OnWrapItem
 
     private void initOrderInfo(BoxOrder order){
         if (order != null){
-            String s = "<font  color='#FFFFFF'>还需要支付邮费</font><font color='#FF0000'><big>" + order.getPrice()  + "</big></font><font  color='#FFFFFF'>元</font>";
+            String str = TextUtils.isEmpty(order.getPacket_mail_number_text()) ? "" : order.getPacket_mail_number_text();
+            String s = "<font  color='#FFFFFF'>还需要支付邮费</font><font color='#FF0000'><big>" + order.getPrice()  + "</big></font><font  color='#FFFFFF'>元 "+str+"</font>";
             mCommitOrder.setText(Html.fromHtml(s));
         }
     }
@@ -145,6 +248,28 @@ public class BoxInfoActivity extends AppCompatBaseActivity implements OnWrapItem
 
     }
 
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        switch (v.getId()){
+            case R.id.order_commit_tv:
+                operateCommitOrder();
+                break;
+            case R.id.nav_right:
+                ActivityUtils.startSendHistoryActivity(this);
+                break;
+        }
+    }
+
+    private void operateCommitOrder() {
+        if (isCommit){
+            return;
+        }
+        isCommit = true;
+        dialogManager.showDialog(DialogStyle.PAY_STATE,null,getMString(R.string.string_box_order_commit));
+        mOrderPresenter.firstTask();
+    }
+
     private void operateUpdataInfo(Object[] obj) {
         if(obj != null){
             AddressInfo info = (AddressInfo) obj[0];
@@ -162,8 +287,46 @@ public class BoxInfoActivity extends AppCompatBaseActivity implements OnWrapItem
 
 
 
+
+
     @Override
     public void onRefrsh(View view) {
         loadData();
+    }
+
+    @Override
+    public void onClick(View view, Object... content) {
+        switch (view.getId()){
+            case R.id.box_order_success:
+                dialogManager.dismissDialog();
+                ActivityUtils.startSendHistoryActivity(this);
+//                Toast.makeText(this,"跳转到背包状态列表0",Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
+    @Override
+    public void onPayState(int state) {
+        switch (state){
+            case RechargeNotifyManager.RECHARGE_CANCEL_STATE:
+                Toast.makeText(this,getMString(R.string.string_pay_state_cancel),Toast.LENGTH_SHORT).show();
+                break;
+            case RechargeNotifyManager.RECHARGE_ERROR_STATE:
+                Toast.makeText(this,getMString(R.string.string_pay_state_error),Toast.LENGTH_SHORT).show();
+                break;
+            case RechargeNotifyManager.RECHARGE_SUCCESS_STATE:
+                operateConfirmOrder();
+                break;
+        }
+    }
+
+    /**
+     * 确认订单
+     */
+    private void operateConfirmOrder() {
+        if (mCurrentEntry != null){
+            dialogManager.showDialog(DialogStyle.PAY_STATE, null, getMString(R.string.string_pay_state_check));
+            mCheckPresenter.firstTask(mCurrentEntry.getOrder_no());
+        }
     }
 }

@@ -82,6 +82,9 @@ public class DialogManager {
             case PAY_STATE:
                 operaatePayState(listener,objects);
                 break;
+            case BOX_ORDER_SUCCESS:
+                operateOrderSuccess(listener,objects);
+                break;
             default:
                 break;
         }
@@ -96,6 +99,23 @@ public class DialogManager {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void operateOrderSuccess(final OnClickListenerContent listener, Object[] objects) {
+        View mView = mInflater.inflate(R.layout.dialog_order_success, null);
+        TextView minfoTv = (TextView) mView.findViewById(R.id.dialog_order_send_info);
+        TextView mOKBtn = (TextView) mView.findViewById(R.id.box_order_success);
+        if (objects != null && objects.length > 0) {
+            String info = (String) objects[0];
+            minfoTv.setText(info);
+        }
+        mOKBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setListener(listener, v, new Object[]{});
+            }
+        });
+        mSimpleDialog.createOrUpdate(-1, mView);
     }
 
     private void operaatePayState(OnClickListenerContent listener, Object[] objects) {
