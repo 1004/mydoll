@@ -5,7 +5,6 @@ import com.umeng.socialize.PlatformConfig;
 public class UmengInit {
 
 	public static final String WEIXIN_APPID = "wx8ff481aad7c25e65";
-//	public static final String WEIXIN_APPKEY = "c874039fe9cd2feff732abb5b6b3883a";
 	public static final String WEIXIN_APPKEY = "c6d6fe311f79f9b60c00ca80251d211c";
 	public static final String QQ_APPID = "1106587128";
 	public static final String QQ_APPKEY = "5NOqpKNLd9vEgc46";

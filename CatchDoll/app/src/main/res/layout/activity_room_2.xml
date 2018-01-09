@@ -3,211 +3,247 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include layout="@layout/back_video_nav"></include>
-
-    <ScrollView
-        android:layout_above="@+id/llinputparent"
-        android:scrollbars="none"
-        android:background="@color/color_EDF0F4"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
-            android:orientation="vertical"
+
+        <ScrollView
+            android:id="@+id/room_sv"
+            android:scrollbars="none"
+            android:background="@color/color_EDF0F4"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
-                android:id="@+id/room_video_chat_container"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="300dp">
-                <RelativeLayout
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:id="@+id/room_video_chat_container"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:background="@color/color_4BD3A1"
-                    android:layout_height="0dp">
-
-                </RelativeLayout>
-                <RelativeLayout
-                    android:background="@color/color_3B4152"
-                    android:layout_width="match_parent"
-                    android:layout_height="121dp">
+                    android:layout_height="300dp">
                     <RelativeLayout
-                        android:visibility="visible"
-                        android:id="@+id/room_catchstate_start_container"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <ImageView
-                            android:id="@+id/room_chat_btn"
-                            android:layout_marginLeft="15dp"
-                            android:layout_centerVertical="true"
-                            android:src="@mipmap/sent_chat"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                        android:layout_weight="1"
+                        android:background="@color/color_black"
+                        android:layout_height="0dp">
+                        <FrameLayout android:id="@+id/gaming_video"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            >
+                            <ImageView android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="LOADING"
+                                android:layout_gravity="center"
+                                android:src="@mipmap/loading_blue" />
+                        </FrameLayout>
+
+                        <ImageView android:layout_width="36dp"
+                            android:layout_height="68dp"
+                            android:layout_centerInParent="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginRight="10dp"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/btn_switch_camera"
+                            android:onClick="onSwitchCameraClicked"
+                            android:layout_alignParentRight="true" />
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:background="@color/color_3B4152"
+                        android:layout_width="match_parent"
+                        android:layout_height="121dp">
                         <RelativeLayout
-                            android:id="@+id/room_state_start_wait"
-                            android:layout_width="180dp"
-                            android:layout_centerVertical="true"
-                            android:layout_toRightOf="@id/room_chat_btn"
-                            android:layout_marginLeft="25dp"
-                            android:background="@drawable/shape_round_state_start"
-                            android:layout_height="75dp">
-                            <LinearLayout
-                                android:layout_centerInParent="true"
-                                android:layout_width="wrap_content"
-                                android:orientation="vertical"
-                                android:layout_height="wrap_content">
-                                <TextView
-                                    android:textSize="20sp"
-                                    android:textColor="@color/color_white"
-                                    android:text="@string/string_room_state_start"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" />
-                                <TextView
-                                    android:textSize="12sp"
-                                    android:layout_gravity="center_horizontal"
-                                    android:text="36/次"
-                                    android:layout_marginTop="5dp"
-                                    android:textColor="@color/color_fffefe"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
-                        </RelativeLayout>
-                        <LinearLayout
-                            android:paddingRight="15dp"
-                            android:layout_alignParentRight="true"
-                            android:orientation="vertical"
-                            android:layout_width="wrap_content"
+                            android:visibility="visible"
+                            android:id="@+id/room_catchstate_start_container"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent">
-                            <TextView
-                                android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="18dp"
-                                style="@style/style_13_fffefe"
-                                android:text="@string/string_room_my_money"
+                            <ImageView
+                                android:id="@+id/room_chat_btn"
+                                android:layout_marginLeft="15dp"
+                                android:layout_centerVertical="true"
+                                android:src="@mipmap/sent_chat"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
-                            <TextView
-                                style="@style/style_15_fffefe"
-                                android:textStyle="bold"
-                                android:text="34"
-                                android:layout_marginTop="10dp"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                            <RelativeLayout
+                                android:id="@+id/room_state_start_wait"
+                                android:layout_width="180dp"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@id/room_chat_btn"
+                                android:layout_marginLeft="25dp"
+                                android:background="@drawable/shape_round_state_start"
+                                android:layout_height="75dp">
+                                <LinearLayout
+                                    android:layout_centerInParent="true"
+                                    android:layout_width="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_height="wrap_content">
+                                    <TextView
+                                        android:textSize="20sp"
+                                        android:textColor="@color/color_white"
+                                        android:text="@string/string_room_state_start"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+                                    <TextView
+                                        android:id="@+id/pay_gold_tv"
+                                        android:textSize="12sp"
+                                        android:layout_gravity="center_horizontal"
+                                        android:text="36/次"
+                                        android:layout_marginTop="5dp"
+                                        android:textColor="@color/color_fffefe"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout>
+                            </RelativeLayout>
                             <LinearLayout
-                                android:background="@drawable/shape_round_ffce01_40_bg"
-                                android:orientation="horizontal"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_width="wrap_content"
-                                android:gravity="center_vertical"
-                                android:paddingLeft="15dp"
                                 android:paddingRight="15dp"
-                                android:paddingTop="5dp"
-                                android:paddingBottom="5dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_height="wrap_content">
-                                <ImageView
-                                    android:src="@mipmap/room_add"
+                                android:layout_alignParentRight="true"
+                                android:orientation="vertical"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+                                <TextView
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginTop="18dp"
+                                    style="@style/style_13_fffefe"
+                                    android:text="@string/string_room_my_money"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content" />
                                 <TextView
-                                    android:text="@string/string_my_rechage"
-                                    style="@style/style_14_fffefe"
+                                    android:id="@+id/room_gold_num"
+                                    style="@style/style_15_fffefe"
+                                    android:textStyle="bold"
+                                    android:text="34"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_gravity="center_horizontal"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content" />
-                            </LinearLayout>
+                                <LinearLayout
+                                    android:background="@drawable/shape_round_ffce01_40_bg"
+                                    android:orientation="horizontal"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_width="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:paddingLeft="15dp"
+                                    android:paddingRight="15dp"
+                                    android:paddingTop="5dp"
+                                    android:paddingBottom="5dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_height="wrap_content">
+                                    <ImageView
+                                        android:src="@mipmap/room_add"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+                                    <TextView
+                                        android:text="@string/string_my_rechage"
+                                        style="@style/style_14_fffefe"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+                                </LinearLayout>
 
-                        </LinearLayout>
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:id="@+id/room_catchstate_play_container"
-                        android:layout_width="match_parent"
-                        android:visibility="gone"
-                        android:layout_height="match_parent">
+                            </LinearLayout>
+                        </RelativeLayout>
                         <RelativeLayout
-                            android:layout_marginLeft="44dp"
-                            android:layout_width="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_height="wrap_content">
-                            <ImageView
-                                android:id="@+id/oriention_left_icon"
-                                android:src="@mipmap/room_left"
-                                android:layout_centerVertical="true"
-                                android:layout_width="@dimen/dimen_origin_img_wh"
-                                android:layout_height="@dimen/dimen_origin_img_wh" />
-                            <LinearLayout
-                                android:id="@+id/oriention_center_container"
-                                android:layout_toRightOf="@id/oriention_left_icon"
+                            android:id="@+id/room_catchstate_play_container"
+                            android:layout_width="match_parent"
+                            android:visibility="gone"
+                            android:layout_height="match_parent">
+                            <RelativeLayout
+                                android:layout_marginLeft="44dp"
                                 android:layout_width="wrap_content"
-                                android:orientation="vertical"
-                                android:layout_marginLeft="15dp"
                                 android:layout_centerVertical="true"
                                 android:layout_height="wrap_content">
                                 <ImageView
-                                    android:id="@+id/oriention_top_icon"
-                                    android:src="@mipmap/room_top"
+                                    android:id="@+id/oriention_left_icon"
+                                    android:src="@mipmap/room_left"
                                     android:layout_centerVertical="true"
                                     android:layout_width="@dimen/dimen_origin_img_wh"
                                     android:layout_height="@dimen/dimen_origin_img_wh" />
+                                <LinearLayout
+                                    android:id="@+id/oriention_center_container"
+                                    android:layout_toRightOf="@id/oriention_left_icon"
+                                    android:layout_width="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_height="wrap_content">
+                                    <ImageView
+                                        android:id="@+id/oriention_top_icon"
+                                        android:src="@mipmap/room_top"
+                                        android:layout_centerVertical="true"
+                                        android:layout_width="@dimen/dimen_origin_img_wh"
+                                        android:layout_height="@dimen/dimen_origin_img_wh" />
+                                    <ImageView
+                                        android:id="@+id/oriention_bottom_icon"
+                                        android:src="@mipmap/room_bottom"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginTop="11dp"
+                                        android:layout_width="@dimen/dimen_origin_img_wh"
+                                        android:layout_height="@dimen/dimen_origin_img_wh" />
+                                </LinearLayout>
                                 <ImageView
-                                    android:id="@+id/oriention_bottom_icon"
-                                    android:src="@mipmap/room_bottom"
+                                    android:id="@+id/oriention_right_icon"
+                                    android:layout_toRightOf="@id/oriention_center_container"
+                                    android:src="@mipmap/room_right"
                                     android:layout_centerVertical="true"
-                                    android:layout_marginTop="11dp"
+                                    android:layout_marginLeft="15dp"
                                     android:layout_width="@dimen/dimen_origin_img_wh"
                                     android:layout_height="@dimen/dimen_origin_img_wh" />
-                            </LinearLayout>
-                            <ImageView
-                                android:id="@+id/oriention_right_icon"
-                                android:layout_toRightOf="@id/oriention_center_container"
-                                android:src="@mipmap/room_right"
+                            </RelativeLayout>
+                            <TextView
+                                android:id="@+id/room_catch_doll"
+                                android:background="@drawable/shape_circle_4bd3a1"
+                                android:gravity="center"
+                                android:layout_alignParentRight="true"
+                                android:text="@string/string_room_catch_doll"
+                                style="@style/style_20_fffefe"
+                                android:layout_marginRight="30dp"
                                 android:layout_centerVertical="true"
-                                android:layout_marginLeft="15dp"
-                                android:layout_width="@dimen/dimen_origin_img_wh"
-                                android:layout_height="@dimen/dimen_origin_img_wh" />
+                                android:layout_width="91dp"
+                                android:layout_height="91dp" />
                         </RelativeLayout>
-                        <TextView
-                            android:id="@+id/room_catch_doll"
-                            android:background="@drawable/shape_circle_4bd3a1"
-                            android:gravity="center"
-                            android:layout_alignParentRight="true"
-                            android:text="@string/string_room_catch_doll"
-                            style="@style/style_20_fffefe"
-                            android:layout_marginRight="30dp"
-                            android:layout_centerVertical="true"
-                            android:layout_width="91dp"
-                            android:layout_height="91dp" />
                     </RelativeLayout>
-                </RelativeLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/catch_history_container"
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_height="wrap_content">
-                <com.fy.catchdoll.library.widgets.CustomRecentView
-                    android:id="@+id/room_recent_doll"
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/catch_history_container"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
-                </com.fy.catchdoll.library.widgets.CustomRecentView>
-            </LinearLayout>
-            <LinearLayout
-                android:gravity="center"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <com.fy.catchdoll.library.widgets.CustomRecentView
-                    android:id="@+id/room_doll_show"
+                    android:orientation="vertical"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_height="wrap_content">
+                    <com.fy.catchdoll.library.widgets.CustomRecentView
+                        android:id="@+id/room_recent_doll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                    </com.fy.catchdoll.library.widgets.CustomRecentView>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/roll_doll_container"
+                    android:gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
-                </com.fy.catchdoll.library.widgets.CustomRecentView>
+                    android:layout_height="wrap_content">
+                    <com.fy.catchdoll.library.widgets.CustomRecentView
+                        android:id="@+id/room_doll_show"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                    </com.fy.catchdoll.library.widgets.CustomRecentView>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+        </ScrollView>
+        <com.fy.catchdoll.library.widgets.NetStateView
+            android:id="@+id/netstate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true">
+
+        </com.fy.catchdoll.library.widgets.NetStateView>
+
+    </RelativeLayout>
 </LinearLayout>

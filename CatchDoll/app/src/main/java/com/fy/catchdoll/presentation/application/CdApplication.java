@@ -3,6 +3,7 @@ package com.fy.catchdoll.presentation.application;
 import android.app.Application;
 import android.content.Context;
 
+import com.fy.catchdoll.module.support.agora.model.WorkerThread;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DefaultConfigurationFactory;
@@ -23,6 +24,7 @@ import tv.feiyunlu.qike.com.qikecorelibrary.libs.libs.core.config.Configuration;
 public class CdApplication extends Application{
     private static Application mApp;
     public static String mCacheApkDir;
+    private WorkerThread mWorkerThread;
 
 
     @Override
@@ -32,6 +34,19 @@ public class CdApplication extends Application{
         coreInit();
         initImageLoader();
         librariesInit();
+    }
+
+    public synchronized void initWorkerThread() {
+        if (mWorkerThread == null) {
+            mWorkerThread = new WorkerThread(getApplicationContext());
+            mWorkerThread.start();
+
+            mWorkerThread.waitForReady();
+        }
+    }
+
+    public synchronized WorkerThread getWorkerThread() {
+        return mWorkerThread;
     }
 
     /**

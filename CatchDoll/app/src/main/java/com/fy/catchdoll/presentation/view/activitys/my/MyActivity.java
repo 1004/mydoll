@@ -16,6 +16,8 @@ import com.fy.catchdoll.presentation.presenter.IBasePresenterLinstener;
 import com.fy.catchdoll.presentation.presenter.account.AccountManager;
 import com.fy.catchdoll.presentation.presenter.my.MyPresenter;
 import com.fy.catchdoll.presentation.view.activitys.base.AppCompatBaseActivity;
+import com.qike.umengshare_643.UmengUtil643;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 /**
  * Created by xky on 2017/11/28 0028.
@@ -131,6 +133,7 @@ public class MyActivity extends AppCompatBaseActivity implements IBasePresenterL
     }
 
     private void logout() {
+//        UmengUtil643.deleteAuth(this, SHARE_MEDIA.WEIXIN);
         AccountManager.getInstance().logout();
         UiUtils.finishAllALiveAcitity();
         ActivityUtils.startLoginActivity(this);

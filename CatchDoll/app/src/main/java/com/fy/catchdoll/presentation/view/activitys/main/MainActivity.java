@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatBaseActivity implements OnWrapItemCli
         mAdapter = new CommonAdapterType<BaseItemDto>(this);
 
         BannerWrap mBannerWrap = new BannerWrap();
-        mBannerWrap.setOnWrapItemClickListener(this);
+        mBannerWrap.setOnWrapItemClickListener(mBannerClickListener);
         mAdapter.addViewObtains(WrapConstants.WRAP_INDEX_BANNER, mBannerWrap);
 
         DollRoomWrap mRoomWrap = new DollRoomWrap();
@@ -110,6 +110,13 @@ public class MainActivity extends AppCompatBaseActivity implements OnWrapItemCli
 
         return mAdapter;
     }
+
+    private OnWrapItemClickListener mBannerClickListener = new OnWrapItemClickListener() {
+        @Override
+        public void onItemClick(View v, Object... obj) {
+
+        }
+    };
 
     /**
      * 检测系统更新
@@ -241,8 +248,13 @@ public class MainActivity extends AppCompatBaseActivity implements OnWrapItemCli
 
     @Override
     public void onItemClick(View v, Object... obj) {
-        ActivityUtils.startDollRoomActivity(this,"");
-//        ActivityUtils.startRoomActivity(this,"");
+        switch (v.getId()){
+            case R.id.left_room_container:
+            case R.id.right_room_container:
+                DollMachine machines = (DollMachine) obj[0];
+                ActivityUtils.startDollRoomActivity(this,machines.getId());
+                break;
+        }
     }
 
 

@@ -48,6 +48,7 @@ public class ActivityUtils {
      */
     public static void startDollRoomActivity(Context context,String roomId){
         Intent intent = new Intent(context, DollRoomActivity.class);
+        intent.putExtra(DollRoomActivity.DOLL_ROOM_KEY,roomId);
         context.startActivity(intent);
     }
     /**

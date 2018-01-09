@@ -503,6 +503,7 @@
     <string name="string_room_state_start">开始游戏</string>
     <string name="string_room_catch_doll">抓</string>
     <string name="string_room_my_money">我的咔币</string>
+    <string name="string_room_pay_gold">%1$s/次</string>
     <string name="string_flash_info">掌上娃娃机   快乐不停歇</string>
 
     <string name="string_box_order_commit">正在下单</string>

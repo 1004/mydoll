@@ -29,11 +29,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/item_title"
                 style="@style/style_14_848d92"
                 android:text="kk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:id="@+id/item_subtitle"
                 style="@style/style_12_b6bfc6"
                 android:text="11:39"
                 android:layout_marginTop="10dp"

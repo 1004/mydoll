@@ -4,10 +4,13 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.fy.catchdoll.R;
+import com.fy.catchdoll.library.utils.ImageLoaderUtils;
+import com.fy.catchdoll.presentation.model.dto.room.CatchRecord;
 
 import java.util.List;
 
@@ -39,7 +42,7 @@ public class CustomRecentView extends LinearLayout{
         setBackgroundResource(R.drawable.shape_round_fff_30_bg);
     }
 
-    public void initRecentCatchHistory(List<Object> dolls) {
+    public void initRecentCatchHistory(List<CatchRecord> dolls) {
         if (dolls == null || dolls.size() == 0) {
             setVisibility(GONE);
             return;
@@ -48,19 +51,27 @@ public class CustomRecentView extends LinearLayout{
         initRecentItemView(dolls);
     }
 
-    private void initRecentItemView(List<Object> dolls) {
+    private void initRecentItemView(List<CatchRecord> dolls) {
         if (dolls != null){
             for (int i=0 ;i<dolls.size();i++){
-                Object o = dolls.get(i);
+                CatchRecord o = dolls.get(i);
                 addRecentView(o,i==(dolls.size()-1));
             }
         }
     }
 
-    private void addRecentView(Object o, boolean b) {
+    private void addRecentView(CatchRecord o, boolean b) {
         View itemView = mInflater.inflate(R.layout.view_recent_doll_item,null);
         View line = itemView.findViewById(R.id.recent_doll_line);
+        ImageView mIcon = (ImageView) itemView.findViewById(R.id.room_doll_icon);
+        TextView mTitle = (TextView) itemView.findViewById(R.id.item_title);
+        TextView mSubTitle = (TextView) itemView.findViewById(R.id.item_subtitle);
+
         line.setVisibility(b?GONE:VISIBLE);
+        ImageLoaderUtils.displayImage(mIcon,R.drawable.drawable_default_color,o.getHeadimgurl());
+        mTitle.setText(o.getNickname());
+        mSubTitle.setText(o.getGrab_time());
+
         addView(itemView,LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
     }
 
