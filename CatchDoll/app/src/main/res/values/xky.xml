@@ -515,4 +515,7 @@
     <string name="string_box_order_success">下单成功</string>
     <string name="string_send_state_str">状态:%1$s</string>
     <string name="string_send_time_str">下单时间:%1$s</string>
+
+    <string name="string_room_tost_busy">当前娃娃机有人在用哦</string>
+    <string name="string_room_start_machine">正在上机...</string>
 </resources>

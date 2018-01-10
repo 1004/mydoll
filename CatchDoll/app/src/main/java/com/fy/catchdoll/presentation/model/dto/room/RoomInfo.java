@@ -4,6 +4,8 @@ package com.fy.catchdoll.presentation.model.dto.room;
  * Created by xky on 2018/1/9 0009.
  */
 public class RoomInfo {
+    public static int STATE_GAMEING = 1;
+    public static int STATE_GAME_FREE= 0;
     private String id;
     private String doll_id;
     private String gold;

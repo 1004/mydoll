@@ -32,6 +32,7 @@ public class Paths {
     public static final String BOX_ORDER_COMMIT = "backpack/setbackpackorder.json";//背包订单提交
     public static final String ORDER_HISTORY_URL = "backpack/backpackorder.json";//背包订单记录列表
     public static final String ENTER_ROOM_URL = "machine/info.json";//进入直播间接口
+    public static final String MACHINE_OPERATE_URL = "machine/operation.json";//操作娃娃机
 
 
 }
