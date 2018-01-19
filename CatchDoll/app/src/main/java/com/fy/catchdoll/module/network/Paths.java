@@ -11,7 +11,7 @@ public class Paths {
 
     public static boolean ISTEST = true;
     public static boolean IS_DANMU_TEST = false;//如果是beta版本或者正式版本要是false
-    public static String NEWAPI = "http://api.wakawawa.com/";
+    public static String NEWAPI = "http://api.wakawawa.com/api/v1/";
 
 
 
@@ -33,6 +33,7 @@ public class Paths {
     public static final String ORDER_HISTORY_URL = "backpack/backpackorder.json";//背包订单记录列表
     public static final String ENTER_ROOM_URL = "machine/info.json";//进入直播间接口
     public static final String MACHINE_OPERATE_URL = "machine/operation.json";//操作娃娃机
+    public static final String GET_DOLL_INFO = "machine/getgameresult.json";//获取抓取结果
 
 
 }

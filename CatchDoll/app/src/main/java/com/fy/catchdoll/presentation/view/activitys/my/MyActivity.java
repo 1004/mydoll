@@ -15,6 +15,7 @@ import com.fy.catchdoll.presentation.presenter.ErrorCodeOperate;
 import com.fy.catchdoll.presentation.presenter.IBasePresenterLinstener;
 import com.fy.catchdoll.presentation.presenter.account.AccountManager;
 import com.fy.catchdoll.presentation.presenter.my.MyPresenter;
+import com.fy.catchdoll.presentation.presenter.my.SettingPresenter;
 import com.fy.catchdoll.presentation.view.activitys.base.AppCompatBaseActivity;
 import com.qike.umengshare_643.UmengUtil643;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -94,7 +95,7 @@ public class MyActivity extends AppCompatBaseActivity implements IBasePresenterL
     private void updata(){
         User user = AccountManager.getInstance().getUser();
         if (user != null){
-            mGoldTv.setText(user.getGold()+"");
+            mGoldTv.setText(user.getGold() + "");
         }
     }
 
@@ -129,7 +130,16 @@ public class MyActivity extends AppCompatBaseActivity implements IBasePresenterL
             case R.id.my_rechange_tv:
                 ActivityUtils.startRechargeListActivity(this);
                 break;
+            case R.id.my_bg_music_iv:
+                operateBgMusic();
+                break;
         }
+    }
+
+    private void operateBgMusic() {
+        boolean bgMusiceIsOpen = !SettingPresenter.getBgMusiceIsOpen();
+        mBgMusic.setImageResource(bgMusiceIsOpen ? R.mipmap.my_open : R.mipmap.my_close);
+        SettingPresenter.setBgMusicIsOpen(bgMusiceIsOpen);
     }
 
     private void logout() {

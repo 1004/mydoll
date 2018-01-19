@@ -11,9 +11,11 @@ import android.widget.ImageView;
 /**
  * Created by xky on 2018/1/10 0010.
  */
-public class LongPressImageView extends ImageView implements View.OnTouchListener {
-    private int SECOND = 100;
+public class LongPressImageView extends ImageView implements View.OnTouchListener, View.OnLongClickListener {
+    private int SECOND = 200;
+    private int MAXCOUNT = 10;
     long time = 0;
+    private int mCount = 0;
     private OnClickListener clickListener;
     private boolean isUp = false;
     private Handler mHandler = new Handler();
@@ -31,10 +33,13 @@ public class LongPressImageView extends ImageView implements View.OnTouchListene
         setOnTouchListener(this);
     }
 
-    @Override
-    public void setOnClickListener(OnClickListener l) {
+
+    public void setOnTimeClickListener(OnClickListener l){
+        setOnLongClickListener(this);
         this.clickListener = l;
     }
+
+
 
 
     @Override
@@ -42,6 +47,7 @@ public class LongPressImageView extends ImageView implements View.OnTouchListene
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
                 Log.i("test","down");
+                mCount = 0;
                 time = System.currentTimeMillis();
                 isUp = false;
                 mHandler.postDelayed(runnable,SECOND);
@@ -67,10 +73,16 @@ public class LongPressImageView extends ImageView implements View.OnTouchListene
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
+            Log.i("test", "click");
             if (isUp){
                 return;
             }
-            Log.i("test", "click");
+            mCount ++;
+            if (mCount > MAXCOUNT){
+                //限制次数
+                mHandler.removeCallbacks(runnable);
+                return;
+            }
             if (clickListener != null){
                 clickListener.onClick(LongPressImageView.this);
             }
@@ -78,4 +90,9 @@ public class LongPressImageView extends ImageView implements View.OnTouchListene
             mHandler.postDelayed(runnable,SECOND);
         }
     };
+
+    @Override
+    public boolean onLongClick(View v) {
+        return false;
+    }
 }

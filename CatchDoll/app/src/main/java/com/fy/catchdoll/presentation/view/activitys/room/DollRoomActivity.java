@@ -28,9 +28,11 @@ import com.fy.catchdoll.module.network.Page;
 import com.fy.catchdoll.module.support.agora.common.Constant;
 import com.fy.catchdoll.module.support.agora.model.AGEventHandler;
 import com.fy.catchdoll.module.support.agora.model.ConstantApp;
+import com.fy.catchdoll.module.support.recharge.RechargeNotifyManager;
 import com.fy.catchdoll.presentation.model.dto.account.User;
 import com.fy.catchdoll.presentation.model.dto.room.CatchRecord;
 import com.fy.catchdoll.presentation.model.dto.room.EnterRoomDto;
+import com.fy.catchdoll.presentation.model.dto.room.GetDollDto;
 import com.fy.catchdoll.presentation.model.dto.room.OperateMachineDto;
 import com.fy.catchdoll.presentation.model.dto.room.RoomInfo;
 import com.fy.catchdoll.presentation.presenter.ErrorCodeOperate;
@@ -50,7 +52,7 @@ import io.agora.rtc.video.VideoCanvas;
 /**
  * Created by xky on 2017/12/1 0001.
  */
-public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHandler, View.OnLongClickListener {
+public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHandler, View.OnLongClickListener, CustomRecentView.OnHistoryClickListener, RechargeNotifyManager.OnPayStateListener {
     private static final String TAG = "DollRoomActivity";
     public static final String DOLL_ROOM_KEY = "doll_room_key";
     private LinearLayout mVideoChatContainer;
@@ -85,7 +87,14 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
     private View mCatchView;
     private boolean isCatch;
 
-
+    private View mTimeHintContainer;
+    private TextView mTimeHintCount;
+    private TextView mOperationHint;
+    private Handler mHandler = new Handler();
+    private OperateMachineDto mOperateionDto;
+    private boolean isPayCome = false;
+    private int mPlayTimeCount = 30;
+    public static final String DOLL_ROOM_PAY = "DollRoomActivity_pay";
 
 
     @Override
@@ -118,6 +127,10 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
         mTopIcon = (LongPressImageView) findViewById(R.id.oriention_top_icon);
         mDownIcon = (LongPressImageView) findViewById(R.id.oriention_bottom_icon);
         mCatchView = findViewById(R.id.room_catch_doll);
+
+        mTimeHintContainer = findViewById(R.id.room_time_hint_container);
+        mTimeHintCount = (TextView) findViewById(R.id.room_time_hint_count);
+        mOperationHint = (TextView) findViewById(R.id.room_operation_hint);
 
     }
 
@@ -178,18 +191,16 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
         softKeyboardListnenr();
         mRoomPresenter.registPresenterCallBack(mEnterCallBack);
         mRoomPresenter.registOperateMachineCallBack(mOperateMachineCallBack);
+        mRoomPresenter.registGetDollInfoCallBack(mGetDollInfoCallBack);
         mPayContainer.setOnClickListener(this);
 
-        mLeftIcon.setOnClickListener(this);
-        mRightIcon.setOnClickListener(this);
-        mTopIcon.setOnClickListener(this);
-        mDownIcon.setOnClickListener(this);
+        mLeftIcon.setOnTimeClickListener(this);
+        mRightIcon.setOnTimeClickListener(this);
+        mTopIcon.setOnTimeClickListener(this);
+        mDownIcon.setOnTimeClickListener(this);
         mCatchView.setOnClickListener(this);
-
-        mLeftIcon.setOnLongClickListener(this);
-        mRightIcon.setOnLongClickListener(this);
-        mTopIcon.setOnLongClickListener(this);
-        mDownIcon.setOnLongClickListener(this);
+        mRecentDoll.setOnHistoryClickListener(this);
+        RechargeNotifyManager.getInstance().registPayStateListener(DOLL_ROOM_PAY, this);
     }
 
     private IBasePresenterLinstener mEnterCallBack = new IBasePresenterLinstener() {
@@ -220,7 +231,81 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
         public void errerResult(int code, String msg) {
             ErrorCodeOperate.executeError(TAG, getContext(), code, msg, true);
             isCatch = false;
-            startPlayFailed();
+            changeStartState(false,RoomInfo.STATE_GAME_FREE);
+        }
+    };
+
+    private IBasePresenterLinstener mGetDollInfoCallBack = new IBasePresenterLinstener() {
+        @Override
+        public void dataResult(Object obj, Page page, int status) {
+            if (obj != null && obj instanceof GetDollDto){
+                GetDollDto dollDto = (GetDollDto) obj;
+                operateGetDoll(dollDto);
+            }
+        }
+
+        @Override
+        public void errerResult(int code, String msg) {
+            ErrorCodeOperate.executeError(TAG, getContext(), code, msg, true);
+            isCatch = false;
+            mOperationHint.setVisibility(View.GONE);
+            changeStartState(false,RoomInfo.STATE_GAME_FREE);
+        }
+    };
+
+    private void operateGetDoll(GetDollDto dollDto) {
+        mOperationHint.setVisibility(View.GONE);
+        if (dollDto.getIs_grab() == GetDollDto.GRAB_OK){
+            //抓中
+            dialogManager.showDialog(DialogStyle.CATCH_SUCCESS,mCatchSuccessListener
+                    ,dollDto.getDoll_info()
+                    ,getMString(R.string.string_room_look_box)
+                    ,getResources().getString(R.string.string_room_success_getonce),10);
+        }else {
+            //未抓中
+            dialogManager.showDialog(DialogStyle.CATCH_FAILED,mCatchFailedListener
+                    ,getMString(R.string.string_room_get_failed_hint)
+                    ,getMString(R.string.string_room_get_failed_left)
+                    ,getMString(R.string.string_room_get_failed_right));
+        }
+    }
+
+    private DialogManager.OnClickListenerContent mCatchSuccessListener = new DialogManager.OnClickListenerContent() {
+        @Override
+        public void onClick(View view, Object... content) {
+            switch (view.getId()){
+                case R.id.tv_yes_common:
+                    dialogManager.dismissDialog();
+                    //乘胜追击 自动上机
+                    changeStartState(false,RoomInfo.STATE_GAME_FREE);
+                    operatePlay();
+                    break;
+                case R.id.tv_cancel_common:
+                    dialogManager.dismissDialog();
+                    //去背包查看 更换状态到空闲
+                    changeStartState(false, RoomInfo.STATE_GAME_FREE);
+                    ActivityUtils.startBoxInfoActivity(DollRoomActivity.this);
+                    break;
+            }
+        }
+    };
+
+    private DialogManager.OnClickListenerContent mCatchFailedListener = new DialogManager.OnClickListenerContent() {
+        @Override
+        public void onClick(View view, Object... content) {
+            switch (view.getId()){
+                case R.id.tv_yes_common:
+                    dialogManager.dismissDialog();
+                    //再来一局--自动上机
+                    changeStartState(false,RoomInfo.STATE_GAME_FREE);
+                    operatePlay();
+                    break;
+                case R.id.tv_cancel_common:
+                    dialogManager.dismissDialog();
+                    //取消，切换到空闲
+                    changeStartState(false, RoomInfo.STATE_GAME_FREE);
+                    break;
+            }
         }
     };
 
@@ -234,6 +319,7 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
     }
 
     private void initNetData(EnterRoomDto roomDto) {
+        mRoomDto = roomDto;
         RoomInfo machine = roomDto.getMachine();
         User user = roomDto.getUser();
         List<CatchRecord> grab_record = roomDto.getGrab_record();
@@ -247,9 +333,7 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
 
                 }
             }
-            mPayGoldTv.setText(getResources().getString(R.string.string_room_pay_gold,machine.getGold()));
-            mTotalGoldTv.setText(user.getGold()+"");
-            initMachineState(machine.getGame_state());
+            changeStartState(false,machine.getGame_state());
         }
 
 
@@ -262,20 +346,6 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
         mDollListContainer.setVisibility(View.GONE);
     }
 
-    private void initMachineState(int game_state) {
-        mCurrentState = game_state;
-        if (mCurrentState == RoomInfo.STATE_GAMEING){
-            //游戏中
-            mStartCatchContainer.setBackgroundResource(R.drawable.shape_round_state_wait);
-            mStateStartTv.setTextColor(getResources().getColor(R.color.color_3B4152));
-            mPayGoldTv.setTextColor(getResources().getColor(R.color.color_3B4152));
-        }else {
-            //空闲中
-            mStartCatchContainer.setBackgroundResource(R.drawable.shape_round_state_start);
-            mStateStartTv.setTextColor(getResources().getColor(R.color.color_white));
-            mPayGoldTv.setTextColor(getResources().getColor(R.color.color_white));
-        }
-    }
 
     @Override
     public void loadData() {
@@ -339,8 +409,10 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
         if (OperateMachineDto.GET.equals(type)){
             //去抓了
             isCatch = true;
+            endPlayTask();
         }
-        mRoomPresenter.operateMachine(roomId,type);
+        VoicePresenter.vSimple(this);
+        mRoomPresenter.operateMachine(roomId, type, config().mWawajiUid);
     }
 
     /**
@@ -354,7 +426,7 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
             //空闲中
             mStateStartTv.setText(getMString(R.string.string_room_start_machine));
             mStartCatchContainer.setOnClickListener(null);
-            mRoomPresenter.operateMachine(roomId, OperateMachineDto.START);
+            mRoomPresenter.operateMachine(roomId, OperateMachineDto.START,config().mWawajiUid);
         }
     }
 
@@ -367,27 +439,126 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
             if (user != null && OperateMachineDto.START.equals(dto.getType())){
                 isCatch = false;
                 user.setGold(dto.getGold());
-                mTotalGoldTv.setText(user.getGold()+"");
-                mRoomStateStartWaitContainer.setVisibility(View.GONE);
-                mRoomStatePlayContainer.setVisibility(View.VISIBLE);
+                changeStartState(true, RoomInfo.STATE_GAMEING);
             }
-
+            mOperateionDto = dto;
             if (OperateMachineDto.GET.equals(dto.getType())){
                 //抓取后，开始获取当前抓取的结果 在请求抓取结果后 将isCatch置为false
-                Toast.makeText(this,"正在等待抓取的结果",Toast.LENGTH_SHORT).show();
+                mOperationHint.setVisibility(View.VISIBLE);
+                mOperationHint.setText(getMString(R.string.string_room_get_info));
+                mHandler.postDelayed(mCatchWaitTask, 15 * 1000);
             }
         }
     }
 
+    private Runnable mCatchWaitTask = new Runnable() {
+        @Override
+        public void run() {
+            if (mOperateionDto != null){
+                mRoomPresenter.getGrepDollInfo(mOperateionDto.getRecord_id(),roomId);
+            }
+        }
+    };
+
     /**
      * 操作状态----》上机失败
+     * 切换到开始上机的位置----》根据state来选择是等待，还是可以上机
+     * 操作状态
+     *      未上机
+     *          等待
+     *          空闲
+     *      上机
      */
-    private void startPlayFailed(){
+    private void changeStartState(boolean isChangeOperation,int state){
+        if (isChangeOperation){
+            //变成操作状态了
+            initOperateState();
+        }else {
+            //是不可以操作的状态
+            initMachineFirstState(state);
+        }
+    }
+
+    /**
+     * 可操作状态
+     */
+    private void initOperateState(){
+        mRoomStateStartWaitContainer.setVisibility(View.GONE);
+        mRoomStatePlayContainer.setVisibility(View.VISIBLE);
+        mTimeHintContainer.setVisibility(View.VISIBLE);
+        startPlayTask();
+    }
+
+
+    /**
+     * 开启定时任务
+     */
+    private void startPlayTask(){
+        mPlayTimeCount = 30;
+        mTimeHintCount.setText(mPlayTimeCount+"");
+        mHandler.postDelayed(mPlayTask, 1000);
+    }
+
+    /**
+     * 结束定时任务
+     */
+    private void endPlayTask(){
+        mHandler.removeCallbacks(mPlayTask);
+    }
+
+    private Runnable mPlayTask = new Runnable() {
+        @Override
+        public void run() {
+            mPlayTimeCount--;
+            mTimeHintCount.setText(mPlayTimeCount+"");
+            endPlayTask();
+            if (mPlayTimeCount <= 0){
+                //结束计时
+                operatePlayState(OperateMachineDto.GET);
+            }else {
+                //时间未到
+                mHandler.postDelayed(mPlayTask, 1000);
+            }
+        }
+    };
+
+
+    /**
+     * 不可操作状态的提示
+     * 在未开启操作的时候的状态
+     * @param game_state
+     */
+    private void initMachineFirstState(int game_state) {
+        mCurrentState = game_state;
+        mTimeHintContainer.setVisibility(View.GONE);
+        endPlayTask();
         mStartCatchContainer.setOnClickListener(this);
         mStateStartTv.setText(getMString(R.string.string_room_state_start));
         mRoomStateStartWaitContainer.setVisibility(View.VISIBLE);
         mRoomStatePlayContainer.setVisibility(View.GONE);
+
+        User user = AccountManager.getInstance().getUser();
+        if (user != null){
+            mTotalGoldTv.setText(user.getGold()+"");
+        }
+
+        if (mRoomDto != null && mRoomDto.getMachine()!= null){
+            mPayGoldTv.setText(getResources().getString(R.string.string_room_pay_gold, mRoomDto.getMachine().getGold()));
+        }
+
+        if (mCurrentState == RoomInfo.STATE_GAMEING){
+            //游戏中
+            mStartCatchContainer.setBackgroundResource(R.drawable.shape_round_state_wait);
+            mStateStartTv.setTextColor(getResources().getColor(R.color.color_3B4152));
+            mPayGoldTv.setTextColor(getResources().getColor(R.color.color_3B4152));
+        }else {
+            //空闲中
+            mStartCatchContainer.setBackgroundResource(R.drawable.shape_round_state_start);
+            mStateStartTv.setTextColor(getResources().getColor(R.color.color_white));
+            mPayGoldTv.setTextColor(getResources().getColor(R.color.color_white));
+        }
     }
+
 
     /**
      * 等待状态--->启动状态
@@ -402,6 +573,17 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
     public void onResume() {
         super.onResume();
         mVoicePresenter.startPlayBgVoice();
+        if (isPayCome){
+            updateGold();
+        }
+        isPayCome = false;
+    }
+
+    private void updateGold(){
+        User user = AccountManager.getInstance().getUser();
+        if (user != null){
+            mTotalGoldTv.setText(user.getGold()+"");
+        }
     }
 
     @Override
@@ -416,6 +598,9 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
         mVoicePresenter.endPlayBgVoice();
         doLeaveChannel();
         event().removeEventHandler(this);
+        mHandler.removeCallbacks(mCatchWaitTask);
+        endPlayTask();
+        RechargeNotifyManager.getInstance().unRegistPayStateListener(DOLL_ROOM_PAY);
     }
 
     private void doLeaveChannel() {
@@ -543,5 +728,15 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
     @Override
     public boolean onLongClick(View v) {
         return false;
+    }
+
+    @Override
+    public void onHistoryClick(CatchRecord record) {
+        ActivityUtils.startPlayerActivity(this,record.getVideo_link());
+    }
+
+    @Override
+    public void onPayState(int state) {
+        isPayCome = true;
     }
 }

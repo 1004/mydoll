@@ -18,6 +18,8 @@ import com.fy.catchdoll.presentation.view.activitys.orderhistory.OrderHistoryAct
 import com.fy.catchdoll.presentation.view.activitys.recharge.RechargeListActivity;
 import com.fy.catchdoll.presentation.view.activitys.room.DollRoomActivity;
 import com.fy.catchdoll.presentation.view.activitys.room.RoomActivity;
+import com.fy.catchdoll.presentation.view.activitys.video.VideoActivity;
+import com.fy.catchdoll.presentation.view.activitys.web.WebActivity;
 
 /**
  * Created by xky on 2017/9/22 0022.
@@ -132,6 +134,23 @@ public class ActivityUtils {
      */
     public static void startSendHistoryActivity(Context context){
         Intent intent = new Intent(context, OrderHistoryActivity.class);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 启动web
+     */
+    public static void startWebActivity(Context context, String url, String title) {
+        Loger.d("url---" + url);
+        Intent intent = new Intent(context, WebActivity.class);
+        intent.putExtra(WebActivity.KEY_URL, url);
+        intent.putExtra(WebActivity.KEY_NAME, title);
+        context.startActivity(intent);
+    }
+
+    public static void startPlayerActivity(Context context,String url){
+        Intent intent = new Intent(context, VideoActivity.class);
+        intent.putExtra(VideoActivity.URL_KEY, url);
         context.startActivity(intent);
     }
 }

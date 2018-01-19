@@ -4,8 +4,8 @@ package com.fy.catchdoll.presentation.model.dto.doll;
  * Created by xky on 2017/11/27 0027.
  */
 public class DollMachine {
-    public static final int FREE = 1;//空闲
-    public static final int BUSY = 0;//游戏中
+    public static final int FREE = 0;//空闲
+    public static final int BUSY = 1;//游戏中
     private String id;///娃娃机ID
     private String doll_id;
     private String gold;
@@ -15,7 +15,18 @@ public class DollMachine {
     private String updated_at;
     private String doll_title;
     private String doll_image;
+    private int game_state;
+
+
     private int is_game;
+
+    public int getGame_state() {
+        return game_state;
+    }
+
+    public void setGame_state(int game_state) {
+        this.game_state = game_state;
+    }
 
     public String getId() {
         return id;

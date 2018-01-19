@@ -235,27 +235,27 @@
     <string name="app_update_downloaded">下载完成，点击安装</string>
     <string name="app_update_download_error">下载失败，点击重新下载</string>
 
-    <dimen name="dimen_ban_view_w">240dp</dimen>
-    <dimen name="dimen_ban_view_item_h">44dp</dimen>
+    <dimen name="dimen_ban_view_w">280dp</dimen>
+    <dimen name="dimen_ban_view_item_h">60dp</dimen>
 
     <color name="color_ban_line">#edecec</color>
-    <color name="color_divide_">#f5f5f5</color>
+    <color name="color_divide_">#ebf2f7</color>
     <color name="item_border_color">#ffdadada</color>
     <color name="green_downloading_progress">#41c737</color>
 
 
     <style name="style_ban_title">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#666666</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">#969ea3</item>
     </style>
     <style name="style_h_cancel_">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#999999</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#b6bfc6</item>
     </style>
 
     <style name="style_ban_content">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#21aaff</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#4bd3a1</item>
     </style>
 
 
@@ -403,6 +403,10 @@
         <item name="android:textSize">15.0sp</item>
         <item name="android:textColor">#dee2e5</item>
     </style>
+    <style name="video_center_progress_style">
+        <item name="android:textSize">15.0sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
     <style name="style_15_ffffff">
         <item name="android:textSize">15.0sp</item>
         <item name="android:textColor">#ffffff</item>
@@ -518,4 +522,20 @@
 
     <string name="string_room_tost_busy">当前娃娃机有人在用哦</string>
     <string name="string_room_start_machine">正在上机...</string>
+    <string name="video_loading">加载中...</string>
+
+    <string name="dialog_get_doll_title">恭喜你! 抓住%1$s一只</string>
+    <string name="string_room_get_info">正在获取抓取结果</string>
+    <string name="string_room_time_hint">倒计时</string>
+    <string name="string_room_look_box">去背包查看</string>
+    <string name="string_room_success_getonce">乘胜追击(%1$ss)</string>
+
+    <string name="string_room_get_failed_hint">没抓住娃娃，继续加油哦</string>
+    <string name="string_room_get_failed_left">取消</string>
+    <string name="string_room_get_failed_right">在来一局</string>
+
+    <string name="string_room_time_count">30</string>
+    <string name="string_window_player_error">播放出錯</string>
+    <string name="string_video_title">视频回放</string>
+
 </resources>

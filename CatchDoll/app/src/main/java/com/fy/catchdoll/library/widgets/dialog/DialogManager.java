@@ -18,7 +18,9 @@ import android.widget.Toast;
 
 import com.fy.catchdoll.R;
 import com.fy.catchdoll.library.utils.DeviceUtils;
+import com.fy.catchdoll.library.utils.ImageLoaderUtils;
 import com.fy.catchdoll.library.widgets.BackEditText;
+import com.fy.catchdoll.presentation.model.dto.doll.Doll;
 import com.fy.catchdoll.presentation.presenter.update2.Inter.OnUploadListener;
 import com.fy.catchdoll.presentation.presenter.update2.UploadManager;
 
@@ -85,6 +87,12 @@ public class DialogManager {
             case BOX_ORDER_SUCCESS:
                 operateOrderSuccess(listener,objects);
                 break;
+            case CATCH_SUCCESS:
+                operateCatchSuccess(listener,objects);
+                break;
+            case CATCH_FAILED:
+                operateCatchSuccess(listener,objects);
+                break;
             default:
                 break;
         }
@@ -99,6 +107,56 @@ public class DialogManager {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void operateCatchSuccess(final OnClickListenerContent listener, Object[] objects) {
+        View mView = mInflater.inflate(R.layout.dialog_catch_success, null);
+        ImageView icon = (ImageView) mView.findViewById(R.id.dialog_doll_icon);
+        TextView contentTv = (TextView) mView.findViewById(R.id.dialog_content);
+        TextView mCancelTv = (TextView) mView.findViewById(R.id.tv_cancel_common);
+        TextView mYesTv = (TextView) mView.findViewById(R.id.tv_yes_common);
+        TextView titleTv = (TextView) mView.findViewById(R.id.tv_house_title);
+
+        if (objects != null && objects.length > 0 && objects[0] instanceof Doll) {
+            icon.setVisibility(View.VISIBLE);
+            Doll doll = (Doll) objects[0];
+            titleTv.setText(mContext.getResources().getString(R.string.dialog_get_doll_title,doll.getTitle()));
+            ImageLoaderUtils.displayImage(icon,R.drawable.drawable_default_color,doll.getImage());
+        }else {
+            icon.setVisibility(View.GONE);
+        }
+
+        if (objects != null && objects.length > 0 && objects[0] instanceof String){
+            contentTv.setVisibility(View.VISIBLE);
+            String content = (String) objects[0];
+            contentTv.setText(content);
+        }else {
+            contentTv.setVisibility(View.GONE);
+        }
+
+        if (objects != null && objects.length > 1) {
+            String left = (String) objects[1];
+            mCancelTv.setText(left);
+        }
+
+        if (objects != null && objects.length > 2) {
+            String right = (String) objects[2];
+            mYesTv.setText(right);
+        }
+
+        mCancelTv.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setListener(listener, view, new Object[]{});
+            }
+        });
+        mYesTv.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setListener(listener, view, new Object[]{});
+            }
+        });
+        mSimpleDialog.createOrUpdate(-1, mView);
     }
 
     private void operateOrderSuccess(final OnClickListenerContent listener, Object[] objects) {
@@ -418,7 +476,7 @@ public class DialogManager {
         if (mStyle == DialogStyle.EXIT ) { //根据需求修改dialog的样式
             mSimpleDialog = new SimpleDialog(mContext);
             mSimpleDialog.setCanceledOnTouchOutside(false);
-        } else if (mStyle == DialogStyle.UPLOAD || mStyle==DialogStyle.PAY_STATE) {
+        } else if (mStyle == DialogStyle.UPLOAD || mStyle==DialogStyle.PAY_STATE || mStyle == DialogStyle.CATCH_SUCCESS || mStyle == DialogStyle.CATCH_FAILED) {
             mSimpleDialog = new SimpleDialog(mContext);
             mSimpleDialog.setCancelable(false);
             mSimpleDialog.setCanceledOnTouchOutside(false);

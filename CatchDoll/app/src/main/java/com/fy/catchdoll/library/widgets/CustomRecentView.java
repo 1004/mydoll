@@ -20,6 +20,7 @@ import java.util.List;
 public class CustomRecentView extends LinearLayout{
     private Context mContext;
     private LayoutInflater mInflater;
+    private OnHistoryClickListener mHistoryClickListener;
     public CustomRecentView(Context context) {
         super(context);
         init(context);
@@ -67,13 +68,26 @@ public class CustomRecentView extends LinearLayout{
         TextView mTitle = (TextView) itemView.findViewById(R.id.item_title);
         TextView mSubTitle = (TextView) itemView.findViewById(R.id.item_subtitle);
 
-        line.setVisibility(b?GONE:VISIBLE);
-        ImageLoaderUtils.displayImage(mIcon,R.drawable.drawable_default_color,o.getHeadimgurl());
+        line.setVisibility(b ? GONE : VISIBLE);
+        ImageLoaderUtils.displayImage(mIcon, R.drawable.drawable_default_color, o.getHeadimgurl());
         mTitle.setText(o.getNickname());
         mSubTitle.setText(o.getGrab_time());
+        itemView.setTag(o);
+        itemView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mHistoryClickListener != null){
+                    Object tag = v.getTag();
+                    if (tag != null && tag instanceof CatchRecord){
+                        mHistoryClickListener.onHistoryClick((CatchRecord) tag);
+                    }
+                }
+            }
+        });
 
-        addView(itemView,LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
+        addView(itemView, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
     }
+
 
     private void initHeaderView(String title) {
         View headerView = mInflater.inflate(R.layout.view_recent_title,null);
@@ -104,6 +118,14 @@ public class CustomRecentView extends LinearLayout{
         View mDollShowItem = mInflater.inflate(R.layout.view_doll_show_item, null);
 
         addView(mDollShowItem,LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
+    }
+
+    public interface OnHistoryClickListener{
+        void onHistoryClick(CatchRecord record);
+    }
+
+    public void setOnHistoryClickListener(OnHistoryClickListener clickListener){
+        mHistoryClickListener = clickListener;
     }
 
 

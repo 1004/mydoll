@@ -7,8 +7,6 @@ public class Doll {
     private String id;
     private String title;
     private String image;
-    private String status;
-    private String created_at;
 
     public String getId() {
         return id;
@@ -34,19 +32,4 @@ public class Doll {
         this.image = image;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
-    }
 }

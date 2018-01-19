@@ -193,7 +193,7 @@ public class BoxInfoActivity extends AppCompatBaseActivity implements OnWrapItem
             BoxInfoDto mDto = (BoxInfoDto) obj;
 
             List<BaseItemDto> datas = parseData(mDto);
-            if (datas.size() == 0){
+            if (datas.size() == 0 || datas.size() == 1){
                 netstate.show(NetStateView.NetState.EMPTY);
             }else {
                 mAdapter.clear();

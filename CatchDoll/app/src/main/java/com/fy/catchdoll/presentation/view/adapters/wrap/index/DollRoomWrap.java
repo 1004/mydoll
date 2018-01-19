@@ -73,7 +73,7 @@ public class DollRoomWrap extends BaseViewObtion<BaseItemDto>{
         ImageLoaderUtils.displayImage(cover, R.drawable.drawable_write_color, dollRoom.getDoll_image());
         title.setText(dollRoom.getDoll_title());
         money.setText(dollRoom.getGold()+" "+ CommonUtil.getMoneyUnit());
-        if (dollRoom.getIs_game() == DollMachine.BUSY){
+        if (dollRoom.getGame_state() == DollMachine.BUSY){
             //游戏中
             bcon.setText(mActivity.getResources().getString(R.string.string_room_busy));
             bImg.setImageResource(R.mipmap.busy);

@@ -3,6 +3,7 @@ package com.fy.catchdoll.presentation.presenter.room;
 import com.fy.catchdoll.module.network.Page;
 import com.fy.catchdoll.presentation.model.business.BaseBizListener;
 import com.fy.catchdoll.presentation.model.business.room.EnterRoomBiz;
+import com.fy.catchdoll.presentation.model.business.room.GetDollInfoBiz;
 import com.fy.catchdoll.presentation.model.business.room.OperateMachineBiz;
 import com.fy.catchdoll.presentation.presenter.IBasePresenterLinstener;
 
@@ -12,8 +13,10 @@ import com.fy.catchdoll.presentation.presenter.IBasePresenterLinstener;
 public class RoomPresenter {
     private EnterRoomBiz mEnterBiz;
     private OperateMachineBiz mOperateBiz;
+    private GetDollInfoBiz mGetGrepBiz;
     private IBasePresenterLinstener mEnterPresenterCallBack;
     private IBasePresenterLinstener mOperatePresenterCallBack;
+    private IBasePresenterLinstener mGetInfoPresenterCallBack;
     public RoomPresenter(){
         initBiz();
         setListener();
@@ -22,11 +25,13 @@ public class RoomPresenter {
     private void initBiz() {
         mEnterBiz = new EnterRoomBiz();
         mOperateBiz = new OperateMachineBiz();
+        mGetGrepBiz = new GetDollInfoBiz();
     }
 
     private void setListener(){
         mEnterBiz.registBizCallBack(mEnterCallBack);
         mOperateBiz.registBizCallBack(mOperateCallBack);
+        mGetGrepBiz.registBizCallBack(mGetInfoCallBack);
     }
 
     public void registPresenterCallBack(IBasePresenterLinstener linstener){
@@ -35,15 +40,21 @@ public class RoomPresenter {
     public void registOperateMachineCallBack(IBasePresenterLinstener linstener){
         mOperatePresenterCallBack = linstener;
     }
+    public void registGetDollInfoCallBack(IBasePresenterLinstener linstener){
+        mGetInfoPresenterCallBack = linstener;
+    }
 
     public void enterRoom(String roomId){
         mEnterBiz.firstTask(roomId);
     }
 
-    public void operateMachine(String roomId,String type){
-        mOperateBiz.firstTask(roomId,type);
+    public void operateMachine(String roomId,String type,int position){
+        mOperateBiz.firstTask(roomId,type,position);
     }
 
+    public void getGrepDollInfo(String recordId,String roomId){
+        mGetGrepBiz.firstTask(recordId,roomId);
+    }
 
     private BaseBizListener mEnterCallBack = new BaseBizListener() {
         @Override
@@ -73,6 +84,22 @@ public class RoomPresenter {
         public void errerResult(int code, String msg) {
             if (mOperatePresenterCallBack != null){
                 mOperatePresenterCallBack.errerResult(code,msg);
+            }
+        }
+    };
+
+    private BaseBizListener mGetInfoCallBack = new BaseBizListener() {
+        @Override
+        public void dataResult(Object obj, Page page, int status) {
+            if (mGetInfoPresenterCallBack != null){
+                mGetInfoPresenterCallBack.dataResult(obj,page,status);
+            }
+        }
+
+        @Override
+        public void errerResult(int code, String msg) {
+            if (mGetInfoPresenterCallBack != null){
+                mGetInfoPresenterCallBack.errerResult(code,msg);
             }
         }
     };

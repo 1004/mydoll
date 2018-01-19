@@ -1,14 +1,18 @@
 package com.fy.catchdoll.presentation.presenter.room;
 
 import android.app.Activity;
+import android.content.Context;
 import android.media.MediaPlayer;
+import android.os.Vibrator;
 
 import com.fy.catchdoll.R;
+import com.fy.catchdoll.presentation.presenter.my.SettingPresenter;
 
 /**
  * Created by xky on 2017/11/30 0030.
  */
 public class VoicePresenter {
+    public static final long VIBRATOR_SECOND = 30;
     private MediaPlayer mBgPlayer ;
 
     private Activity mActivity;
@@ -22,6 +26,9 @@ public class VoicePresenter {
      */
     public void startPlayBgVoice(){
        try {
+           if (!SettingPresenter.getBgMusiceIsOpen()){
+               return;
+           }
            if (mBgPlayer == null){
                mBgPlayer = MediaPlayer.create(mActivity, R.raw.bgm02);
            }
@@ -58,6 +65,16 @@ public class VoicePresenter {
         } catch (Throwable e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 简单震动
+     * @param context     调用震动的Context
+     */
+    @SuppressWarnings("static-access")
+    public static void vSimple(Context context) {
+        Vibrator vibrator = (Vibrator) context.getSystemService(context.VIBRATOR_SERVICE);
+        vibrator.vibrate(VIBRATOR_SECOND);
     }
 
 

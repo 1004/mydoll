@@ -21,9 +21,10 @@ public class OperateMachineBiz extends BaseLoadListener {
         mIndexDao.registerListener(this);
     }
 
-    public void firstTask(String roomId,String type){
+    public void firstTask(String roomId,String type,int position){
         mIndexDao.setNoCache();
         mIndexDao.putParams("machine_id", roomId);
+        mIndexDao.putParams("camera_position", position);
         mIndexDao.putParams("type",type);
         mIndexDao.asyncDoAPI();
     }
