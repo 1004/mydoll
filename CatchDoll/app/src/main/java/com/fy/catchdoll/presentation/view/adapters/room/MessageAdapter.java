@@ -4,11 +4,16 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 
 import com.fy.catchdoll.R;
+import com.fy.catchdoll.library.utils.ImageLoaderUtils;
+import com.fy.catchdoll.presentation.model.dto.msg.MessDto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,13 +32,15 @@ import java.util.List;
 public class MessageAdapter extends BaseAdapter {
 
     private Context mContext;
-    private ViewHolder holder;
-    private List<String> data;
+    private List<MessDto> data;
+    private ListView mListView;
 
-    public MessageAdapter(Context context, List<String> data) {
+    public MessageAdapter(Context context, ListView listView) {
         this.mContext = context;
-        this.data = data;
+        this.mListView = listView;
+        this.data = new ArrayList<>();
     }
+
 
     @Override
     public int getCount() {
@@ -50,25 +57,47 @@ public class MessageAdapter extends BaseAdapter {
         return position;
     }
 
-    public void NotifyAdapter(List<String> data) {
-        this.data = data;
+    public void addData(MessDto msg){
+        if (msg != null){
+            if (data.size()>100){
+                data.remove(0);
+            }
+
+            this.data.add(msg);
+            notifyDataSetChanged();
+            mListView.setSelection(data.size());
+        }
+    }
+
+    public void NotifyAdapter(List<MessDto> msgs) {
+        if (msgs == null){
+            return;
+        }
+        data.addAll(msgs);
         notifyDataSetChanged();
+        mListView.setSelection(this.data.size());
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = View.inflate(mContext, R.layout.item_messageadapter, null);
-            holder.tvcontent = (TextView) convertView.findViewById(R.id.tvcontent);
+            holder.tvcontent = (TextView) convertView.findViewById(R.id.msg_content);
+            holder.icon = (ImageView) convertView.findViewById(R.id.msg_icon);
             convertView.setTag(holder);
-        } else
+        } else{
             holder = (ViewHolder) convertView.getTag();
-        holder.tvcontent.setText(data.get(position));
+        }
+        MessDto dto = data.get(position);
+        ImageLoaderUtils.displayImage(holder.icon,R.drawable.drawable_default_color,dto.getHeadimgurl());
+        holder.tvcontent.setText(dto.getContent());
         return convertView;
     }
 
     private final class ViewHolder {
+        ImageView icon;
         TextView tvcontent;
     }
 }

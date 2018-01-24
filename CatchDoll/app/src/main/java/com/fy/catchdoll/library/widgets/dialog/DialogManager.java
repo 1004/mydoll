@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.fy.catchdoll.library.utils.DeviceUtils;
 import com.fy.catchdoll.library.utils.ImageLoaderUtils;
 import com.fy.catchdoll.library.widgets.BackEditText;
 import com.fy.catchdoll.presentation.model.dto.doll.Doll;
+import com.fy.catchdoll.presentation.presenter.msg.DmPresenter;
 import com.fy.catchdoll.presentation.presenter.update2.Inter.OnUploadListener;
 import com.fy.catchdoll.presentation.presenter.update2.UploadManager;
 
@@ -186,9 +188,10 @@ public class DialogManager {
         mSimpleDialog.createOrUpdate(-1, mView);
     }
 
-    private void operateChat(OnClickListenerContent listener, Object[] objects) {
+    private void operateChat(final OnClickListenerContent listener, Object[] objects) {
         View mView = mInflater.inflate(R.layout.dialog_chat, null);
         mSentContentTv = (BackEditText) mView.findViewById(R.id.etInput);
+        TextView mSentInput = (TextView) mView.findViewById(R.id.sendInput);
         mSimpleDialog.setFocusView(mSentContentTv);
 
         mSentContentTv.setOnClickListener(new OnClickListener() {
@@ -204,6 +207,18 @@ public class DialogManager {
         mSentContentTv.setOnBackClickListener(new BackEditText.OnBackClickListener() {
             @Override
             public void onBack(View v) {
+                dismissDialog();
+            }
+        });
+        mSentInput.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String msg = mSentContentTv.getText().toString();
+                if (TextUtils.isEmpty(msg)){
+                    Toast.makeText(mContext,"发送内容不能为空",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                DmPresenter.getInstance().sentMessage(msg);
                 dismissDialog();
             }
         });

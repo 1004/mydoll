@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:background="@color/color_white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:layout_height="80dp">
+        <TextView
+
+            style="@style/style_14_adb5bb"
+            android:id="@+id/send_order_time"
+            android:text="下单时间"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            style="@style/style_14_adb5bb"
+            android:id="@+id/send_order_state"
+            android:text="状态"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:background="@color/color_ban_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp">
+
+    </View>
+</LinearLayout>

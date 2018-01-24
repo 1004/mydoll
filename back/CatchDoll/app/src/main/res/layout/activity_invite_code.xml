@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/color_EDF0F4"
+    android:layout_height="match_parent">
+    <include layout="@layout/back_common_nav"></include>
+    <TextView
+        style="@style/style_14_848d92"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="45dp"
+        android:text="@string/string_invite_code_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:background="@drawable/shape_round_white_30"
+        android:layout_height="44dp">
+        <EditText
+            android:id="@+id/invide_code_et"
+            style="@android:style/Widget.TextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:layout_toLeftOf="@+id/invide_code_exchange"
+            android:hint="@string/string_invite_code_input"
+            android:inputType="textUri|textMultiLine"
+            android:textColor="@color/color_ADB5BB"
+            android:textSize="13sp"/>
+        <TextView
+            android:id="@+id/invide_code_exchange"
+            android:text="@string/string_invite_code_btn"
+            android:layout_width="65dp"
+            style="@style/style_14_fff"
+            android:background="@drawable/shape_round_green_r_30"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+</LinearLayout>

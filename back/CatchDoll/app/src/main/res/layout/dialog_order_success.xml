@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/content"
+        android:layout_width="@dimen/dimen_ban_view_w"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/round_coner_back_white"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/dialog_order_send_title"
+            android:layout_centerHorizontal="true"
+            style="@style/style_17_969ea3"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/string_box_order_success"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_below="@id/dialog_order_send_title"
+            android:id="@+id/dialog_order_send_info"
+            android:layout_centerHorizontal="true"
+            style="@style/style_14_b6bfc6"
+            android:layout_width="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:lineSpacingMultiplier="1.2"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="但是看来建档立卡是放假考虑的是积分克里斯多夫了看到是积分克里斯丁"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/box_order_success"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/dialog_order_send_info"
+            android:background="@drawable/shape_circle_4bd3a1"
+            android:layout_width="61dp"
+            style="@style/style_20_fffefe"
+            android:text="OK"
+            android:gravity="center"
+            android:layout_marginBottom="15dp"
+            android:layout_height="61dp" />
+
+    </RelativeLayout>
+</LinearLayout>

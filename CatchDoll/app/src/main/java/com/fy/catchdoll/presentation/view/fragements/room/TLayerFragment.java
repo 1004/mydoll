@@ -161,7 +161,7 @@ public class TLayerFragment extends Fragment implements View.OnClickListener {
         for(int x=0; x<20; x++){
             messageData.add("Johnny: 默认聊天内容"+x);
         }
-        messageAdapter=new MessageAdapter(getActivity(), messageData);
+//        messageAdapter=new MessageAdapter(getActivity(), messageData);
         lvmessage.setAdapter(messageAdapter);
         lvmessage.setSelection(messageData.size());
         hlvaudience.setAdapter(new AudienceAdapter(getActivity()));
@@ -312,7 +312,7 @@ public class TLayerFragment extends Fragment implements View.OnClickListener {
         if(!etInput.getText().toString().trim().isEmpty()){
             messageData.add("Johnny: "+etInput.getText().toString().trim());
             etInput.setText("");
-            messageAdapter.NotifyAdapter(messageData);
+//            messageAdapter.NotifyAdapter(messageData);
             lvmessage.setSelection(messageData.size());
             hideKeyboard();
         }else

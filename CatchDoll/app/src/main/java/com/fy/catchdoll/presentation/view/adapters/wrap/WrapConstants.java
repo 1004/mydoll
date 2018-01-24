@@ -22,4 +22,8 @@ public class WrapConstants {
     public static final int WRAP_SEND_ADDRESS = 1;
     public static final int WRAP_SEND_ITEM = WRAP_SEND_ADDRESS+1;
     public static final int WRAP_SEND_STATE = WRAP_SEND_ITEM+1;
+
+    //主聊天界面
+    public static final int WRAP_MAIN_COMMON_MSG = 1;
+    public static final int WRAP_MAIN_GIFT_MSG = 2;
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/recharge_container"
+        android:layout_width="match_parent"
+        android:layout_height="75dp">
+        <TextView
+            android:id="@+id/recharge_count"
+            android:textSize="25sp"
+            android:textColor="#464e52"
+            android:text="200"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/recharge_dw"
+            android:layout_marginLeft="10dp"
+            style="@style/style_14_848d92"
+            android:text="咔币"
+            android:layout_toRightOf="@id/recharge_count"
+            android:layout_alignBottom="@+id/recharge_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/recharge_money"
+            android:layout_width="88dp"
+            android:gravity="center"
+            android:text="￥50"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/shape_round_fdd741_40_bg"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            style="@style/style_15_fffffe"
+            android:layout_height="35dp" />
+    </RelativeLayout>
+</LinearLayout>

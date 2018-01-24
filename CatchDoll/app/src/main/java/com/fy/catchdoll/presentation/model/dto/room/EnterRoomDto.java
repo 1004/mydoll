@@ -1,6 +1,7 @@
 package com.fy.catchdoll.presentation.model.dto.room;
 
 import com.fy.catchdoll.presentation.model.dto.account.User;
+import com.fy.catchdoll.presentation.model.dto.msg.SocketUrlDto;
 
 import java.util.List;
 
@@ -11,9 +12,18 @@ public class EnterRoomDto {
     private User user;
     private RoomInfo machine;
     private List<CatchRecord> grab_record;
-
+    private SocketUrlDto danmu;
     public User getUser() {
         return user;
+    }
+
+
+    public SocketUrlDto getDanmu() {
+        return danmu;
+    }
+
+    public void setDanmu(SocketUrlDto danmu) {
+        this.danmu = danmu;
     }
 
     public void setUser(User user) {

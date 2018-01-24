@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+        <com.qike.telecast.library.widgets.CircleImageView
+            android:src="@mipmap/cover_bg"
+            android:id="@+id/room_doll_icon"
+            android:layout_marginLeft="25dp"
+            android:layout_centerVertical="true"
+            android:layout_width="46dp"
+            android:layout_height="46dp" />
+        <ImageView
+            android:id="@+id/room_doll_video"
+            android:src="@mipmap/video_icon"
+            android:layout_width="35dp"
+            android:layout_marginRight="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_height="35dp" />
+        <LinearLayout
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/room_doll_icon"
+            android:layout_toLeftOf="@+id/room_doll_video"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                style="@style/style_14_848d92"
+                android:text="kk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                style="@style/style_12_b6bfc6"
+                android:text="11:39"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
+    <View
+        android:id="@+id/recent_doll_line"
+        android:background="@color/color_EDF0F4"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp">
+
+    </View>
+</LinearLayout>

@@ -1,0 +1,5 @@
+include ':app'
+include ':CoreLibrary'
+include ':umengshare_6.4.3'
+include 'ijkplayer-java_3.1'
+include '7k7kDanmaku'

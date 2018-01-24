@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.SurfaceView;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +32,7 @@ import com.fy.catchdoll.module.support.agora.model.AGEventHandler;
 import com.fy.catchdoll.module.support.agora.model.ConstantApp;
 import com.fy.catchdoll.module.support.recharge.RechargeNotifyManager;
 import com.fy.catchdoll.presentation.model.dto.account.User;
+import com.fy.catchdoll.presentation.model.dto.msg.MessDto;
 import com.fy.catchdoll.presentation.model.dto.room.CatchRecord;
 import com.fy.catchdoll.presentation.model.dto.room.EnterRoomDto;
 import com.fy.catchdoll.presentation.model.dto.room.GetDollDto;
@@ -38,9 +41,12 @@ import com.fy.catchdoll.presentation.model.dto.room.RoomInfo;
 import com.fy.catchdoll.presentation.presenter.ErrorCodeOperate;
 import com.fy.catchdoll.presentation.presenter.IBasePresenterLinstener;
 import com.fy.catchdoll.presentation.presenter.account.AccountManager;
+import com.fy.catchdoll.presentation.presenter.msg.DmPresenter;
+import com.fy.catchdoll.presentation.presenter.msg.MessageNotifyManager;
 import com.fy.catchdoll.presentation.presenter.room.RoomPresenter;
 import com.fy.catchdoll.presentation.presenter.room.VoicePresenter;
 import com.fy.catchdoll.presentation.view.activitys.base.AppCompatBaseActivity;
+import com.fy.catchdoll.presentation.view.adapters.room.MessageAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +58,7 @@ import io.agora.rtc.video.VideoCanvas;
 /**
  * Created by xky on 2017/12/1 0001.
  */
-public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHandler, View.OnLongClickListener, CustomRecentView.OnHistoryClickListener, RechargeNotifyManager.OnPayStateListener {
+public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHandler, View.OnLongClickListener, CustomRecentView.OnHistoryClickListener, RechargeNotifyManager.OnPayStateListener, MessageNotifyManager.IOnMessageComeCallBack {
     private static final String TAG = "DollRoomActivity";
     public static final String DOLL_ROOM_KEY = "doll_room_key";
     private LinearLayout mVideoChatContainer;
@@ -95,7 +101,8 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
     private boolean isPayCome = false;
     private int mPlayTimeCount = 30;
     public static final String DOLL_ROOM_PAY = "DollRoomActivity_pay";
-
+    private ListView mMsgListView;
+    private MessageAdapter mMsgAdapter;
 
     @Override
     public int getLayoutId() {
@@ -131,6 +138,7 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
         mTimeHintContainer = findViewById(R.id.room_time_hint_container);
         mTimeHintCount = (TextView) findViewById(R.id.room_time_hint_count);
         mOperationHint = (TextView) findViewById(R.id.room_operation_hint);
+        mMsgListView = (ListView) findViewById(R.id.msg_list);
 
     }
 
@@ -138,10 +146,23 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
     public void initData() {
         inittopViewH();
         initIntent();
+        initDanMu();
+        initAdapter();
         handler = new Handler();
         dialogManager = new DialogManager(this);
         mVoicePresenter = new VoicePresenter(this);
         mRoomPresenter = new RoomPresenter();
+    }
+
+    private void initAdapter() {
+        mMsgAdapter = new MessageAdapter(this,mMsgListView);
+        mMsgListView.setAdapter(mMsgAdapter);
+    }
+
+    private void initDanMu() {
+        DmPresenter.getInstance().clearCacheMegs();
+        DmPresenter.getInstance().init();
+
     }
 
     private void initIntent() {
@@ -154,6 +175,7 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
     private void initAgora(String  channel_id) {
         event().addEventHandler(this);
         int cRole = Constants.CLIENT_ROLE_AUDIENCE;
+//        int cRole = Constants.CLIENT_ROLE_BROADCASTER;
         String roomName = channel_id;
         doConfigEngine(cRole);
         worker().joinChannel(roomName, config().mUid);
@@ -201,6 +223,7 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
         mCatchView.setOnClickListener(this);
         mRecentDoll.setOnHistoryClickListener(this);
         RechargeNotifyManager.getInstance().registPayStateListener(DOLL_ROOM_PAY, this);
+        MessageNotifyManager.getInstance().registGiftCallBack(DOLL_ROOM_KEY,this);
     }
 
     private IBasePresenterLinstener mEnterCallBack = new IBasePresenterLinstener() {
@@ -323,6 +346,11 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
         RoomInfo machine = roomDto.getMachine();
         User user = roomDto.getUser();
         List<CatchRecord> grab_record = roomDto.getGrab_record();
+
+        if (roomDto != null){
+            //连接弹幕
+            DmPresenter.getInstance().linkDanmu(roomDto.getDanmu());
+        }
 
         if (machine != null && user != null){
             User accoundUser = AccountManager.getInstance().getUser();
@@ -582,7 +610,7 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
     private void updateGold(){
         User user = AccountManager.getInstance().getUser();
         if (user != null){
-            mTotalGoldTv.setText(user.getGold()+"");
+            mTotalGoldTv.setText(user.getGold() + "");
         }
     }
 
@@ -595,12 +623,18 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        DmPresenter.getInstance().desotryData();
+        destoryAgora();
         mVoicePresenter.endPlayBgVoice();
-        doLeaveChannel();
-        event().removeEventHandler(this);
         mHandler.removeCallbacks(mCatchWaitTask);
         endPlayTask();
         RechargeNotifyManager.getInstance().unRegistPayStateListener(DOLL_ROOM_PAY);
+        MessageNotifyManager.getInstance().unRegisteGiftCallBack(DOLL_ROOM_KEY);
+    }
+
+    private void destoryAgora(){
+        doLeaveChannel();
+        event().removeEventHandler(this);
     }
 
     private void doLeaveChannel() {
@@ -738,5 +772,18 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
     @Override
     public void onPayState(int state) {
         isPayCome = true;
+    }
+
+    @Override
+    public void onMessageCome(MessDto msg) {
+        Log.i("test",msg.toString());
+        if (mMsgAdapter != null){
+            mMsgAdapter.addData(msg);
+        }
+    }
+
+    @Override
+    public void onMessageChanges(List<MessDto> msgs) {
+
     }
 }

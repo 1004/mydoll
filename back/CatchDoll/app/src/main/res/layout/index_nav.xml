@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:background="@color/color_A2AFC9"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_nav_h">
+        <com.qike.telecast.library.widgets.CircleImageView
+            android:layout_width="30dp"
+            android:id="@+id/main_my_center"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/drawable_default_color"
+            android:scaleType="centerCrop"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/color_white"
+            android:layout_centerVertical="true"
+            android:layout_height="30dp" />
+        <ImageView
+            android:id="@+id/main_my_box"
+            android:src="@mipmap/box_icon"
+            android:layout_alignParentRight="true"
+            android:scaleType="centerCrop"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <ImageView
+            android:src="@mipmap/index_logo"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</LinearLayout>

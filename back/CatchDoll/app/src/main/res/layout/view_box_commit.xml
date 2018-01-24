@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:background="@color/color_3B4152"
+        android:layout_width="match_parent"
+        android:layout_height="65dp">
+        <TextView
+            android:id="@+id/order_commit_tv"
+            android:background="@drawable/shape_round_00d5dd_40_bg"
+            android:layout_width="110dp"
+            style="@style/style_13_fff"
+            android:text="@string/string_order_commit"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_centerVertical="true"
+            android:layout_height="40dp" />
+        <TextView
+            android:id="@+id/order_money_info"
+            style="@style/style_13_fff"
+            android:text="sdfkldsklfjlkjkl"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toLeftOf="@id/order_commit_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</LinearLayout>

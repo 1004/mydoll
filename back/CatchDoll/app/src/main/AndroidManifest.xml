@@ -1,0 +1,128 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.qike.telecast">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/flash_icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:name=".presentation.application.CdApplication"
+        android:theme="@android:style/Theme.Light.NoTitleBar">
+        <meta-data android:name="android.max_aspect" android:value="2.1" />
+        <activity android:name=".presentation.view.activitys.main.MainActivity">
+
+        </activity>
+
+        <activity android:name=".presentation.view.activitys.login.LoginActivity">
+
+        </activity>
+
+        <activity android:name=".presentation.view.activitys.room.RoomActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            >
+
+        </activity>
+        <activity android:name=".presentation.view.activitys.my.MyActivity"></activity>
+        <activity android:name=".presentation.view.activitys.my.MyExchangeActivity"></activity>
+        <activity android:name=".presentation.view.activitys.box.BoxInfoActivity"></activity>
+        <activity android:name=".presentation.view.activitys.my.MyInviteShareActivity"></activity>
+        <activity android:name=".presentation.view.activitys.my.MySpendActivity"></activity>
+        <activity android:name=".presentation.view.activitys.first.StartActivity"
+            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
+            android:theme="@style/AppTheme.Launcher"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".presentation.view.activitys.room.DollRoomActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            >
+
+        </activity>
+        <activity android:name=".presentation.view.activitys.recharge.RechargeListActivity"></activity>
+        <activity android:name=".presentation.view.activitys.box.UpdateAddressActivity"></activity>
+        <activity android:name=".presentation.view.activitys.orderhistory.OrderHistoryActivity"></activity>
+
+        <service android:name=".module.service.NetService"></service>
+        <service android:name=".presentation.presenter.update2.UploadService"></service>
+
+
+        <!--微信支付-->
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="wx8ff481aad7c25e65"/>
+            </intent-filter>
+
+        </activity>
+
+
+
+        <!--友盟 start-->
+        <activity
+            android:name=".WBShareActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.umeng.socialize.editorpage.ShareActivity"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.UMDefault" />
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.umeng.qq.tencent.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1106587128" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.umeng.qq.tencent.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5698d7c7e0f55a16530024f3" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="abc" />
+        <!--友盟end -->
+    </application>
+
+</manifest>

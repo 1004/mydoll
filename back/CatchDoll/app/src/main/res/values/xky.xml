@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="string_error_no_net">当前网络不稳定</string>
+    <string name="string_error_request">当前网络不稳定</string>
+    <string name="string_error_http_timeout">请求超时</string>
+    <string name="string_room_notice_other">暂时不能开启直播</string>
+    <string name="string_error_parse_exception">请求出错</string>
+
+    <!--第三方登陆-->
+    <string name="auoth_cancle">授权取消！</string>
+    <string name="auoth_failed">授权失败！</string>
+    <string name="auoth_success">授权成功！</string>
+
+
+    <string name="mzw_pull_refresh">松开手即可刷新</string>
+    <string name="mzw_pull_upload">加载中..</string>
+    <string name="mzw_pull_finally">已经是最后一个</string>
+    <string name="mzw_click_reopen_date">点击重新获取</string>
+    <string name="mzw_let_go_refresh">松开手即可刷新</string>
+    <string name="wf_listview_header_hint_loading">正在加载中</string>
+    <string name="wf_listview_footer_hint_normal">查看更多</string>
+    <string name="wf_listview_header_hint_anew">点击重试</string>
+    <string name="item_loading_not_data">已经没有了哦~</string>
+    <string name="load_error_info">点击加载更多哦</string>
+    <string name="quanzi_turnover_time">上次更新时间：%1$s</string>
+    <string name="loding_more_errer">加载错误请点击重试</string>
+    <string name="mzw_already_finish">已经加载完毕- DONE</string>
+
+    <string name="VideoView_render_none">Render: None</string>
+    <string name="VideoView_render_surface_view">Render: SurfaceView</string>
+    <string name="VideoView_render_texture_view">Render: TextureView</string>
+    <string name="VideoView_player_none">Player: None</string>
+    <string name="VideoView_player_AndroidMediaPlayer">Player: AndroidMediaPlayer</string>
+    <string name="VideoView_player_IjkMediaPlayer">Player: IjkMediaPlayer</string>
+    <string name="VideoView_player_IjkExoMediaPlayer">Player: IjkExoMediaPlayer</string>
+    <string name="N_A">N/A</string>
+    <string name="mi_player">Player</string>
+    <string name="mi_media">Media</string>
+    <string name="mi_profile_level">Profile level</string>
+    <string name="mi_pixel_format">Pixel format</string>
+    <string name="mi_resolution">Resolution</string>
+    <string name="mi_length">Length</string>
+    <string name="mi_stream_fmt1">Stream #%d</string>
+    <string name="mi_type">Type</string>
+    <string name="mi_language">Language</string>
+    <string name="mi_codec">Codec</string>
+    <string name="mi_frame_rate">Frame rate</string>
+    <string name="mi_bit_rate">Bit rate</string>
+    <string name="mi_sample_rate">Sample rate</string>
+    <string name="mi_channels">Channels</string>
+    <string name="mi__selected_video_track">*</string>
+    <string name="mi__selected_audio_track">*</string>
+    <string name="TrackType_video">Video</string>
+    <string name="TrackType_audio">Audio</string>
+    <string name="TrackType_subtitle">Subtitle</string>
+    <string name="TrackType_timedtext">Timed text</string>
+    <string name="TrackType_metadata">Meta data</string>
+    <string name="TrackType_unknown">Unknown</string>
+    <string name="pref_title_ijkplayer_audio">Audio: ijkplayer</string>
+    <string name="pref_key_enable_background_play">pref.enable_background_play</string>
+    <string name="pref_title_enable_background_play">Enable background play</string>
+    <string name="pref_summary_enable_background_play">need Android 4.0+</string>
+
+    <string name="pref_key_using_android_player">pref.using_android_player</string>
+    <string name="pref_title_using_android_player">Using system player</string>
+    <string name="pref_key_using_opensl_es">pref.using_opensl_es</string>
+    <string name="pref_title_using_opensl_es">Using OpenSL ES</string>
+    <string name="pref_key_pixel_format">pref.pixel_format</string>
+    <string name="pref_title_pixel_format">Pixel Format</string>
+    <string name="pref_key_player">pref.player</string>
+
+    <string name="pref_title_render_view">RenderView</string>
+
+    <string name="pref_key_enable_no_view">pref.enable_no_view</string>
+    <string name="pref_title_enable_no_view">Enable NoView</string>
+    <string name="pref_summary_enable_no_view"></string>
+
+    <string name="pref_key_enable_surface_view">pref.enable_surface_view</string>
+    <string name="pref_title_enable_surface_view">Enable SurfaceView</string>
+    <string name="pref_summary_enable_surface_view"></string>
+
+    <string name="pref_key_enable_texture_view">pref.enable_texture_view</string>
+    <string name="pref_title_enable_texture_view">Enable TextureView</string>
+    <string name="pref_summary_enable_texture_view"></string>
+
+    <string name="pref_key_enable_detached_surface_texture">pref.enable_detached_surface_texture</string>
+    <string name="pref_title_enable_detached_surface_texture">Enable detached SurfaceTexture</string>
+    <string name="pref_summary_enable_detached_surface_texture"></string>
+
+    <string name="pref_title_ijkplayer_video">Video: ijkplayer</string>
+
+    <string name="pref_key_using_media_codec">pref.using_media_codec</string>
+    <string name="pref_title_using_media_codec">Using MediaCodec</string>
+    <string name="pref_summary_using_media_codec"></string>
+
+    <string name="pref_key_using_media_codec_auto_rotate">pref.using_media_codec_auto_rotate</string>
+    <string name="pref_title_using_media_codec_auto_rotate">Using MediaCodec auto rotate</string>
+    <string name="pref_summary_using_media_codec_auto_rotate"></string>
+
+    <string-array name="pref_entries_pixel_format">
+        <item>Auto Select</item>
+        <item>RGB 565</item>
+        <item>RGB 888</item>
+        <item>RGBX 8888</item>
+        <item>YV12</item>
+        <item>OpenGL ES2</item>
+    </string-array>
+
+    <style name="MediaButtonCompat">
+        <item name="android:background">@null</item>
+        <item name="android:layout_width">71dip</item>
+        <item name="android:layout_height">52dip</item>
+    </style>
+
+    <!-- 圆形头像 -->
+    <declare-styleable name="CustomRoundView">
+        <attr name="border_width" format="dimension"></attr>
+        <attr name="border_color" format="color"></attr>
+    </declare-styleable>
+
+    <style name="MainDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:background">@null</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <declare-styleable name="MagicTextView">
+        <attr name="innerShadowColor" format="color" />
+        <attr name="innerShadowRadius" format="float" />
+        <attr name="innerShadowDx" format="float" />
+        <attr name="innerShadowDy" format="float" />
+        <attr name="outerShadowColor" format="color" />
+        <attr name="outerShadowRadius" format="float" />
+        <attr name="outerShadowDx" format="float" />
+        <attr name="outerShadowDy" format="float" />
+        <attr name="typeface" format="string" />
+        <attr name="foreground" format="reference|color" />
+        <attr name="strokeWidth" format="float" />
+        <attr name="strokeMiter" format="float" />
+        <attr name="strokeColor" format="color" />
+        <attr name="strokeJoinStyle">
+            <enum name="miter" value="0" />
+            <enum name="bevel" value="1" />
+            <enum name="round" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <style name="MyDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <!-- 升级的dialog -->
+    <style name="update_ProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
+
+        <!-- 继承了android横向的ProgressBar的样式 -->
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/update_progress</item>
+    </style>
+
+    <style name="MyTopciDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="style_diolog_no_bg" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item> <!--Dialog的windowFrame框为无 -->
+        <item name="android:windowIsFloating">true</item><!-- 是否漂现在activity上-->
+        <item name="android:windowIsTranslucent">true</item><!-- 是否半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item><!-- dim:模糊的 阴影效果 -->
+        <item name="android:windowBackground">@android:color/transparent</item><!-- 背景图片的大小也影响窗口的大小 -->
+    </style>
+
+    <style name="dialogWindowAnim" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/push_down_in</item>
+        <item name="android:windowExitAnimation">@anim/push_down_out</item>
+    </style>
+
+    <style name="replydialogWindowAnim" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/reply_push_down_in</item>
+        <item name="android:windowExitAnimation">@anim/reply_push_down_out</item>
+    </style>
+
+    <style name="MediaButtonCompat.Previous">
+        <item name="android:src">@mipmap/ic_launcher</item>
+    </style>
+
+    <style name="MediaButtonCompat.Next">
+        <item name="android:src">@mipmap/ic_launcher</item>
+    </style>
+
+    <style name="MediaButtonCompat.Play">
+        <item name="android:src">@mipmap/ic_launcher</item>
+    </style>
+
+    <style name="MediaButtonCompat.Ffwd">
+        <item name="android:src">@mipmap/ic_launcher</item>
+    </style>
+
+    <style name="MediaButtonCompat.Rew">
+        <item name="android:src">@mipmap/ic_launcher</item>
+    </style>
+
+    <style name="MediaButtonCompat.Pause">
+        <item name="android:src">@mipmap/ic_launcher</item>
+    </style>
+
+
+    <string name="dialog_title">提示</string>
+    <string name="string_ban_cancel">取消</string>
+    <string name="string_ban_yes">确定</string>
+    <string name="prompt">提示</string>
+    <string name="confirm_exit">确定退出登录</string>
+    <string name="exit">退出</string>
+
+    <!-- 版本更新所用到的内容 -->
+    <string name="app_update_ticker">新版本开始更新…</string>
+    <string name="app_update_downloading">下载中…</string>
+    <string name="app_update_downloaded">下载完成，点击安装</string>
+    <string name="app_update_download_error">下载失败，点击重新下载</string>
+
+    <dimen name="dimen_ban_view_w">240dp</dimen>
+    <dimen name="dimen_ban_view_item_h">44dp</dimen>
+
+    <color name="color_ban_line">#edecec</color>
+    <color name="color_divide_">#f5f5f5</color>
+    <color name="item_border_color">#ffdadada</color>
+    <color name="green_downloading_progress">#41c737</color>
+
+
+    <style name="style_ban_title">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#666666</item>
+    </style>
+    <style name="style_h_cancel_">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#999999</item>
+    </style>
+
+    <style name="style_ban_content">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#21aaff</item>
+    </style>
+
+
+    <!-- banner start -->
+    <color name="banner_bottom_bg">#33000000</color>
+
+    <dimen name="banner_height">180dp</dimen>
+    <dimen name="banner_bottom_height">25dp</dimen>
+    <dimen name="banner_bottom_margin">8dp</dimen>
+
+    <style name="banner_bottom_title_style">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+    <!-- banner end -->
+
+
+    <drawable name="drawable_default_color">#f5f5f5</drawable>
+    <drawable name="drawable_write_color">#ffffff</drawable>
+
+    <dimen name="dimen_room_pic_h">130dp</dimen>
+    <dimen name="dimen_r_pic_score">15dp</dimen>
+    <dimen name="dimen_r_between">15dp</dimen>
+    <dimen name="dimen_r_margin">15dp</dimen>
+    <dimen name="dimen_r_text_margin_t">10dp</dimen>
+    <dimen name="dimen_r_text_margin_b">15dp</dimen>
+    <dimen name="dimen_r_bootom_h">33dp</dimen>
+    <dimen name="dimen_r_bootom_icon_wh">15dp</dimen>
+    <dimen name="dimen_r_bootom_icon_margin">6dp</dimen>
+    <dimen name="dimen_r_banner_h">160dp</dimen>
+    <dimen name="dimen_nav_h">45dp</dimen>
+    <dimen name="dimen_nav_left">15dp</dimen>
+    <string name="string_room_busy">游戏中</string>
+    <string name="string_room_free">空闲中</string>
+    <string name="state_loading_str">加载中...</string>
+    <string name="net_error_str">加载失败,点击刷新</string>
+    <string name="net_error_t1">空空如也</string>
+    <string name="net_error_t2">加载失败,网络可能有问题!</string>
+    <string name="press_twice_back_exit">再按一次退出程序</string>
+
+
+    <declare-styleable name="SelectableRoundedImageView">
+        <attr name="sriv_left_top_corner_radius" format="dimension" />
+        <attr name="sriv_right_top_corner_radius" format="dimension" />
+        <attr name="sriv_left_bottom_corner_radius" format="dimension" />
+        <attr name="sriv_right_bottom_corner_radius" format="dimension" />
+        <attr name="sriv_border_width" format="dimension" />
+        <attr name="sriv_border_color" format="color" />
+        <attr name="sriv_oval" format="boolean" />
+        <attr name="android:scaleType" />
+    </declare-styleable>
+
+    <declare-styleable name="circleimageview">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
+
+    <style name="style_13_969ea3">
+        <item name="android:textSize">13.0sp</item>
+        <item name="android:textColor">#969ea3</item>
+    </style>
+    <style name="style_13_adb5bb">
+        <item name="android:textSize">13.0sp</item>
+        <item name="android:textColor">#adb5bb</item>
+    </style>
+    <style name="style_13_fff">
+        <item name="android:textSize">13.0sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+    <style name="style_13_fffefe">
+        <item name="android:textSize">13.0sp</item>
+        <item name="android:textColor">#fffefe</item>
+    </style>
+    <style name="style_15_fffefe">
+        <item name="android:textSize">15.0sp</item>
+        <item name="android:textColor">#fffefe</item>
+    </style>
+    <style name="style_14_fffefe">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textColor">#fffefe</item>
+    </style>
+    <style name="style_13_ffd929">
+        <item name="android:textSize">13.0sp</item>
+        <item name="android:textColor">#ffd929</item>
+    </style>
+    <style name="style_12_4bd3a1">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textColor">#4bd3a1</item>
+    </style>
+    <style name="style_14_fff">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+    <style name="style_40_fff">
+        <item name="android:textSize">40.0sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+    <style name="style_11_fff">
+        <item name="android:textSize">11.0sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+    <style name="style_14_848d92">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textColor">#848d92</item>
+    </style>
+    <style name="style_14_00ded6">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textColor">#00ded6</item>
+    </style>
+    <style name="style_17_969ea3">
+        <item name="android:textSize">17.0sp</item>
+        <item name="android:textColor">#969ea3</item>
+    </style>
+    <style name="style_14_adb5bb">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textColor">#adb5bb</item>
+    </style>
+    <style name="style_14_b6bfc6">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textColor">#b6bfc6</item>
+    </style>
+    <style name="style_14_ff0000">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textColor">#ff0000</item>
+    </style>
+    <style name="style_16_464e52">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:textColor">#464e52</item>
+    </style>
+    <style name="style_15_848d92">
+        <item name="android:textSize">15.0sp</item>
+        <item name="android:textColor">#848d92</item>
+    </style>
+    <style name="style_18_b6bfc6">
+        <item name="android:textSize">15.0sp</item>
+        <item name="android:textColor">#b6bfc6</item>
+    </style>
+    <style name="style_15_464e52">
+        <item name="android:textSize">15.0sp</item>
+        <item name="android:textColor">#464e52</item>
+    </style>
+    <style name="style_15_dee2e5">
+        <item name="android:textSize">15.0sp</item>
+        <item name="android:textColor">#dee2e5</item>
+    </style>
+    <style name="style_15_ffffff">
+        <item name="android:textSize">15.0sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+    <style name="style_15_fffffe">
+        <item name="android:textSize">15.0sp</item>
+        <item name="android:textColor">#fffffe</item>
+    </style>
+    <style name="style_12_b6bfc6">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textColor">#b6bfc6</item>
+    </style>
+    <style name="style_12_848d92">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textColor">#848d92</item>
+    </style>
+    <style name="style_20_fffefe">
+        <item name="android:textSize">20.0sp</item>
+        <item name="android:textColor">#fffefe</item>
+    </style>
+
+    <style name="text_loading_style">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/color_999</item>
+    </style>
+
+    <!--我的-->
+    <dimen name="dimen_my_header_h">210dp</dimen>
+    <dimen name="dimen_my_item_h">60dp</dimen>
+    <dimen name="dimen_my_item_top">15dp</dimen>
+    <dimen name="dimen_my_item_exit_top">20dp</dimen>
+    <dimen name="dimen_my_item_left">20dp</dimen>
+    <dimen name="dimen_my_item_right">15dp</dimen>
+
+    <string name="string_my_has_money">您拥有的咔币</string>
+    <string name="string_my_rechage">充值</string>
+    <string name="string_my_title">我的</string>
+    <string name="string_my_rechange_history">消费记录</string>
+    <string name="string_my_invite_give">邀请奖励</string>
+    <string name="string_my_input_code">输入邀请码</string>
+    <string name="string_my_bg_music">背景音乐</string>
+    <string name="string_my_voice">音效</string>
+    <string name="string_my_exit">退出当前账号</string>
+
+    <!--邀请码-->
+    <string name="string_invite_code_title">邀请码</string>
+    <string name="string_invite_code_info">输入邀请码免费兑换娃娃币</string>
+    <string name="string_invite_code_input">输入兑换码</string>
+    <string name="string_invite_code_btn">兑换</string>
+
+    <string name="string_share_name">你的邀请码</string>
+    <string name="string_share_wx">微信</string>
+    <string name="string_share_qq">QQ</string>
+    <string name="string_share_circle">朋友圈</string>
+    <string name="string_share_qq_zone">QQ空间</string>
+    <string name="string_spend_title">消费明细</string>
+    <string name="string_orderhistory_title">发货记录</string>
+
+    <!--地址-->
+    <string name="string_address_info">收件信息</string>
+    <string name="string_address_info_update">修改</string>
+    <string name="string_address_name">收件人:%1$s</string>
+    <string name="string_address_phone">手机号:%1$s</string>
+    <string name="string_address_address">地址:%1$s</string>
+
+    <string name="string_order_commit">提交订单</string>
+    <string name="string_box_title">背包</string>
+
+    <dimen name="dimen_share_icon_wh">49dp</dimen>
+    <dimen name="dimen_share_title_top">15dp</dimen>
+    <dimen name="dimen_share_container_bet">10dp</dimen>
+
+    <string name="string_share_no_content">娃娃ka</string>
+
+    <string name="string_login_wx">微信登录</string>
+    <string name="string_wawa_qutho">waka@2017 All guangzhouxinsheng</string>
+    <string name="string_login_agree_1">登录表示同意</string>
+    <string name="string_login_agree_2"><u>用户隐私与协议条款</u></string>
+    <string name="string_recharge_title">充值</string>
+    
+    <!--修改地址-->
+    <string name="string_update_receiver">收件人</string>
+    <string name="string_update_title">收件信息</string>
+    <string name="string_update_receiver_hint">请输入收件人姓名</string>
+    <string name="string_update_phone">手机号</string>
+    <string name="string_update_phone_hing">请输入手机号码</string>
+    <string name="string_update_addr">地址</string>
+    <string name="string_update_addr_hint">请输入收件人地址</string>
+    <string name="string_update_save">保存</string>
+    <dimen name="dimen_update_info_margin">45dp</dimen>
+    <dimen name="dimen_update_info_margin_r">30dp</dimen>
+    <dimen name="dimen_update_info_h">55dp</dimen>
+
+    <dimen name="dimen_origin_img_wh">40dp</dimen>
+
+    <string name="string_recent_title_str">最近抓中记录</string>
+    <string name="string_doll_shwo_title_str">娃娃展示</string>
+    <string name="string_room_state_start">开始游戏</string>
+    <string name="string_room_catch_doll">抓</string>
+    <string name="string_room_my_money">我的咔币</string>
+    <string name="string_flash_info">掌上娃娃机   快乐不停歇</string>
+
+    <string name="string_box_order_commit">正在下单</string>
+    <string name="string_pay_state_loading">正在支付...</string>
+    <string name="string_pay_state_error">支付失败</string>
+    <string name="string_pay_state_check">支付确认中</string>
+    <string name="string_pay_state_cancel">支付取消</string>
+    <string name="string_pay_state_success">支付成功</string>
+    <string name="string_box_order_success">下单成功</string>
+    <string name="string_send_state_str">状态:%1$s</string>
+    <string name="string_send_time_str">下单时间:%1$s</string>
+</resources>
