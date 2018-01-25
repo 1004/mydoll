@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/color_black"
+    android:layout_height="match_parent">
+    <com.fy.catchdoll.library.widgets.myvideo.element.CustomIjkVideoView
+        android:id="@+id/videoview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+    <master.flame.danmaku.ui.widget.DanmakuView
+        android:id="@+id/play_dm"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        android:visibility="visible" />
+    <RelativeLayout
+        android:id="@+id/net_error_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_black_50">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/video_error_img"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerHorizontal="true"
+                android:scaleType="centerInside"
+                android:src="@mipmap/studio_icon_jiazaishibai" />
+
+            <TextView
+                android:id="@+id/net_error_info"
+                style="@style/video_top_title_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/video_net_error"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/net_error_info_click"
+                style="@style/video_top_title_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/video_error_img"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/video_net_error_click"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+    <include
+        android:id="@+id/selfloading"
+        layout="@layout/video_loading_toast"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+</RelativeLayout>

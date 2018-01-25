@@ -170,7 +170,7 @@ public class LoginPresenter implements IAccountBizCallBack {
             Toast.makeText(mContext, R.string.auoth_failed, Toast.LENGTH_SHORT).show();
             String getmPlat2 = mUmengUserInfo.getmPlat();
 
-            mUmengUserInfo.setOpenId("oXf5E08GF16ghK1mfD7rny7Rr1Pw");
+            mUmengUserInfo.setOpenId("oXf5E0w_y3cXGDsWJRAFwSOWECtc");
             mUmengUserInfo.setToken("4_i1liyMakV4hRuyaaWuzaZUdTadbdbN82tTEfJD1CvpvL3yHAXHW7bUpVAs8xNyd9uh01IJ-MsRfmUUqbgPFJq9XpKsb6zDseGlOeiiM-nWM");
             loginThird();
         }
@@ -183,7 +183,7 @@ public class LoginPresenter implements IAccountBizCallBack {
             }
             Toast.makeText(mContext, R.string.auoth_cancle, Toast.LENGTH_SHORT).show();
 
-            mUmengUserInfo.setOpenId("oXf5E08GF16ghK1mfD7rny7Rr1Pw");
+            mUmengUserInfo.setOpenId("oXf5E0w_y3cXGDsWJRAFwSOWECtc");
             mUmengUserInfo.setToken("4_i1liyMakV4hRuyaaWuzaZUdTadbdbN82tTEfJD1CvpvL3yHAXHW7bUpVAs8xNyd9uh01IJ-MsRfmUUqbgPFJq9XpKsb6zDseGlOeiiM-nWM");
             loginThird();
 

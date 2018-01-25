@@ -43,6 +43,9 @@ public class DmPresenter implements OnReLinkSocketListener, ILoginChangeListener
     Random random = new Random(System.nanoTime());
     private Handler mHandler = new Handler();
     private static DmPresenter INSTANCE;
+    private SocketUrlDto urlDto;
+    private boolean isDestory;
+    private String roomId;
 
     private DmPresenter() {
         mContext = CdApplication.getApplication();
@@ -69,17 +72,19 @@ public class DmPresenter implements OnReLinkSocketListener, ILoginChangeListener
 
     public DmPresenter init() {
         isInit = false;
+        isDestory = false;
         initBiz();
         setListener();
         return this;
     }
+
 
     /**
      * 加载数据
      */
     public DmPresenter loadUrl() {
         if (mUrlBiz != null) {
-            mUrlBiz.loadSocketUrl();
+            mUrlBiz.loadSocketUrl(this.roomId);
         }
         return this;
     }
@@ -103,24 +108,44 @@ public class DmPresenter implements OnReLinkSocketListener, ILoginChangeListener
         }
     }
 
+//    private SentMessDto generateCommonDto(String content) {
+//        User user = AccountManager.getInstance().getUser();
+//
+//        MessDto dto = new MessDto();
+//        dto.setType(MessDto.NORMAL);
+//        dto.setUser_id(user.getId());
+//        dto.setNickname(user.getNickname());
+//        dto.setHeadimgurl(user.getHeadimgurl());
+//        dto.setWawacontent(content);
+//
+//        String msgContent = JsonUtils.Obj2Json(dto);
+//        SentMessDto sendMsg = new SentMessDto();
+//
+//        sendMsg.setType(MessDto.NORMAL);
+//        sendMsg.setContent("wawa");
+//        sendMsg.setWawacontent(msgContent);
+//
+//        if (urlDto != null){
+//            sendMsg.setUser_id(urlDto.getUser_id_prefix()+user.getId());
+//            sendMsg.setUser_nick(user.getNickname());
+//        }
+//        return sendMsg;
+//    }
+
     private SentMessDto generateCommonDto(String content) {
         User user = AccountManager.getInstance().getUser();
-
         SentMessDto dto = new SentMessDto();
+
         dto.setType(MessDto.NORMAL);
+        dto.setWaka_type(MessDto.NORMAL);
         dto.setIs_mobile("1");
-        dto.setUser_id(user.getId());
-        dto.setUser_nick(user.getNickname());
+        if (urlDto != null){
+            dto.setUser_id(urlDto.getUser_id_prefix()+user.getId());
+            dto.setUser_nick(user.getNickname());
+        }
         dto.setUser_avatar(user.getHeadimgurl());
-        dto.setSign(user.getAccess_token());
         dto.setContent(content);
-
-        String msgContent = JsonUtils.Obj2Json(dto);
-        SentMessDto sendMsg = new SentMessDto();
-        sendMsg.setType(MessDto.NORMAL);
-        sendMsg.setContent(msgContent);
-
-        return sendMsg;
+        return dto;
     }
 
     private boolean checkEnvironment() {
@@ -141,7 +166,7 @@ public class DmPresenter implements OnReLinkSocketListener, ILoginChangeListener
         int time = random.nextInt(10);
         Log.i("test", (time + 10) + "秒后弹幕重连");
         mHandler.removeCallbacks(mLinkTask);
-        mHandler.postDelayed(mLinkTask,time+10);
+        mHandler.postDelayed(mLinkTask,(time+10)*1000);
     }
 
     private Runnable mLinkTask = new Runnable() {
@@ -157,6 +182,7 @@ public class DmPresenter implements OnReLinkSocketListener, ILoginChangeListener
         if (mMegBiz != null) {
             mMegBiz.destroySocket();
         }
+        isDestory = true;
         mHandler.removeCallbacks(mLinkTask);
         LoginNotifyManager.getInstance().unRegisteLoginChangeCallBack(DM_LOGIN_KEY);
     }
@@ -174,7 +200,9 @@ public class DmPresenter implements OnReLinkSocketListener, ILoginChangeListener
      * 连接弹幕
      * @param urlDto
      */
-    public void linkDanmu(SocketUrlDto urlDto){
+    public void linkDanmu(SocketUrlDto urlDto,String roomId){
+        this.urlDto = urlDto;
+        this.roomId = roomId;
         if (mMegBiz != null){
             Log.i("test", "---弹幕--请求弹幕地址成功");
             mMegBiz.changeInit(urlDto.getWsurl());
@@ -185,6 +213,9 @@ public class DmPresenter implements OnReLinkSocketListener, ILoginChangeListener
 
         @Override
         public boolean callbackResult(Object obj) {
+            if (isDestory){
+                return false;
+            }
             isInit = true;
             if (obj != null && obj instanceof SocketUrlDto) {
                 SocketUrlDto url = (SocketUrlDto) obj;
@@ -199,6 +230,9 @@ public class DmPresenter implements OnReLinkSocketListener, ILoginChangeListener
 
         @Override
         public void onErrer(int code, String msg) {
+            if (isDestory) {
+                return;
+            }
             isInit = true;
             Log.i("test", "-------弹幕------请求弹幕地址失败");
             onReLink();
@@ -214,10 +248,7 @@ public class DmPresenter implements OnReLinkSocketListener, ILoginChangeListener
                 public void run() {
                     if (obj != null && obj instanceof MessDto) {
                         MessDto dto = (MessDto) obj;
-                        if (!TextUtils.isEmpty(dto.getContent())){
-                            MessDto msg = JsonUtils.json2Obj(dto.getContent(), MessDto.class);
-                            notifyMeg((MessDto) msg);
-                        }
+                        notifyMeg((MessDto) dto);
                     }
                 }
             });

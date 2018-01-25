@@ -15,7 +15,7 @@ public class Paths {
 
 
 
-    public static final String UPLOAD_VERSION = "/basics/initialization.json";
+    public static final String UPLOAD_VERSION = "basics/initialization.json";
     public static final String HOME_ARTICLE = "v1/article";
 
     public static final String IDNEX_DATA = "index/list.json";//首页数据
@@ -34,7 +34,7 @@ public class Paths {
     public static final String ENTER_ROOM_URL = "machine/info.json";//进入直播间接口
     public static final String MACHINE_OPERATE_URL = "machine/operation.json";//操作娃娃机
     public static final String GET_DOLL_INFO = "machine/getgameresult.json";//获取抓取结果
-    public static final String NEW_GET_WSURL = "api/chat/danmu";//获取重连地址
+    public static final String NEW_GET_WSURL = "basics/chatdanmu.json";//获取重连地址
 
 
 

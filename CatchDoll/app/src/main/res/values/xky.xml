@@ -387,6 +387,12 @@
         <item name="android:textSize">16.0sp</item>
         <item name="android:textColor">#464e52</item>
     </style>
+
+    <style name="video_top_title_style">
+        <item name="android:textSize">18.0sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
     <style name="style_15_848d92">
         <item name="android:textSize">15.0sp</item>
         <item name="android:textColor">#848d92</item>
@@ -537,5 +543,7 @@
     <string name="string_room_time_count">30</string>
     <string name="string_window_player_error">播放出錯</string>
     <string name="string_video_title">视频回放</string>
+    <string name="video_net_error">网络未连接，请检查网络设置</string>
+    <string name="video_net_error_click">加载失败，点击重试</string>
 
 </resources>

@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.SparseBooleanArray;
+import android.view.KeyEvent;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ import com.fy.catchdoll.library.widgets.LongPressImageView;
 import com.fy.catchdoll.library.widgets.NetStateView;
 import com.fy.catchdoll.library.widgets.dialog.DialogManager;
 import com.fy.catchdoll.library.widgets.dialog.DialogStyle;
+import com.fy.catchdoll.library.widgets.myvideo.VideoConstants;
+import com.fy.catchdoll.library.widgets.myvideo.VideoViewLayout;
 import com.fy.catchdoll.module.network.Page;
 import com.fy.catchdoll.module.support.agora.common.Constant;
 import com.fy.catchdoll.module.support.agora.model.AGEventHandler;
@@ -103,7 +106,11 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
     public static final String DOLL_ROOM_PAY = "DollRoomActivity_pay";
     private ListView mMsgListView;
     private MessageAdapter mMsgAdapter;
+    private boolean isDestory;
+    private VideoViewLayout mVideo;
 
+    private FrameLayout container;
+    private List<String> mPaths = new ArrayList<>();
     @Override
     public int getLayoutId() {
         return R.layout.activity_room_2;
@@ -139,6 +146,8 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
         mTimeHintCount = (TextView) findViewById(R.id.room_time_hint_count);
         mOperationHint = (TextView) findViewById(R.id.room_operation_hint);
         mMsgListView = (ListView) findViewById(R.id.msg_list);
+        mVideo = (VideoViewLayout) findViewById(R.id.video);
+        container = (FrameLayout) findViewById(R.id.gaming_video);
 
     }
 
@@ -334,11 +343,30 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
 
     private void parseRoomData(EnterRoomDto roomDto) {
         mNetView.show(NetStateView.NetState.CONTENT);
-        RoomInfo machine = roomDto.getMachine();
-        if (machine != null){
-            initAgora(machine.getChannel_id());
-        }
+        initVideo(roomDto);
         initNetData(roomDto);
+    }
+
+    private void initVideo(EnterRoomDto roomDto){
+        RoomInfo machine = roomDto.getMachine();
+        boolean isShowVideo = true;
+        if (isShowVideo) {
+            container.setVisibility(View.GONE);
+            mVideo.setVisibility(View.VISIBLE);
+            mPaths.clear();
+            if (roomDto.getLive_url() != null){
+                mPaths.add(roomDto.getLive_url().getFlv());
+            }
+            mVideo.setVideoPaths(mPaths);
+        }else {
+            container.setVisibility(View.VISIBLE);
+            mVideo.setVisibility(View.GONE);
+            //初始化第三方的播放器
+            if (machine != null){
+                initAgora(machine.getChannel_id());
+            }
+        }
+
     }
 
     private void initNetData(EnterRoomDto roomDto) {
@@ -349,7 +377,7 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
 
         if (roomDto != null){
             //连接弹幕
-            DmPresenter.getInstance().linkDanmu(roomDto.getDanmu());
+            DmPresenter.getInstance().linkDanmu(roomDto.getDanmu(),machine.getId());
         }
 
         if (machine != null && user != null){
@@ -623,6 +651,29 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        desotry();
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        desotry();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void desotry(){
+        if (isDestory){
+            return;
+        }
+        isDestory = true;
+        Log.i("test","--------销毁资源");
         DmPresenter.getInstance().desotryData();
         destoryAgora();
         mVoicePresenter.endPlayBgVoice();
@@ -630,6 +681,9 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
         endPlayTask();
         RechargeNotifyManager.getInstance().unRegistPayStateListener(DOLL_ROOM_PAY);
         MessageNotifyManager.getInstance().unRegisteGiftCallBack(DOLL_ROOM_KEY);
+        if (mVideo != null) {
+            mVideo.setVideoDestory();
+        }
     }
 
     private void destoryAgora(){
@@ -723,7 +777,6 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
             rtcEngine().setupRemoteVideo(new VideoCanvas(surfaceV, VideoCanvas.RENDER_MODE_HIDDEN, uid));
         }
 
-        FrameLayout container = (FrameLayout) findViewById(R.id.gaming_video);
         if (container.getChildCount() >= 2) {
             return;
         }

@@ -21,10 +21,13 @@ public class MessDto extends BaseItemDto implements Cloneable {
 
     // 消息种类： 1.普通文字弹幕
     private int type;
+    private int waka_type;
+    private String is_mobile;
     private String user_id;// 发送消息人uid
-    private String nickname;
-    private String headimgurl;
-    private String content;
+    private String user_nick; // 发送消息人的昵称
+    private String user_avatar;// 发送消息人的头像地址，普通消息无头像
+    private String content;// 消息内容
+
 
     public int getType() {
         return type;
@@ -32,6 +35,22 @@ public class MessDto extends BaseItemDto implements Cloneable {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public int getWaka_type() {
+        return waka_type;
+    }
+
+    public void setWaka_type(int waka_type) {
+        this.waka_type = waka_type;
+    }
+
+    public String getIs_mobile() {
+        return is_mobile;
+    }
+
+    public void setIs_mobile(String is_mobile) {
+        this.is_mobile = is_mobile;
     }
 
     public String getUser_id() {
@@ -42,20 +61,20 @@ public class MessDto extends BaseItemDto implements Cloneable {
         this.user_id = user_id;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getUser_nick() {
+        return user_nick;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setUser_nick(String user_nick) {
+        this.user_nick = user_nick;
     }
 
-    public String getHeadimgurl() {
-        return headimgurl;
+    public String getUser_avatar() {
+        return user_avatar;
     }
 
-    public void setHeadimgurl(String headimgurl) {
-        this.headimgurl = headimgurl;
+    public void setUser_avatar(String user_avatar) {
+        this.user_avatar = user_avatar;
     }
 
     public String getContent() {

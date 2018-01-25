@@ -91,8 +91,8 @@ public class MessageAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         MessDto dto = data.get(position);
-        ImageLoaderUtils.displayImage(holder.icon,R.drawable.drawable_default_color,dto.getHeadimgurl());
-        holder.tvcontent.setText(dto.getContent());
+        ImageLoaderUtils.displayImage(holder.icon,R.drawable.drawable_default_color,dto.getUser_avatar());
+        holder.tvcontent.setText(dto.getUser_nick()+":"+dto.getContent());
         return convertView;
     }
 

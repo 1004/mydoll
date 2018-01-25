@@ -13,6 +13,16 @@ public class EnterRoomDto {
     private RoomInfo machine;
     private List<CatchRecord> grab_record;
     private SocketUrlDto danmu;
+    private VideoUrl live_url;
+
+    public VideoUrl getLive_url() {
+        return live_url;
+    }
+
+    public void setLive_url(VideoUrl live_url) {
+        this.live_url = live_url;
+    }
+
     public User getUser() {
         return user;
     }

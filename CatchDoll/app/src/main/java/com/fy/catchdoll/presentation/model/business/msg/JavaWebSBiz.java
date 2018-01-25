@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
+import com.fy.catchdoll.library.utils.JsonUtils;
 import com.fy.catchdoll.module.support.java_websocket.client.WebSocketClient;
 import com.fy.catchdoll.module.support.java_websocket.drafts.Draft;
 import com.fy.catchdoll.module.support.java_websocket.handshake.ServerHandshake;
@@ -40,7 +41,8 @@ public class JavaWebSBiz implements IMessageBiz {
         if (AccountManager.getInstance().getUser() == null || msg == null) {
             return;
         }
-        String message = JSON.toJSONString(msg);
+//        String message = JSON.toJSONString(msg);
+        String message = JsonUtils.Obj2Json(msg);
         if (mWebClent != null && mWebClent.isOpen() && message != null) {
             mWebClent.send(message);
         } else {

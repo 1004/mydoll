@@ -29,13 +29,13 @@ public class UrlBiz extends BaseLoadListener {
                 BazaarGetDao.ARRAY_DATA_CHUNK);
     }
 
-    public void loadSocketUrl(){
+    public void loadSocketUrl(String roomId){
         mGetWsUrlDao.registerListener(this);
         User user = AccountManager.getInstance().getUser();
         if (user == null){
             return;
         }
-        mGetWsUrlDao.putParams("room_id", user.getId());
+        mGetWsUrlDao.putParams("machine_id", roomId);
         mGetWsUrlDao.setNoCache();
         mGetWsUrlDao.asyncDoAPI();
     }
