@@ -2,33 +2,18 @@ package com.fy.catchdoll.library.widgets.myvideo;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fy.catchdoll.R;
 import com.fy.catchdoll.library.utils.Device;
-import com.fy.catchdoll.library.utils.Loger;
-import com.fy.catchdoll.library.utils.PreferencesUtils;
 import com.fy.catchdoll.library.widgets.myvideo.element.CustomIjkVideoView;
-import com.fy.catchdoll.library.widgets.myvideo.element.CustomVideoView;
-import com.fy.catchdoll.library.widgets.myvideo.inter.IVideoPlayListener;
 import com.fy.catchdoll.library.widgets.myvideo.inter.IXVideoPlayListener;
-import com.fy.catchdoll.presentation.presenter.ErrorCodeOperate;
-import com.fy.catchdoll.presentation.presenter.account.AccountManager;
-import com.fy.catchdoll.presentation.presenter.msg.MessageNotifyManager;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +37,7 @@ public class VideoViewLayout extends RelativeLayout implements View.OnClickListe
     private LinearLayout mSelfLoading;
     private boolean isError = false;
     private int mCurrentPath = 0;
+    private boolean isSwitchSuccess;
 
     public VideoViewLayout(Context context) {
         super(context);
@@ -61,6 +47,7 @@ public class VideoViewLayout extends RelativeLayout implements View.OnClickListe
         super(context, attrs);
         initData(context);
         initView();
+        setListener();
     }
 
     public VideoViewLayout(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -138,6 +125,8 @@ public class VideoViewLayout extends RelativeLayout implements View.OnClickListe
      * 渲染数据
      */
     private void onPlayRending_() {
+        Log.i("test", "onPlayRending_");
+
 //        if (mCompletionListener != null) {
 //            mCompletionListener.onPlayRending();
 //        }
@@ -154,7 +143,7 @@ public class VideoViewLayout extends RelativeLayout implements View.OnClickListe
 
     public void closeLoading() {
         mSelfLoading.setVisibility(View.GONE);
-        // Log.i("test", "结束缓2");
+         Log.i("test", "结束缓2");
     }
 
     @Override
@@ -177,10 +166,37 @@ public class VideoViewLayout extends RelativeLayout implements View.OnClickListe
             mPaths.clear();
             mPaths.addAll(paths);
         }
-        if (mPaths.size() > 0) {
+        playPath();
+    }
+
+    /**
+     * 播放
+     */
+    private void playPath(){
+        isSwitchSuccess = false;
+        if (mPaths.size() > 0 && mCurrentPath<mPaths.size()) {
             play(mPaths.get(mCurrentPath));
             mNetErrorContainer.setVisibility(View.GONE);
         }
+    }
+
+    /**
+     * 切换
+     * @param index
+     */
+    public void switchPath(int index){
+        if (mCurrentPath == index){
+            return;
+        }
+        if (mVideo != null) {
+            mVideo.stopPlayback();
+        }
+        mCurrentPath = index;
+        playPath();
+    }
+
+    public List<String> getPaths(){
+        return mPaths;
     }
 
     /**
@@ -203,9 +219,11 @@ public class VideoViewLayout extends RelativeLayout implements View.OnClickListe
      */
     private void onPlayProgress_(int progress, int maxProgress, int bufprogress) {
         //operateVideoInfo();
+//        Log.i("test", "onPlayProgress_");
     }
 
     private void onPlayCompletion_() {
+        Log.i("test", "onPlayCompletion_");
         showLoading();
     }
 
@@ -213,6 +231,8 @@ public class VideoViewLayout extends RelativeLayout implements View.OnClickListe
      * 播放回掉
      */
     private void onPlay_() {
+        Log.i("test", "onPlay_");
+        isSwitchSuccess = true;
         closeLoading();
     }
 
@@ -220,18 +240,21 @@ public class VideoViewLayout extends RelativeLayout implements View.OnClickListe
      * 暂停回掉
      */
     private void onPause_() {
+        Log.i("test", "onPause_");
         closeLoading();
     }
     /**
      * 加载中的回掉
      */
     private void onLoading_() {
+        Log.i("test", "onLoading_");
         showLoading();
     }
     /**
      * 错误回掉
      */
     private void onError_(int type) {
+        Log.i("test","onError_");
         // Toast.makeText(mContext, "播放失败", 0).show();
         setErrorTyp(type);
         // 播放出错
@@ -239,6 +262,10 @@ public class VideoViewLayout extends RelativeLayout implements View.OnClickListe
         // 或者是网络异常，或者是不支持该格式，本地视频不存在网络异常
         // Toast.makeText(mActivity, "播放出错啦....", 0).show();
         showNoNetInfo();
+    }
+
+    public boolean getSwitchState(){
+        return isSwitchSuccess;
     }
 
     private void setErrorTyp(int errorType) {
@@ -309,6 +336,7 @@ public class VideoViewLayout extends RelativeLayout implements View.OnClickListe
     }
 
     private void onBlock_(boolean isBlockFinish) {
+        Log.i("test", "onBlock_");
         // 播放卡
         if (isBlockFinish) {
             // 缓冲完毕

@@ -41,6 +41,7 @@ import com.fy.catchdoll.presentation.model.dto.room.EnterRoomDto;
 import com.fy.catchdoll.presentation.model.dto.room.GetDollDto;
 import com.fy.catchdoll.presentation.model.dto.room.OperateMachineDto;
 import com.fy.catchdoll.presentation.model.dto.room.RoomInfo;
+import com.fy.catchdoll.presentation.model.dto.room.VideoUrl;
 import com.fy.catchdoll.presentation.presenter.ErrorCodeOperate;
 import com.fy.catchdoll.presentation.presenter.IBasePresenterLinstener;
 import com.fy.catchdoll.presentation.presenter.account.AccountManager;
@@ -50,8 +51,10 @@ import com.fy.catchdoll.presentation.presenter.room.RoomPresenter;
 import com.fy.catchdoll.presentation.presenter.room.VoicePresenter;
 import com.fy.catchdoll.presentation.view.activitys.base.AppCompatBaseActivity;
 import com.fy.catchdoll.presentation.view.adapters.room.MessageAdapter;
+import com.fy.catchdoll.presentation.view.adapters.wrap.WrapConstants;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import io.agora.rtc.Constants;
@@ -111,6 +114,12 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
 
     private FrameLayout container;
     private List<String> mPaths = new ArrayList<>();
+    private String[] flvs;
+    private int mCurrentDrive;
+    private int mCurrentCameraId;
+    public static final int WAWA_AGORA = 2;
+    public static final int WAWA_JIN = 1;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_room_2;
@@ -348,23 +357,27 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
     }
 
     private void initVideo(EnterRoomDto roomDto){
-        RoomInfo machine = roomDto.getMachine();
-        boolean isShowVideo = true;
-        if (isShowVideo) {
+        VideoUrl videoUrl = roomDto.getLive_url();
+        if (videoUrl == null){
+            return;
+        }
+        mCurrentDrive = videoUrl.getDrive();
+        if (mCurrentDrive == WAWA_JIN) {
             container.setVisibility(View.GONE);
             mVideo.setVisibility(View.VISIBLE);
             mPaths.clear();
-            if (roomDto.getLive_url() != null){
-                mPaths.add(roomDto.getLive_url().getFlv());
+            flvs = videoUrl.getFlv().split(",");
+            if (flvs == null || flvs.length == 0){
+                return;
             }
+            mCurrentCameraId = Constant.Wawaji_CAM_MAIN;
+            mPaths = Arrays.asList(flvs);
             mVideo.setVideoPaths(mPaths);
         }else {
             container.setVisibility(View.VISIBLE);
             mVideo.setVisibility(View.GONE);
             //初始化第三方的播放器
-            if (machine != null){
-                initAgora(machine.getChannel_id());
-            }
+            initAgora(videoUrl.getChannel_id());
         }
 
     }
@@ -468,7 +481,16 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
             endPlayTask();
         }
         VoicePresenter.vSimple(this);
-        mRoomPresenter.operateMachine(roomId, type, config().mWawajiUid);
+
+        mRoomPresenter.operateMachine(roomId, type, getCurrentCameraId());
+    }
+
+    private int getCurrentCameraId(){
+        if (mCurrentDrive == WAWA_AGORA){
+            return config().mWawajiUid;
+        }else{
+            return mCurrentCameraId;
+        }
     }
 
     /**
@@ -788,6 +810,27 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
 
     public void onSwitchCameraClicked(View view) {
         // running on UI thread
+        if (mCurrentDrive == WAWA_JIN){
+            checkIjkCamera();
+        }else if (mCurrentDrive == WAWA_AGORA){
+            checkAgoraCamera();
+        }
+    }
+
+    private void checkIjkCamera(){
+        if (!mVideo.getSwitchState()){
+            Toast.makeText(this,"摄像头切换中",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (flvs != null && flvs.length>1){
+            mCurrentCameraId = (mCurrentCameraId == Constant.Wawaji_CAM_MAIN ? Constant.Wawaji_CAM_SECONDARY : Constant.Wawaji_CAM_MAIN);
+            mVideo.switchPath(mCurrentCameraId-1);
+        }else {
+            Toast.makeText(this,"只有一个摄像头 不能切换",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void checkAgoraCamera(){
         if (mUidList.size() > 1) {
             int targetUid = 0;
             for (int i = 0, size = mUidList.size(); i < size; i++) {
