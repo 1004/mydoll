@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatBaseActivity implements OnWrapItemCli
                         ActivityUtils.startRechargeListActivity(MainActivity.this);
                         break;
                     case BannerInfo.BANNER_ROOM:
-                        ActivityUtils.startRoomActivity(MainActivity.this,info.getMachine_id());
+                        ActivityUtils.startDollRoomActivity(MainActivity.this,info.getMachine_id());
                         break;
                     case BannerInfo.BANNER_WAP:
                         ActivityUtils.startWebActivity(MainActivity.this,info.getLink(),info.getTitle());
