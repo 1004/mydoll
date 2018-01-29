@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatBaseActivity implements IAccountPres
     public void setListener() {
         mLoginBtn.setOnClickListener(this);
         findViewById(R.id.agree_tv).setOnClickListener(this);
+        mImgContainer.setOnClickListener(this);
     }
 
     @Override
