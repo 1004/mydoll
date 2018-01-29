@@ -13,6 +13,7 @@ import com.fy.catchdoll.library.widgets.myvideo.DensityUtil;
 import com.fy.catchdoll.library.widgets.myvideo.VideoConstants;
 import com.fy.catchdoll.library.widgets.myvideo.inter.IVideoPlayListener;
 import com.fy.catchdoll.library.widgets.myvideo.inter.IXVideoPlayListener;
+import com.fy.catchdoll.library.widgets.video.ijkplayer.media.IRenderView;
 import com.fy.catchdoll.library.widgets.video.ijkplayer.media.IjkVideoView;
 
 import tv.danmaku.ijk.media.player.IMediaPlayer;
@@ -96,7 +97,7 @@ public class CustomIjkVideoView extends IjkVideoView implements IMediaPlayer.OnP
         setOnCompletionListener(this);
         setOnInfoListener(this);
         setOnErrorListener(this);
-//        setAspectRatio(IRenderView.AR_ASPECT_FILL_PARENT);
+        setAspectRatio(IRenderView.AR_ASPECT_FILL_PARENT);
 //        setAspectRatio(IRenderView.AR_ASPECT_WRAP_CONTENT);
     }
 

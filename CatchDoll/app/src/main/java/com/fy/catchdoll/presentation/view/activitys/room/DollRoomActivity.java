@@ -119,7 +119,9 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
     private int mCurrentCameraId;
     public static final int WAWA_AGORA = 2;
     public static final int WAWA_JIN = 1;
-
+    private int mDialogCount = 10;
+    private boolean isCatchSuccess ;
+    private boolean isCatchResultReturn = false;//抓取结果是否返回
     @Override
     public int getLayoutId() {
         return R.layout.activity_room_2;
@@ -240,6 +242,7 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
         mDownIcon.setOnTimeClickListener(this);
         mCatchView.setOnClickListener(this);
         mRecentDoll.setOnHistoryClickListener(this);
+        findViewById(R.id.room_record_container).setOnClickListener(this);
         RechargeNotifyManager.getInstance().registPayStateListener(DOLL_ROOM_PAY, this);
         MessageNotifyManager.getInstance().registGiftCallBack(DOLL_ROOM_KEY,this);
     }
@@ -280,6 +283,12 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
         @Override
         public void dataResult(Object obj, Page page, int status) {
             if (obj != null && obj instanceof GetDollDto){
+                if (isCatchResultReturn){
+                    return;
+                }else {
+                    isCatchResultReturn = true;
+                }
+                Log.i("test","-mGetDollInfoCallBack--");
                 GetDollDto dollDto = (GetDollDto) obj;
                 operateGetDoll(dollDto);
             }
@@ -296,20 +305,48 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
 
     private void operateGetDoll(GetDollDto dollDto) {
         mOperationHint.setVisibility(View.GONE);
+        mDialogCount = 10;
         if (dollDto.getIs_grab() == GetDollDto.GRAB_OK){
+            isCatchSuccess = true;
             //抓中
             dialogManager.showDialog(DialogStyle.CATCH_SUCCESS,mCatchSuccessListener
                     ,dollDto.getDoll_info()
-                    ,getMString(R.string.string_room_look_box)
-                    ,getResources().getString(R.string.string_room_success_getonce),10);
+//                    ,getMString(R.string.string_room_look_box)
+                    ,getMString(R.string.string_room_get_failed_left)
+                    ,getResources().getString(R.string.string_room_success_getonce,mDialogCount));
+            mHandler.postDelayed(mDialogTask,1000);
         }else {
+            isCatchSuccess = false;
             //未抓中
             dialogManager.showDialog(DialogStyle.CATCH_FAILED,mCatchFailedListener
                     ,getMString(R.string.string_room_get_failed_hint)
                     ,getMString(R.string.string_room_get_failed_left)
-                    ,getMString(R.string.string_room_get_failed_right));
+                    ,getResources().getString(R.string.string_room_get_failed_right_count, mDialogCount));
+            mHandler.postDelayed(mDialogTask,1000);
         }
     }
+
+    private Runnable mDialogTask = new Runnable() {
+        @Override
+        public void run() {
+            mDialogCount --;
+            Log.i("test","count:"+mDialogCount);
+            mHandler.removeCallbacks(mDialogTask);
+            if (isCatchSuccess){
+                dialogManager.setTimeText(getResources().getString(R.string.string_room_success_getonce,mDialogCount));
+            }else {
+                dialogManager.setTimeText(getResources().getString(R.string.string_room_get_failed_right_count,mDialogCount));
+            }
+            if (mDialogCount>0){
+                mHandler.postDelayed(mDialogTask,1000);
+            }else {
+                //时间到
+                dialogManager.dismissDialog();
+                //取消，切换到空闲
+                changeStartState(false, RoomInfo.STATE_GAME_FREE);
+            }
+        }
+    };
 
     private DialogManager.OnClickListenerContent mCatchSuccessListener = new DialogManager.OnClickListenerContent() {
         @Override
@@ -325,7 +362,7 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
                     dialogManager.dismissDialog();
                     //去背包查看 更换状态到空闲
                     changeStartState(false, RoomInfo.STATE_GAME_FREE);
-                    ActivityUtils.startBoxInfoActivity(DollRoomActivity.this);
+//                    ActivityUtils.startBoxInfoActivity(DollRoomActivity.this);
                     break;
             }
         }
@@ -467,6 +504,9 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
             case R.id.room_catch_doll:
                 operatePlayState(OperateMachineDto.GET);
                 break;
+            case R.id.room_record_container:
+                ActivityUtils.startCatchHistoryActivity(this);
+                break;
         }
     }
 
@@ -516,6 +556,7 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
             User user = AccountManager.getInstance().getUser();
             if (user != null && OperateMachineDto.START.equals(dto.getType())){
                 isCatch = false;
+                isCatchResultReturn = false;
                 user.setGold(dto.getGold());
                 changeStartState(true, RoomInfo.STATE_GAMEING);
             }
@@ -700,6 +741,7 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
         destoryAgora();
         mVoicePresenter.endPlayBgVoice();
         mHandler.removeCallbacks(mCatchWaitTask);
+        mHandler.removeCallbacks(mDialogTask);
         endPlayTask();
         RechargeNotifyManager.getInstance().unRegistPayStateListener(DOLL_ROOM_PAY);
         MessageNotifyManager.getInstance().unRegisteGiftCallBack(DOLL_ROOM_KEY);
@@ -824,7 +866,7 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
         }
         if (flvs != null && flvs.length>1){
             mCurrentCameraId = (mCurrentCameraId == Constant.Wawaji_CAM_MAIN ? Constant.Wawaji_CAM_SECONDARY : Constant.Wawaji_CAM_MAIN);
-            mVideo.switchPath(mCurrentCameraId-1);
+            mVideo.switchPath(mCurrentCameraId - 1);
         }else {
             Toast.makeText(this,"只有一个摄像头 不能切换",Toast.LENGTH_SHORT).show();
         }
@@ -872,7 +914,67 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
 
     @Override
     public void onMessageCome(MessDto msg) {
-        Log.i("test",msg.toString());
+        Log.i("test", msg.toString());
+        switch (msg.getWaka_type()){
+            case MessDto.WAWA_MSG:
+                operateAddMsg(msg);
+                break;
+            case MessDto.WAWA_MACHINE_STATE_BUSY:
+                operateBusyState(msg);
+                break;
+            case MessDto.WAWA_MACHINE_STATE_FREE:
+                operateFreeState(msg);
+                break;
+            case MessDto.WAWA_MACHINE_STATE_FINISH:
+                operateFinishState(msg);
+                break;
+            case MessDto.WAWA_ENTER_ROOM:
+                break;
+        }
+
+    }
+
+    /**
+     * 获取结果
+     * @param msg
+     */
+    private void operateFinishState(MessDto msg) {
+        User user = AccountManager.getInstance().getUser();
+        Log.i("test","operateFinishState");
+        if (msg != null && user != null && user.getId().equals(msg.getUser_id())){
+            if (isCatchResultReturn){
+                return;
+            }else {
+                isCatchResultReturn = true;
+                mHandler.removeCallbacks(mCatchWaitTask);
+                operateGetDoll(msg.getGrab_data());
+            }
+        }
+    }
+
+    /**
+     * 下机状态
+     * @param msg
+     */
+    private void operateFreeState(MessDto msg) {
+        changeStartState(false, RoomInfo.STATE_GAME_FREE);
+    }
+
+    /**
+     * 通知上机状态
+     */
+    private void operateBusyState(MessDto msg) {
+        User user = AccountManager.getInstance().getUser();
+
+        if (msg != null && user != null && user.getId().equals(msg.getUser_id())){
+            //当前用户上机了，不用任何操作
+        }else {
+            //其他用户 等待上机
+            changeStartState(false,RoomInfo.STATE_GAMEING);
+        }
+    }
+
+    private void operateAddMsg(MessDto msg) {
         if (mMsgAdapter != null){
             mMsgAdapter.addData(msg);
         }

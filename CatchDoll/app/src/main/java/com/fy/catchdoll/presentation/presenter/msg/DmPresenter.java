@@ -265,7 +265,7 @@ public class DmPresenter implements OnReLinkSocketListener, ILoginChangeListener
 
     public void notifyMeg(MessDto dto) {
         if (dto != null) {
-            if (checkMessageType(dto)) {
+            if (checkMessageType(dto) && checkMessageSelfType(dto)) {
                 if (!operateMegType(dto)) {
                     return;
                 }
@@ -281,6 +281,15 @@ public class DmPresenter implements OnReLinkSocketListener, ILoginChangeListener
                 MessageNotifyManager.getInstance().notfifyGiftCame(dto);
             }
         }
+    }
+
+    private boolean checkMessageSelfType(MessDto dto) {
+        return (dto.getWaka_type() == MessDto.WAWA_MSG
+                || dto.getWaka_type() == MessDto.WAWA_ENTER_ROOM
+                || dto.getWaka_type() == MessDto.WAWA_MACHINE_STATE_BUSY
+                || dto.getWaka_type() == MessDto.WAWA_MACHINE_STATE_FREE
+                || dto.getWaka_type() == MessDto.WAWA_MACHINE_STATE_FINISH
+        );
     }
 
     public void notifyMegsFilterByBan() {
@@ -315,6 +324,11 @@ public class DmPresenter implements OnReLinkSocketListener, ILoginChangeListener
     }
 
 
+    /**
+     * 区分飞云
+     * @param dto
+     * @return
+     */
     private boolean checkMessageType(MessDto dto) {
         return (dto.getType() == MessDto.NORMAL
         );

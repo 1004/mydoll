@@ -14,6 +14,7 @@ import com.fy.catchdoll.presentation.view.activitys.my.MyActivity;
 import com.fy.catchdoll.presentation.view.activitys.my.MyExchangeActivity;
 import com.fy.catchdoll.presentation.view.activitys.my.MyInviteShareActivity;
 import com.fy.catchdoll.presentation.view.activitys.my.MySpendActivity;
+import com.fy.catchdoll.presentation.view.activitys.orderhistory.CatchHistoryActivity;
 import com.fy.catchdoll.presentation.view.activitys.orderhistory.OrderHistoryActivity;
 import com.fy.catchdoll.presentation.view.activitys.recharge.RechargeListActivity;
 import com.fy.catchdoll.presentation.view.activitys.room.DollRoomActivity;
@@ -148,9 +149,23 @@ public class ActivityUtils {
         context.startActivity(intent);
     }
 
+    /**
+     * 启动播放器
+     * @param context
+     * @param url
+     */
     public static void startPlayerActivity(Context context,String url){
         Intent intent = new Intent(context, VideoActivity.class);
         intent.putExtra(VideoActivity.URL_KEY, url);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 启动抓取记录
+     * @param context
+     */
+    public static void startCatchHistoryActivity(Context context){
+        Intent intent = new Intent(context, CatchHistoryActivity.class);
         context.startActivity(intent);
     }
 }

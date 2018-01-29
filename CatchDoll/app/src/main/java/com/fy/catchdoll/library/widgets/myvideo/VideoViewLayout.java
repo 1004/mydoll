@@ -70,7 +70,12 @@ public class VideoViewLayout extends RelativeLayout implements View.OnClickListe
         mVideo = (CustomIjkVideoView) findViewById(R.id.videoview);
         mBarrageView2 = (DanmakuView) findViewById(R.id.play_dm);
         mSelfLoading = (LinearLayout) findViewById(R.id.selfloading);
+    }
 
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
+//        mVideo.setRotation(90);
     }
 
     private void setListener() {

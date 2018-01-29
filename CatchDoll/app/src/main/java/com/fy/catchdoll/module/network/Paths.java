@@ -35,6 +35,8 @@ public class Paths {
     public static final String MACHINE_OPERATE_URL = "machine/operation.json";//操作娃娃机
     public static final String GET_DOLL_INFO = "machine/getgameresult.json";//获取抓取结果
     public static final String NEW_GET_WSURL = "basics/chatdanmu.json";//获取重连地址
+    public static final String CATCH_HISTORY_INFO = "machine/grabrecord.json";//抓取记录
+    public static final String CATCH_QUESTION_INFO = "machine/appeal.json";//申诉
 
 
 

@@ -40,6 +40,7 @@ public class DialogManager {
     public static final String START_LIVE_SHARE = "start_live";
     private Handler mHandler;
     private BackEditText mSentContentTv;
+    private TextView mTimeTv;
 
     //需要实时更新还剩多少秒可召唤粉丝用到的控件
 
@@ -158,7 +159,14 @@ public class DialogManager {
                 setListener(listener, view, new Object[]{});
             }
         });
+        mTimeTv = mYesTv;
         mSimpleDialog.createOrUpdate(-1, mView);
+    }
+
+    public void setTimeText(String text){
+        if (mTimeTv != null){
+            mTimeTv.setText(text);
+        }
     }
 
     private void operateOrderSuccess(final OnClickListenerContent listener, Object[] objects) {

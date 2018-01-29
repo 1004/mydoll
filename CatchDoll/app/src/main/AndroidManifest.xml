@@ -62,6 +62,7 @@
         <activity android:name=".presentation.view.activitys.recharge.RechargeListActivity"></activity>
         <activity android:name=".presentation.view.activitys.box.UpdateAddressActivity"></activity>
         <activity android:name=".presentation.view.activitys.orderhistory.OrderHistoryActivity"></activity>
+        <activity android:name=".presentation.view.activitys.orderhistory.CatchHistoryActivity"></activity>
         <activity android:name=".presentation.view.activitys.video.VideoActivity"></activity>
 
         <service android:name=".module.service.NetService"></service>

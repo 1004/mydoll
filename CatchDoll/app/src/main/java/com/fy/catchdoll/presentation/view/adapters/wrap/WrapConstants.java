@@ -26,4 +26,7 @@ public class WrapConstants {
     //主聊天界面
     public static final int WRAP_MAIN_COMMON_MSG = 1;
     public static final int WRAP_MAIN_GIFT_MSG = 2;
+
+    //抓取记录
+    public static final int WRAP_CATCH_HISTORY = 1;
 }

@@ -114,7 +114,20 @@ public class MainActivity extends AppCompatBaseActivity implements OnWrapItemCli
     private OnWrapItemClickListener mBannerClickListener = new OnWrapItemClickListener() {
         @Override
         public void onItemClick(View v, Object... obj) {
-
+            if (obj != null && obj[0] instanceof BannerInfo){
+                BannerInfo info = (BannerInfo) obj[0];
+                switch (info.getJump_type()){
+                    case BannerInfo.BANNER_PAY:
+                        ActivityUtils.startRechargeListActivity(MainActivity.this);
+                        break;
+                    case BannerInfo.BANNER_ROOM:
+                        ActivityUtils.startRoomActivity(MainActivity.this,info.getMachine_id());
+                        break;
+                    case BannerInfo.BANNER_WAP:
+                        ActivityUtils.startWebActivity(MainActivity.this,info.getLink(),info.getTitle());
+                        break;
+                }
+            }
         }
     };
 

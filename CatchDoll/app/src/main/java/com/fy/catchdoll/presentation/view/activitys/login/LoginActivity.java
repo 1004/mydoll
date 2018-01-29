@@ -2,6 +2,8 @@ package com.fy.catchdoll.presentation.view.activitys.login;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.fy.catchdoll.R;
 import com.fy.catchdoll.library.utils.ActivityUtils;
@@ -17,6 +19,9 @@ import com.fy.catchdoll.presentation.view.activitys.base.AppCompatBaseActivity;
  */
 public class LoginActivity extends AppCompatBaseActivity implements IAccountPresenterCallBack {
     private View mLoginBtn;
+    private View mImgContainer;
+    private ImageView mAgreeImg;
+    private boolean isCheck = true;
     @Override
     public int getLayoutId() {
         return R.layout.activity_login;
@@ -25,6 +30,8 @@ public class LoginActivity extends AppCompatBaseActivity implements IAccountPres
     @Override
     public void initView() {
         mLoginBtn = findViewById(R.id.login_wx);
+        mImgContainer = findViewById(R.id.agree_img_container);
+        mAgreeImg = (ImageView) findViewById(R.id.agree_img);
     }
 
     @Override
@@ -39,6 +46,7 @@ public class LoginActivity extends AppCompatBaseActivity implements IAccountPres
     @Override
     public void setListener() {
         mLoginBtn.setOnClickListener(this);
+        findViewById(R.id.agree_tv).setOnClickListener(this);
     }
 
     @Override
@@ -51,9 +59,24 @@ public class LoginActivity extends AppCompatBaseActivity implements IAccountPres
         super.onClick(v);
         switch (v.getId()) {
             case R.id.login_wx:
+                if (!isCheck){
+                    Toast.makeText(this,getMString(R.string.login_unagree_hint),Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 AccountManager.getInstance().login(AccountManager.LoginType.WEIXIN,this,this);
                 break;
+            case R.id.agree_tv:
+                ActivityUtils.startWebActivity(this,"http://www.baidu.com","用户协议");
+                break;
+            case R.id.agree_img_container:
+                operateImgCheck();
+                break;
         }
+    }
+
+    private void operateImgCheck() {
+        isCheck = !isCheck;
+        mAgreeImg.setImageResource(isCheck ? R.mipmap.xuanzhong : R.mipmap.weixuanzhong);
     }
 
     @Override
@@ -88,4 +111,5 @@ public class LoginActivity extends AppCompatBaseActivity implements IAccountPres
     public void errerResult(int code, String msg) {
         ErrorCodeOperate.executeError("",this,code,msg,true);
     }
+
 }

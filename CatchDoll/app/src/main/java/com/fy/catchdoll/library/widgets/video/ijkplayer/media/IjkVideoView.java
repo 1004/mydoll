@@ -1020,6 +1020,12 @@ public class IjkVideoView extends FrameLayout implements CustomMediaController.M
                     ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "http-detect-range-support", 0);
 
                     ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "skip_loop_filter", 48);
+
+                    ijkMediaPlayer.setOption(1, "analyzemaxduration", 100L);
+                    ijkMediaPlayer.setOption(1, "probesize", 10240L);
+                    ijkMediaPlayer.setOption(1, "flush_packets", 1L);
+                    ijkMediaPlayer.setOption(4, "packet-buffering", 0L);
+                    ijkMediaPlayer.setOption(4, "framedrop", 1L);
                 }
                 mediaPlayer = ijkMediaPlayer;
                 Log.d(TAG, "create ijkMediaPlayer");

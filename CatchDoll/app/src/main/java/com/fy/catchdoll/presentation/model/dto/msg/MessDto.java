@@ -2,13 +2,21 @@ package com.fy.catchdoll.presentation.model.dto.msg;
 
 
 import com.fy.catchdoll.presentation.model.dto.base.BaseItemDto;
+import com.fy.catchdoll.presentation.model.dto.room.GetDollDto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MessDto extends BaseItemDto implements Cloneable {
+//    1:普通弹幕   2:进入房间提示  3:通知机器上机状态  4:通知机器下机状态   5:游戏结果通知
 
     public static final int NORMAL = 1;// 普通
+
+    public static final int WAWA_MSG = 1;
+    public static final int WAWA_ENTER_ROOM = 2;
+    public static final int WAWA_MACHINE_STATE_BUSY = 3;
+    public static final int WAWA_MACHINE_STATE_FREE = 4;
+    public static final int WAWA_MACHINE_STATE_FINISH = 5;
 
     /**
      * ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓自己设置，网络获取不到
@@ -27,7 +35,15 @@ public class MessDto extends BaseItemDto implements Cloneable {
     private String user_nick; // 发送消息人的昵称
     private String user_avatar;// 发送消息人的头像地址，普通消息无头像
     private String content;// 消息内容
+    private GetDollDto grab_data;
 
+    public GetDollDto getGrab_data() {
+        return grab_data;
+    }
+
+    public void setGrab_data(GetDollDto grab_data) {
+        this.grab_data = grab_data;
+    }
 
     public int getType() {
         return type;
@@ -96,4 +112,16 @@ public class MessDto extends BaseItemDto implements Cloneable {
         return o;
     }
 
+    @Override
+    public String toString() {
+        return "MessDto{" +
+                "type=" + type +
+                ", waka_type=" + waka_type +
+                ", is_mobile='" + is_mobile + '\'' +
+                ", user_id='" + user_id + '\'' +
+                ", user_nick='" + user_nick + '\'' +
+                ", user_avatar='" + user_avatar + '\'' +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }
