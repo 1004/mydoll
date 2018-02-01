@@ -6,6 +6,7 @@ import android.content.Intent;
 
 import com.fy.catchdoll.presentation.model.dto.account.UserInfo;
 import com.fy.catchdoll.presentation.model.dto.box.AddressInfo;
+import com.fy.catchdoll.presentation.model.dto.doll.CatchHistoryDto;
 import com.fy.catchdoll.presentation.view.activitys.box.BoxInfoActivity;
 import com.fy.catchdoll.presentation.view.activitys.box.UpdateAddressActivity;
 import com.fy.catchdoll.presentation.view.activitys.login.LoginActivity;
@@ -16,6 +17,7 @@ import com.fy.catchdoll.presentation.view.activitys.my.MyInviteShareActivity;
 import com.fy.catchdoll.presentation.view.activitys.my.MySpendActivity;
 import com.fy.catchdoll.presentation.view.activitys.orderhistory.CatchHistoryActivity;
 import com.fy.catchdoll.presentation.view.activitys.orderhistory.OrderHistoryActivity;
+import com.fy.catchdoll.presentation.view.activitys.question.QuestionActivity;
 import com.fy.catchdoll.presentation.view.activitys.recharge.RechargeListActivity;
 import com.fy.catchdoll.presentation.view.activitys.room.DollRoomActivity;
 import com.fy.catchdoll.presentation.view.activitys.room.RoomActivity;
@@ -166,6 +168,15 @@ public class ActivityUtils {
      */
     public static void startCatchHistoryActivity(Context context){
         Intent intent = new Intent(context, CatchHistoryActivity.class);
+        context.startActivity(intent);
+    }
+    /**
+     * 启动抓取记录
+     * @param context
+     */
+    public static void startQuestionActivity(Context context,CatchHistoryDto dto){
+        Intent intent = new Intent(context, QuestionActivity.class);
+        intent.putExtra(QuestionActivity.QUESTION_HISTORY_KEY,dto);
         context.startActivity(intent);
     }
 }

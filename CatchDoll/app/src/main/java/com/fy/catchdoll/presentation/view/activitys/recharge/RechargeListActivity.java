@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fy.catchdoll.R;
+import com.fy.catchdoll.library.utils.ActivityUtils;
 import com.fy.catchdoll.library.widgets.NetStateView;
 import com.fy.catchdoll.library.widgets.ResultsListView;
 import com.fy.catchdoll.library.widgets.dialog.DialogManager;
@@ -35,6 +36,7 @@ import com.fy.catchdoll.presentation.presenter.recharge.CheckOrderPresenter;
 import com.fy.catchdoll.presentation.presenter.recharge.RechargeListPresenter;
 import com.fy.catchdoll.presentation.presenter.recharge.RechargeOrderPresenter;
 import com.fy.catchdoll.presentation.view.activitys.base.AppCompatBaseActivity;
+import com.fy.catchdoll.presentation.view.activitys.main.MainActivity;
 import com.fy.catchdoll.presentation.view.adapters.wrap.WrapConstants;
 import com.fy.catchdoll.presentation.view.adapters.wrap.base.CommonAdapterType;
 import com.fy.catchdoll.presentation.view.adapters.wrap.base.OnWrapItemClickListener;
@@ -88,7 +90,7 @@ public class RechargeListActivity extends AppCompatBaseActivity  implements OnWr
         mAdapter = new CommonAdapterType<BaseItemDto>(this);
 
         RechargeImgWrap mImgWrap = new RechargeImgWrap();
-        mImgWrap.setOnWrapItemClickListener(this);
+        mImgWrap.setOnWrapItemClickListener(mBannerClickListener);
         mAdapter.addViewObtains(WrapConstants.WRAP_RECHARGE_IMG, mImgWrap);
 
         RechargeItemWrap mItemWrap = new RechargeItemWrap();
@@ -165,6 +167,27 @@ public class RechargeListActivity extends AppCompatBaseActivity  implements OnWr
                 break;
         }
     }
+
+    private OnWrapItemClickListener mBannerClickListener = new OnWrapItemClickListener() {
+        @Override
+        public void onItemClick(View v, Object... obj) {
+            if (obj != null && obj[0] instanceof BannerInfo){
+                BannerInfo info = (BannerInfo) obj[0];
+                switch (info.getJump_type()){
+                    case BannerInfo.BANNER_ROOM:
+                        ActivityUtils.startDollRoomActivity(RechargeListActivity.this,info.getMachine_id());
+                        break;
+                    case BannerInfo.BANNER_WAP:
+                        ActivityUtils.startWebActivity(RechargeListActivity.this,info.getLink(),info.getTitle());
+                        break;
+                    case BannerInfo.BANNER_SHARE:
+                        ActivityUtils.startMyInviteShareHistory(RechargeListActivity.this);
+                        break;
+                }
+            }
+        }
+    };
+
 
     private void operateOrder(Object[] obj) {
         if (obj == null){

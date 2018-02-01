@@ -12,7 +12,9 @@ import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Binder;
+import android.os.Build;
 import android.provider.Settings;
+import android.support.v4.content.FileProvider;
 import android.text.ClipboardManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -21,6 +23,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
+
+import com.fy.catchdoll.presentation.application.CdApplication;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -122,7 +126,13 @@ public class DeviceUtils {
         Intent intent = new Intent();
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setAction(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(new File(apkPath)), "application/vnd.android.package-archive");
+        if (Build.VERSION.SDK_INT >=Build.VERSION_CODES.N){
+            Uri fileUri = FileProvider.getUriForFile(context, "com.wawa.android7.fileprovider", new File(apkPath));
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);//添加这一句表示对目标应用临时授权该Uri所代表的文件
+            intent.setDataAndType(fileUri, "application/vnd.android.package-archive");
+        }else {
+            intent.setDataAndType(Uri.fromFile(new File(apkPath)), "application/vnd.android.package-archive");
+        }
         context.startActivity(intent);
     }
 

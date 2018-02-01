@@ -1167,7 +1167,7 @@ public class Device {
     }
 
 
-    private static void startMiuiEditorActivity(Context context) {
+    public static void startMiuiEditorActivity(Context context) {
         if (isMIUI()) {
             jumpToPermissionsEditorActivity(context);
         } else {
@@ -1298,4 +1298,7 @@ public class Device {
             return true;
         }
     }
+
+
+
 }

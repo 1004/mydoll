@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.fy.catchdoll.R;
 import com.fy.catchdoll.library.utils.ActivityUtils;
 import com.fy.catchdoll.library.utils.UiUtils;
+import com.fy.catchdoll.library.widgets.video.ijkplayer.Settings;
 import com.fy.catchdoll.module.network.Page;
 import com.fy.catchdoll.presentation.model.dto.account.User;
 import com.fy.catchdoll.presentation.model.dto.account.UserInfo;
@@ -34,6 +35,7 @@ public class MyActivity extends AppCompatBaseActivity implements IBasePresenterL
     private View mExitTv;
     private MyPresenter mMyPresenter;
     private UserInfo mUserInfo;
+    private ImageView mSoftIv;
 
     @Override
     public int getLayoutId() {
@@ -50,12 +52,16 @@ public class MyActivity extends AppCompatBaseActivity implements IBasePresenterL
         mBgMusic = (ImageView) findViewById(R.id.my_bg_music_iv);
         mVoice = (ImageView) findViewById(R.id.my_voice);
         mExitTv = findViewById(R.id.my_exit);
+        mSoftIv = (ImageView) findViewById(R.id.my_bg_soft_iv);
     }
 
     @Override
     public void initData() {
         mMyPresenter = new MyPresenter();
         setCommonTitle(getMString(R.string.string_my_title));
+        mBgMusic.setImageResource(SettingPresenter.getBgMusiceIsOpen() ? R.mipmap.my_open : R.mipmap.my_close);
+        mSoftIv.setImageResource(Settings.isHardCodec() ?  R.mipmap.my_open : R.mipmap.my_close);
+
     }
 
     @Override
@@ -73,6 +79,7 @@ public class MyActivity extends AppCompatBaseActivity implements IBasePresenterL
         mInviteGive.setOnClickListener(this);
         mInviteCode.setOnClickListener(this);
         mBgMusic.setOnClickListener(this);
+        mSoftIv.setOnClickListener(this);
         mVoice.setOnClickListener(this);
         mExitTv.setOnClickListener(this);
         mMyPresenter.registPresenterCallBack(this);
@@ -133,7 +140,16 @@ public class MyActivity extends AppCompatBaseActivity implements IBasePresenterL
             case R.id.my_bg_music_iv:
                 operateBgMusic();
                 break;
+            case R.id.my_bg_soft_iv:
+                operateSoftiv();
+                break;
         }
+    }
+
+    private void operateSoftiv() {
+        boolean hardCodec = !Settings.isHardCodec();
+        mSoftIv.setImageResource(hardCodec ?  R.mipmap.my_open : R.mipmap.my_close);
+        Settings.setCode(hardCodec);
     }
 
     private void operateBgMusic() {

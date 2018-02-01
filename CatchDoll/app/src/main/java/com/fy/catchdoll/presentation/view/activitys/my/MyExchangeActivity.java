@@ -7,9 +7,11 @@ import android.widget.Toast;
 
 import com.fy.catchdoll.R;
 import com.fy.catchdoll.module.network.Page;
+import com.fy.catchdoll.presentation.model.dto.account.User;
 import com.fy.catchdoll.presentation.model.dto.my.MySentCodeDto;
 import com.fy.catchdoll.presentation.presenter.ErrorCodeOperate;
 import com.fy.catchdoll.presentation.presenter.IBasePresenterLinstener;
+import com.fy.catchdoll.presentation.presenter.account.AccountManager;
 import com.fy.catchdoll.presentation.presenter.my.MySentCodePresenter;
 import com.fy.catchdoll.presentation.view.activitys.base.AppCompatBaseActivity;
 
@@ -74,7 +76,11 @@ public class MyExchangeActivity extends AppCompatBaseActivity implements IBasePr
     public void dataResult(Object obj, Page page, int status) {
         if (obj != null){
             MySentCodeDto dto = (MySentCodeDto) obj;
-            Toast.makeText(this, "兑换成功" + dto.getGold(), Toast.LENGTH_SHORT).show();
+            User user = AccountManager.getInstance().getUser();
+            if (user!= null){
+                user.setGold(Integer.valueOf(dto.getGold()));
+            }
+            Toast.makeText(this, "兑换成功" + dto.getInvitation_gold(), Toast.LENGTH_SHORT).show();
         }
     }
 

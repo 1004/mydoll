@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/app_default_color"
+    android:layout_height="match_parent">
+    <include layout="@layout/back_common_nav"></include>
+    <RelativeLayout
+        android:background="@drawable/shape_room_bg"
+        android:layout_margin="15dp"
+        android:layout_width="match_parent"
+        android:paddingLeft="@dimen/dimen_r_margin"
+        android:paddingRight="@dimen/dimen_r_margin"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="105dp">
+                <ImageView
+                    android:id="@+id/box_doll_icon"
+                    android:scaleType="centerCrop"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/drawable_default_color"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp" />
+                <TextView
+                    android:id="@+id/catch_state"
+                    android:layout_width="wrap_content"
+                    style="@style/style_15_848d92"
+                    android:text="抓取成功"
+                    android:layout_marginRight="15dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_toRightOf="@id/box_doll_icon"
+                    android:layout_marginLeft="20dp"
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/box_doll_title"
+                        style="@style/style_15_848d92"
+                        android:text="看见了看"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </RelativeLayout>
+            <View
+                android:background="@color/color_ban_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp">
+
+            </View>
+            <RelativeLayout
+                android:id="@+id/doll_video_container"
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+                <TextView
+                    android:id="@+id/box_video_tv"
+                    style="@style/style_15_848d92"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/string_help_video_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:src="@mipmap/video_icon"
+                    android:layout_width="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:layout_height="30dp" />
+            </RelativeLayout>
+            <View
+                android:background="@color/color_ban_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp">
+
+            </View>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+                <TextView
+                    android:id="@+id/box_num_hint"
+                    style="@style/style_15_848d92"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/string_help_num_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/box_num_tv"
+                    android:layout_alignParentRight="true"
+                    style="@style/style_15_848d92"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:text="1232323"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <View
+                android:background="@color/color_ban_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp">
+            </View>
+            <TextView
+                android:layout_marginTop="15dp"
+                style="@style/style_15_848d92"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:text="@string/string_help_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/recharge_save_tv"
+            android:background="@drawable/shape_round_2bd2b7_40_bg"
+            android:text="@string/string_help_btn_title"
+            android:gravity="center"
+            style="@style/style_14_fff"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="55dp" />
+    </RelativeLayout>
+</LinearLayout>

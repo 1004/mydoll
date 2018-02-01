@@ -9,6 +9,7 @@ public class BannerInfo extends BaseItemDto{
     public static final int BANNER_WAP = 1;
     public static final int BANNER_PAY = 2;
     public static final int BANNER_ROOM = 3;
+    public static final int BANNER_SHARE = 4;
     private String title;
     private String image;
     private String link;

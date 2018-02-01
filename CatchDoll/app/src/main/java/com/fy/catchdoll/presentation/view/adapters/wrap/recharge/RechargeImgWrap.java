@@ -34,8 +34,14 @@ public class RechargeImgWrap extends BaseViewObtion<BaseItemDto> {
             return;
         }
 
-        BannerInfo info = (BannerInfo) baseItemDto;
+        final BannerInfo info = (BannerInfo) baseItemDto;
         ImageLoaderUtils.displayImage(holder.dollIcon,R.drawable.drawable_default_color,info.getImage());
+        holder.dollIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemElementClick(v,info);
+            }
+        });
 
     }
 

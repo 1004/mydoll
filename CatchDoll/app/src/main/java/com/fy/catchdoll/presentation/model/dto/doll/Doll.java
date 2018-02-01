@@ -1,9 +1,11 @@
 package com.fy.catchdoll.presentation.model.dto.doll;
 
+import java.io.Serializable;
+
 /**
  * Created by xky on 2017/11/28 0028.
  */
-public class Doll {
+public class Doll implements Serializable{
     private String id;
     private String title;
     private String image;

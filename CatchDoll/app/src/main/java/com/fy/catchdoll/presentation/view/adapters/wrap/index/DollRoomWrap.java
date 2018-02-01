@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import com.fy.catchdoll.R;
 import com.fy.catchdoll.library.utils.CommonUtil;
+import com.fy.catchdoll.library.utils.Device;
+import com.fy.catchdoll.library.utils.DeviceUtils;
 import com.fy.catchdoll.library.utils.ImageLoaderUtils;
 import com.fy.catchdoll.presentation.model.dto.base.BaseItemDto;
 import com.fy.catchdoll.presentation.model.dto.doll.DollMachine;
@@ -37,10 +39,25 @@ public class DollRoomWrap extends BaseViewObtion<BaseItemDto>{
         viewHolder.mRightBIcon = (ImageView) convertView.findViewById(R.id.right_room_b_icon);
         viewHolder.mRightBContent = (TextView) convertView.findViewById(R.id.right_room_b_con);
 
+        initScaleImg(viewHolder.mLeftCover);
+        initScaleImg(viewHolder.mRightCover);
+
 
         convertView.setTag(viewHolder);
         return convertView;
     }
+
+    private void initScaleImg(ImageView img){
+        ViewGroup.LayoutParams params = img.getLayoutParams();
+        int[] screenWidthAndHeight = DeviceUtils.getScreenWidthAndHeight(mActivity);
+        if (params != null){
+            int w = (int) ((screenWidthAndHeight[0] -mActivity.getResources().getDimension(R.dimen.dimen_r_margin)*2-mActivity.getResources().getDimension(R.dimen.dimen_r_between))/2);
+            params.width = w;
+            params.height = w;
+            img.setLayoutParams(params);
+        }
+    }
+
 
     @Override
     public void updateView(BaseItemDto baseItemDto, int position, View convertView) {

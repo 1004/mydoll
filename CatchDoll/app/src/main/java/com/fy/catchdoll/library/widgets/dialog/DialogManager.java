@@ -74,6 +74,7 @@ public class DialogManager {
                 operateUpload(listener, objects);
                 break;
             case COMMON:
+                operateCatchSuccess(listener,objects);
                 break;
             case LOADING:
                 operateLoading(listener, objects);

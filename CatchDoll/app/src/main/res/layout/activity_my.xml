@@ -158,6 +158,7 @@
                 </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
+                    android:visibility="gone"
                     android:layout_height="@dimen/dimen_my_item_h">
                     <TextView
                         style="@style/style_14_848d92"
@@ -169,6 +170,35 @@
                     <ImageView
                         android:id="@+id/my_voice"
                         android:src="@mipmap/my_open"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dimen_my_item_right"
+                        android:layout_height="match_parent" />
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible"
+                android:background="@drawable/shape_room_bg"
+                android:layout_marginTop="@dimen/dimen_my_item_top"
+                android:layout_marginLeft="@dimen/dimen_my_item_right"
+                android:layout_marginRight="@dimen/dimen_my_item_right"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_my_item_h">
+                    <TextView
+                        style="@style/style_14_848d92"
+                        android:text="@string/string_code_hard"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/dimen_my_item_left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:id="@+id/my_bg_soft_iv"
+                        android:src="@mipmap/my_close"
                         android:layout_width="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"

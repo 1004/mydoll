@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content">
                     <ImageView
                         android:id="@+id/left_room_b_icon"
-                        android:src="@mipmap/ic_launcher"
+                        android:src="@drawable/drawable_default_color"
                         android:layout_centerVertical="true"
                         android:layout_width="@dimen/dimen_r_bootom_icon_wh"
                         android:layout_height="@dimen/dimen_r_bootom_icon_wh" />
@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content">
                     <ImageView
                         android:id="@+id/right_room_b_icon"
-                        android:src="@mipmap/ic_launcher"
+                        android:src="@drawable/drawable_default_color"
                         android:layout_centerVertical="true"
                         android:layout_width="@dimen/dimen_r_bootom_icon_wh"
                         android:layout_height="@dimen/dimen_r_bootom_icon_wh" />

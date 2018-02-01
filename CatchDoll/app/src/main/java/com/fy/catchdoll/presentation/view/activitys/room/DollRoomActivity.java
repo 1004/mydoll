@@ -122,6 +122,7 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
     private int mDialogCount = 10;
     private boolean isCatchSuccess ;
     private boolean isCatchResultReturn = false;//抓取结果是否返回
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_room_2;
@@ -275,7 +276,9 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
         public void errerResult(int code, String msg) {
             ErrorCodeOperate.executeError(TAG, getContext(), code, msg, true);
             isCatch = false;
-            changeStartState(false,RoomInfo.STATE_GAME_FREE);
+            if (code == 4003 || code == 4004 || code == 4005 || code == 4006){
+                changeStartState(false,RoomInfo.STATE_GAME_FREE);
+            }
         }
     };
 
@@ -342,6 +345,7 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
             }else {
                 //时间到
                 dialogManager.dismissDialog();
+                mRoomPresenter.operateMachine(roomId, OperateMachineDto.CANCEL, getCurrentCameraId());
                 //取消，切换到空闲
                 changeStartState(false, RoomInfo.STATE_GAME_FREE);
             }
@@ -354,12 +358,15 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
             switch (view.getId()){
                 case R.id.tv_yes_common:
                     dialogManager.dismissDialog();
+                    mHandler.removeCallbacks(mDialogTask);
                     //乘胜追击 自动上机
                     changeStartState(false,RoomInfo.STATE_GAME_FREE);
                     operatePlay();
                     break;
                 case R.id.tv_cancel_common:
                     dialogManager.dismissDialog();
+                    mHandler.removeCallbacks(mDialogTask);
+                    mRoomPresenter.operateMachine(roomId, OperateMachineDto.CANCEL, getCurrentCameraId());
                     //去背包查看 更换状态到空闲
                     changeStartState(false, RoomInfo.STATE_GAME_FREE);
 //                    ActivityUtils.startBoxInfoActivity(DollRoomActivity.this);
@@ -374,12 +381,15 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
             switch (view.getId()){
                 case R.id.tv_yes_common:
                     dialogManager.dismissDialog();
+                    mHandler.removeCallbacks(mDialogTask);
                     //再来一局--自动上机
                     changeStartState(false,RoomInfo.STATE_GAME_FREE);
                     operatePlay();
                     break;
                 case R.id.tv_cancel_common:
                     dialogManager.dismissDialog();
+                    mHandler.removeCallbacks(mDialogTask);
+                    mRoomPresenter.operateMachine(roomId, OperateMachineDto.CANCEL, getCurrentCameraId());
                     //取消，切换到空闲
                     changeStartState(false, RoomInfo.STATE_GAME_FREE);
                     break;
@@ -542,10 +552,28 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
             Toast.makeText(this,getResources().getString(R.string.string_room_tost_busy),Toast.LENGTH_SHORT).show();;
         }else {
             //空闲中
+            boolean isMoneyEnough = checkMoney();
+            if (!isMoneyEnough){
+                ActivityUtils.startRechargeListActivity(this);
+                return;
+            }
             mStateStartTv.setText(getMString(R.string.string_room_start_machine));
             mStartCatchContainer.setOnClickListener(null);
-            mRoomPresenter.operateMachine(roomId, OperateMachineDto.START,config().mWawajiUid);
+            mRoomPresenter.operateMachine(roomId, OperateMachineDto.START,getCurrentCameraId());
         }
+    }
+
+    private boolean checkMoney() {
+        User user = AccountManager.getInstance().getUser();
+        try {
+            if (user != null && mRoomDto != null){
+                int gold = Integer.valueOf(mRoomDto.getMachine().getGold());
+                return gold<=user.getGold();
+            }
+        }catch (Throwable e){
+
+        }
+        return false;
     }
 
     /**
@@ -921,14 +949,18 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
                 break;
             case MessDto.WAWA_MACHINE_STATE_BUSY:
                 operateBusyState(msg);
+//                operateAddMsg(msg);
                 break;
             case MessDto.WAWA_MACHINE_STATE_FREE:
                 operateFreeState(msg);
+//                operateAddMsg(msg);
                 break;
             case MessDto.WAWA_MACHINE_STATE_FINISH:
                 operateFinishState(msg);
+//                operateAddMsg(msg);
                 break;
             case MessDto.WAWA_ENTER_ROOM:
+                operateAddMsg(msg);
                 break;
         }
 

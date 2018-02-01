@@ -64,10 +64,20 @@
         <activity android:name=".presentation.view.activitys.orderhistory.OrderHistoryActivity"></activity>
         <activity android:name=".presentation.view.activitys.orderhistory.CatchHistoryActivity"></activity>
         <activity android:name=".presentation.view.activitys.video.VideoActivity"></activity>
+        <activity android:name=".presentation.view.activitys.question.QuestionActivity"></activity>
 
         <service android:name=".module.service.NetService"></service>
         <service android:name=".presentation.presenter.update2.UploadService"></service>
 
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.wawa.android7.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
 
         <!--微信支付-->
@@ -133,6 +143,11 @@
             android:name="UMENG_CHANNEL"
             android:value="abc" />
         <!--友盟end -->
+
+        <!--权限-->
+        <activity android:name=".module.support.permission.RequestActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/MyStyle"></activity>
     </application>
 
 </manifest>

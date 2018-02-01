@@ -3,6 +3,7 @@ package com.fy.catchdoll.presentation.view.activitys.orderhistory;
 import android.view.View;
 
 import com.fy.catchdoll.R;
+import com.fy.catchdoll.library.utils.ActivityUtils;
 import com.fy.catchdoll.library.widgets.NetStateView;
 import com.fy.catchdoll.library.widgets.ResultsListView;
 import com.fy.catchdoll.module.network.Page;
@@ -126,7 +127,9 @@ public class CatchHistoryActivity extends AppCompatBaseActivity implements OnWra
 
     @Override
     public void onItemClick(View v, Object... obj) {
-
+        if (obj != null && obj[0] instanceof CatchHistoryDto){
+            ActivityUtils.startQuestionActivity(this, (CatchHistoryDto) obj[0]);
+        }
     }
 
     @Override

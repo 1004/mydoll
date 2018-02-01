@@ -110,7 +110,19 @@ public class LoginActivity extends AppCompatBaseActivity implements IAccountPres
 
     @Override
     public void errerResult(int code, String msg) {
-        ErrorCodeOperate.executeError("",this,code,msg,true);
+        ErrorCodeOperate.executeError("", this, code, msg, true);
     }
+
+    @Override
+    protected int getBarColor() {
+        return R.color.color_88D9E6;
+    }
+
+    @Override
+    protected boolean isDarkFont() {
+        return false;
+    }
+
+
 
 }

@@ -496,6 +496,12 @@ public class ResultsListView extends ListView implements OnScrollListener {
         super.setAdapter(adapter);
     }
 
+    public void setFooterImg(int img){
+        if (mView != null){
+            mView.setBackgroundResource(img);
+        }
+    }
+
     public void removeFooter() {
         removeFooterView(mView);
     }

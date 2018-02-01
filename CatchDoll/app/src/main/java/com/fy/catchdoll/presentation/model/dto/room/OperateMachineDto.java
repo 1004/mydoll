@@ -10,6 +10,7 @@ public class OperateMachineDto {
     public static final String RIGHT = "right";
     public static final String GET = "get";
     public static final String UP = "up";
+    public static final String CANCEL = "cancelagain";
 
     private String type;
     private int gold;

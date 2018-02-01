@@ -1024,7 +1024,7 @@ public class IjkVideoView extends FrameLayout implements CustomMediaController.M
                     ijkMediaPlayer.setOption(1, "analyzemaxduration", 100L);
                     ijkMediaPlayer.setOption(1, "probesize", 10240L);
                     ijkMediaPlayer.setOption(1, "flush_packets", 1L);
-                    ijkMediaPlayer.setOption(4, "packet-buffering", 0L);
+                    ijkMediaPlayer.setOption(4, "packet-buffering", 0L);//关闭播放器缓冲
                     ijkMediaPlayer.setOption(4, "framedrop", 1L);
                 }
                 mediaPlayer = ijkMediaPlayer;

@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatBaseActivity implements OnWrapItemCli
     @Override
     public void initData() {
         topicLv.setAdapter(getAdapter(), this);
+        topicLv.setFooterImg(R.mipmap.image);
         topicLv.setFooterView(ResultsListView.FOOTER_NOT_DATA);
         mPresenter = new IndexPresenter();
         mPagePresenter = new PagePresenter();
@@ -125,6 +126,9 @@ public class MainActivity extends AppCompatBaseActivity implements OnWrapItemCli
                         break;
                     case BannerInfo.BANNER_WAP:
                         ActivityUtils.startWebActivity(MainActivity.this,info.getLink(),info.getTitle());
+                        break;
+                    case BannerInfo.BANNER_SHARE:
+                        ActivityUtils.startMyInviteShareHistory(MainActivity.this);
                         break;
                 }
             }

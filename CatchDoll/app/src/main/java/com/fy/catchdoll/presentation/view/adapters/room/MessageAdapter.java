@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 
 import com.fy.catchdoll.R;
+import com.fy.catchdoll.library.utils.GiftDecodeUtil;
 import com.fy.catchdoll.library.utils.ImageLoaderUtils;
 import com.fy.catchdoll.presentation.model.dto.msg.MessDto;
 
@@ -92,7 +93,9 @@ public class MessageAdapter extends BaseAdapter {
         }
         MessDto dto = data.get(position);
         ImageLoaderUtils.displayImage(holder.icon,R.drawable.drawable_default_color,dto.getUser_avatar());
-        holder.tvcontent.setText(dto.getUser_nick()+":"+dto.getContent());
+
+//        holder.tvcontent.setText(dto.getUser_nick() + ":" + dto.getContent());
+        holder.tvcontent.setText(GiftDecodeUtil.operateColorTextStr(mContext,dto.getContent(),dto.getUser_nick()+":"+dto.getContent(),R.color.color_white));
         return convertView;
     }
 

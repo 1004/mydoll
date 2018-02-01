@@ -1,6 +1,7 @@
 package com.fy.catchdoll.presentation.view.activitys.my;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -54,6 +55,10 @@ public class MyInviteShareActivity extends AppCompatBaseActivity{
         User user = AccountManager.getInstance().getUser();
         if(user != null){
             mShareCodeTv.setText(user.getInvitation_code());
+            if (!TextUtils.isEmpty(user.getInvitation_desc())){
+                String msg = user.getInvitation_desc().replace("\\n", "\n");
+                mShareHintInfo.setText(msg);
+            }
         }
     }
 

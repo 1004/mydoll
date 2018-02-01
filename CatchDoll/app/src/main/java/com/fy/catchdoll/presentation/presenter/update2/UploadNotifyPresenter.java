@@ -56,7 +56,7 @@ public class UploadNotifyPresenter implements OnUploadListener {
                     .build();
         }
         mNotification.flags = Notification.FLAG_AUTO_CANCEL | Notification.FLAG_ONLY_ALERT_ONCE;
-        mRemoteViews.setImageViewResource(R.id.app_update_logo, R.mipmap.ic_launcher);
+        mRemoteViews.setImageViewResource(R.id.app_update_logo, R.mipmap.flash_icon);
         mRemoteViews.setTextViewText(R.id.app_update_title, mContext.getResources().getString(R.string.app_name));
         mRemoteViews.setTextViewText(R.id.app_update_progress_msg, "");
         mRemoteViews.setTextViewText(R.id.app_update_tips, mContext.getResources().getString(R.string.app_update_downloading));

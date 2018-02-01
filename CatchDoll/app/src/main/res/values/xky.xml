@@ -455,6 +455,7 @@
     <string name="string_my_input_code">输入邀请码</string>
     <string name="string_my_bg_music">背景音乐</string>
     <string name="string_my_voice">音效</string>
+    <string name="string_code_hard">开启硬解码</string>
     <string name="string_my_exit">退出当前账号</string>
 
     <!--邀请码-->
@@ -552,5 +553,23 @@
 
     <string name="string_history_catch_success">抓取成功</string>
     <string name="string_history_catch_failed">抓取失败</string>
+    <string name="string_no_permissio_info">没有授权读写内存卡的权限，请授权</string>
 
+    <!--权限-->
+    <string name="sure">确定</string>
+    <string name="cancel">取消</string>
+
+    <style name="MyStyle" parent="@style/Theme.AppCompat.Dialog">
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="DialogStyle" parent="@style/Theme.AppCompat.Light.Dialog"/>
+
+    <!--求助-->
+    <string name="string_help_title">求助</string>
+    <string name="string_help_video_name">游戏视频</string>
+    <string name="string_help_num_name">游戏编号</string>
+    <string name="string_help_desc">游戏过程中遇到问题请反馈给我们处理</string>
+    <string name="string_help_btn_title">发起求助</string>
+    <string name="string_help_result">申诉成功</string>
 </resources>

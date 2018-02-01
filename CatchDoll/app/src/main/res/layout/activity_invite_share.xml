@@ -28,9 +28,12 @@
             <TextView
                 android:id="@+id/invite_share_content"
                 style="@style/style_14_fff"
-                android:text="@string/string_share_name"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_marginTop="35dp"
                 android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="klajdflkjklajdflkjklajdflkjklanjdflkjklajdflkjklajdflkjklajdflkjklajdflkj"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
