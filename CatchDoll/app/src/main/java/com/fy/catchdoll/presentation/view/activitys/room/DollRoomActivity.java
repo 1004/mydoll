@@ -493,7 +493,7 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
                 dialogManager.showDialog(DialogStyle.SENT_CHAT,null,null);
                 break;
             case R.id.nav_back:
-                finish();
+                operateBack();
                 break;
             case R.id.room_state_start_wait:
                 operatePlay();
@@ -759,16 +759,20 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            if (isStartPlay){
-                dialogManager.showDialog(DialogStyle.COMMON, mDialogListener
-                        , getResources().getString(R.string.string_room_is_play_info)
-                        , getResources().getString(R.string.cancel)
-                        , getResources().getString(R.string.sure));
-            }else {
-                finish();
-            }
+                operateBack();
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private void operateBack(){
+        if (isStartPlay){
+            dialogManager.showDialog(DialogStyle.COMMON, mDialogListener
+                    , getResources().getString(R.string.string_room_is_play_info)
+                    , getResources().getString(R.string.cancel)
+                    , getResources().getString(R.string.sure));
+        }else {
+            finish();
+        }
     }
 
     private DialogManager.OnClickListenerContent mDialogListener = new DialogManager.OnClickListenerContent() {

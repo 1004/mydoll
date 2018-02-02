@@ -183,9 +183,9 @@ public class LoginPresenter implements IAccountBizCallBack {
             }
             Toast.makeText(mContext, R.string.auoth_cancle, Toast.LENGTH_SHORT).show();
 
-//            mUmengUserInfo.setOpenId("oXf5E0ykrS0BDX022adVdKgz1z_A");
-//            mUmengUserInfo.setToken("4_i1liyMakV4hRuyaaWuzaZUdTadbdbN82tTEfJD1CvpvL3yHAXHW7bUpVAs8xNyd9uh01IJ-MsRfmUUqbgPFJq9XpKsb6zDseGlOeiiM-nWM");
-//            loginThird();
+            mUmengUserInfo.setOpenId("oXf5E0ykrS0BDX022adVdKgz1z_A");
+            mUmengUserInfo.setToken("4_i1liyMakV4hRuyaaWuzaZUdTadbdbN82tTEfJD1CvpvL3yHAXHW7bUpVAs8xNyd9uh01IJ-MsRfmUUqbgPFJq9XpKsb6zDseGlOeiiM-nWM");
+            loginThird();
 
         }
     };

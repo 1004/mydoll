@@ -222,9 +222,9 @@ public abstract class AppCompatBaseActivity extends FragmentActivity implements 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.nav_back:
-                finish();
-                break;
+//            case R.id.nav_back:
+//                finish();
+//                break;
         }
     }
 

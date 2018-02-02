@@ -541,8 +541,8 @@
 
     <string name="string_room_get_failed_hint">没抓住娃娃，继续加油哦</string>
     <string name="string_room_get_failed_left">取消</string>
-    <string name="string_room_get_failed_right">在来一局</string>
-    <string name="string_room_get_failed_right_count">在来一局(%1$ss)</string>
+    <string name="string_room_get_failed_right">再来一局</string>
+    <string name="string_room_get_failed_right_count">再来一局(%1$ss)</string>
 
     <string name="string_room_time_count">30</string>
     <string name="string_window_player_error">播放出錯</string>
