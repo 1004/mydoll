@@ -41,9 +41,12 @@ public class CatchHistoryDollWrap extends BaseViewObtion<BaseItemDto>{
 
         if (dto!= null && dto.getDoll_info() != null){
             Doll doll_info = dto.getDoll_info();
+            String help =mActivity.getResources().getString(R.string.string_history_has_help);
+            help = " 【"+help+"】";
+            String result = dto.getIs_appeal() == 1 ? help : "";
             ImageLoaderUtils.displayImage(holder.dollIcon,R.drawable.drawable_default_color,doll_info.getImage());
-            holder.dollTitle.setText(doll_info.getTitle());
-            holder.dollTime.setText(dto .getCreated_at());
+            holder.dollTitle.setText(doll_info.getTitle()+result);
+            holder.dollTime.setText(dto.getCreated_at());
         }
         holder.dollstate.setText(mActivity.getResources().getString(dto.getIs_grab() == 1 ? R.string.string_history_catch_success : R.string.string_history_catch_failed));
         holder.mContainer.setOnClickListener(new View.OnClickListener() {

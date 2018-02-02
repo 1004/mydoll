@@ -2,9 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <View
+        android:background="@color/color_ban_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp">
+
+    </View>
     <RelativeLayout
         android:id="@+id/recharge_container"
         android:layout_width="match_parent"
+        android:background="@color/color_white"
         android:layout_height="75dp">
         <TextView
             android:id="@+id/recharge_count"
@@ -18,12 +25,24 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/recharge_dw"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             style="@style/style_14_848d92"
             android:text="咔币"
+            android:layout_centerVertical="true"
+            android:gravity="center"
             android:layout_toRightOf="@id/recharge_count"
-            android:layout_alignBottom="@+id/recharge_count"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/desc_tv"
+            android:layout_toRightOf="@id/recharge_dw"
+            style="@style/style_14_848d92"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:text="kkkkk"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="5dp"
             android:layout_height="wrap_content" />
 
         <TextView

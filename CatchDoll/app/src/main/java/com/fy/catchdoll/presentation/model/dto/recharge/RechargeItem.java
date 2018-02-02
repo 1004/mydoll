@@ -10,7 +10,18 @@ public class RechargeItem extends BaseItemDto{
     private String name;
     private String price;
     private String number;
+    private String desc;
+
+
     private int give_number;
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 
     public String getId() {
         return id;

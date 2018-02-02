@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.fy.catchdoll.R;
 import com.fy.catchdoll.library.utils.ActivityUtils;
+import com.fy.catchdoll.library.utils.Device;
 import com.fy.catchdoll.library.utils.DeviceUtils;
 import com.fy.catchdoll.library.utils.tool.SoftKeyBoardListener;
 import com.fy.catchdoll.library.widgets.CustomRecentView;
@@ -122,6 +123,7 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
     private int mDialogCount = 10;
     private boolean isCatchSuccess ;
     private boolean isCatchResultReturn = false;//抓取结果是否返回
+    private boolean isStartPlay = false;//是否操作上机了
 
     @Override
     public int getLayoutId() {
@@ -557,6 +559,7 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
                 ActivityUtils.startRechargeListActivity(this);
                 return;
             }
+            isStartPlay = true;
             mStateStartTv.setText(getMString(R.string.string_room_start_machine));
             mStartCatchContainer.setOnClickListener(null);
             mRoomPresenter.operateMachine(roomId, OperateMachineDto.START,getCurrentCameraId());
@@ -630,6 +633,7 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
      * 可操作状态
      */
     private void initOperateState(){
+        isStartPlay = true;
         mRoomStateStartWaitContainer.setVisibility(View.GONE);
         mRoomStatePlayContainer.setVisibility(View.VISIBLE);
         mTimeHintContainer.setVisibility(View.VISIBLE);
@@ -676,6 +680,7 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
      * @param game_state
      */
     private void initMachineFirstState(int game_state) {
+        isStartPlay = false;
         mCurrentState = game_state;
         mTimeHintContainer.setVisibility(View.GONE);
         endPlayTask();
@@ -754,10 +759,32 @@ public class DollRoomActivity extends AppCompatBaseActivity implements AGEventHa
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            finish();
+            if (isStartPlay){
+                dialogManager.showDialog(DialogStyle.COMMON, mDialogListener
+                        , getResources().getString(R.string.string_room_is_play_info)
+                        , getResources().getString(R.string.cancel)
+                        , getResources().getString(R.string.sure));
+            }else {
+                finish();
+            }
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    private DialogManager.OnClickListenerContent mDialogListener = new DialogManager.OnClickListenerContent() {
+        @Override
+        public void onClick(View view, Object... content) {
+            switch (view.getId()){
+                case R.id.tv_yes_common:
+                    dialogManager.dismissDialog();
+                    finish();
+                    break;
+                case R.id.tv_cancel_common:
+                    dialogManager.dismissDialog();
+                    break;
+            }
+        }
+    };
 
     private void desotry(){
         if (isDestory){

@@ -1,5 +1,6 @@
 package com.fy.catchdoll.presentation.view.adapters.wrap.recharge;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -8,6 +9,8 @@ import com.fy.catchdoll.R;
 import com.fy.catchdoll.presentation.model.dto.base.BaseItemDto;
 import com.fy.catchdoll.presentation.model.dto.recharge.RechargeItem;
 import com.fy.catchdoll.presentation.view.adapters.wrap.base.BaseViewObtion;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by wst on 2017/12/2.
@@ -20,6 +23,7 @@ public class RechargeItemWrap extends BaseViewObtion<BaseItemDto>{
         viewHolder.rechareCount = (TextView) convertView.findViewById(R.id.recharge_count);
         viewHolder.rechargeMoney = (TextView) convertView.findViewById(R.id.recharge_money);
         viewHolder.itemContainer = convertView.findViewById(R.id.recharge_container);
+        viewHolder.desctv = (TextView) convertView.findViewById(R.id.desc_tv);
         convertView.setTag(viewHolder);
 
         return convertView;
@@ -33,6 +37,12 @@ public class RechargeItemWrap extends BaseViewObtion<BaseItemDto>{
         }
         final RechargeItem dollBox = (RechargeItem) baseItemDto;
         holder.rechareCount.setText(dollBox.getNumber());
+        if (!TextUtils.isEmpty(dollBox.getDesc())){
+            holder.desctv.setVisibility(View.VISIBLE);
+            holder.desctv.setText("【"+dollBox.getDesc()+"】");
+        }else {
+            holder.desctv.setVisibility(View.GONE);
+        }
         holder.rechargeMoney.setText("￥"+dollBox.getPrice());
         holder.itemContainer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +55,7 @@ public class RechargeItemWrap extends BaseViewObtion<BaseItemDto>{
     class ViewHolder{
         public View itemContainer;
         public TextView rechareCount;
+        public TextView desctv;
         public TextView rechargeMoney;
     }
 }

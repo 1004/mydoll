@@ -552,8 +552,10 @@
     <string name="login_unagree_hint">请同意协议，继续登陆</string>
 
     <string name="string_history_catch_success">抓取成功</string>
+    <string name="string_history_has_help">已申诉</string>
     <string name="string_history_catch_failed">抓取失败</string>
     <string name="string_no_permissio_info">没有授权读写内存卡的权限，请授权</string>
+    <string name="string_room_is_play_info">当前正在上机,确定退出吗</string>
 
     <!--权限-->
     <string name="sure">确定</string>
